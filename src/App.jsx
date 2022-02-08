@@ -1,6 +1,13 @@
 import React, {useState} from "react";
 import SearchInformationVolumeFence from "./pages/information-volume-fence-form-create";
 import AppContext from "./pages/information-volume-fence-form-create/components/AppContext";
+import SearchInformationVolumeFenceList
+    from "./pages/information-volume-fence-form-list/SearchInformationVolumeFenceList";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 const App = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +32,12 @@ const App = () => {
 
     return (
         <AppContext.Provider value={userSettings}>
-            <SearchInformationVolumeFence/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="web/allorion/fw-list/" element={<SearchInformationVolumeFenceList />} />
+                    <Route path="web/allorion/fw-add/" element={<SearchInformationVolumeFence/>} />
+                </Routes>
+            </BrowserRouter>
         </AppContext.Provider>
     );
 };

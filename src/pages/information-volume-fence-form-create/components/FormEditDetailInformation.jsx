@@ -8,7 +8,7 @@ import AppContext from "./AppContext";
 import {Close, Send} from "@mui/icons-material";
 import MuiAlert from '@mui/material/Alert';
 import EditIcon from "@mui/icons-material/Edit";
-// import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
+import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -458,7 +458,7 @@ export default function FormEditDetailInformation(obj) {
                                                    value={globalHooks.nameWaterObject.name + " / " + globalHooks.nameWaterObject.code}
                                                    label="Наименование водного объекта - водоисточника"
                                                    variant="standard" helperText='Выберите водный источник'/>
-                                        {/*<FormWaterFeatureSelection/>*/}
+                                        <FormWaterFeatureSelection/>
                                     </Stack>
                                 </Container>
                                 <Container>

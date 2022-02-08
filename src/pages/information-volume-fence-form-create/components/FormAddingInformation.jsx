@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 import AppContext from "./AppContext";
 import {Close, Send} from "@mui/icons-material";
 import MuiAlert from '@mui/material/Alert';
-// import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
+import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -440,9 +440,7 @@ export default function FormAddingInformation() {
 
     return (
         <React.Fragment>
-            <Grid item xs={12} md={12} xl={12} mt={4}>
-                <Button variant="contained" color="success" onClick={handleOpen}>Добавить детали</Button>
-            </Grid>
+            <Button variant="contained" color="secondary" onClick={handleOpen}>Добавить детали</Button>
             <Modal
                 sx={{overflowY: 'auto'}}
                 disableEnforceFocus
@@ -463,7 +461,7 @@ export default function FormAddingInformation() {
                                                    value={globalHooks.nameWaterObject.name + " / " + globalHooks.nameWaterObject.code}
                                                    label="Наименование водного объекта - водоисточника"
                                                    variant="standard" helperText='Выберите водный источник'/>
-                                        {/*<FormWaterFeatureSelection/>*/}
+                                        <FormWaterFeatureSelection/>
                                     </Stack>
                                 </Container>
                                 <Container>

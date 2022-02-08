@@ -24,6 +24,7 @@ import ChoosingLegalEntityForm from "./components";
 import AppContext from "./components/AppContext";
 import FormAddingInformation from "./components/FormAddingInformation";
 import FormEditDetailInformation from "./components/FormEditDetailInformation";
+import {Link} from "react-router-dom";
 
 export default function SearchInformationVolumeFence() {
 
@@ -273,14 +274,19 @@ export default function SearchInformationVolumeFence() {
                                                variant="standard" helperText='Введите дату последней поверки'/>
                                 </Grid>
                             </Grid>
-                            <Grid container pt={2}>
+                            <Grid container pt={2} spacing={2}>
                                 <Grid item xs={12} md={12} xl={12}>
                                     <TextField fullWidth id="input-frequency-verification"
                                                label="Периодичность поверки"
                                                variant="standard" helperText='Введите периодичность поверки'/>
                                 </Grid>
                             </Grid>
-                            <FormAddingInformation/>
+                            <Stack spacing={2} direction='row' mt={4}>
+                                <FormAddingInformation/>
+                                <Link to="/web/allorion/fw-list/" style={{textDecoration: 'none'}}>
+                                    <Button variant="contained" color="success">Сохранить</Button>
+                                </Link>
+                            </Stack>
                         </Box>
                     </Paper>
                 </Grid>
