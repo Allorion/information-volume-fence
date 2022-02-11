@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import SearchInformationVolumeFence from "./pages/information-volume-fence-form-create";
 import AppContext from "./pages/information-volume-fence-form-create/components/AppContext";
-import SearchInformationVolumeFenceList
-    from "./pages/information-volume-fence-form-list/SearchInformationVolumeFenceList";
+import SearchInformation
+    from "./pages/information-volume-water-intake/search-information/SearchInformation";
 import {
     BrowserRouter,
     Routes,
@@ -34,7 +34,7 @@ const App = () => {
         <AppContext.Provider value={userSettings}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="web/allorion/fw-list/" element={<SearchInformationVolumeFenceList />} />
+                    <Route path="web/allorion/fw-list/" element={<SearchInformation />} />
                     <Route path="web/allorion/fw-add/" element={<SearchInformationVolumeFence/>} />
                 </Routes>
             </BrowserRouter>
