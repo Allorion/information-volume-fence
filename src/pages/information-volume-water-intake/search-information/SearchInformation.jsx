@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 // Импорты компонентов
 import TableInformation from "./components/TableInformation";
 import FormSearch from "./components/FormSearch";
-import HeadBox from "../../global-components/HeadBox";
+import HeadBox from "../../global-components/style/HeadBox";
 import {ContextSearchInformationForm} from "./context/ContextSearchInformationForm";
 
 export default function SearchInformation() {

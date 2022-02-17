@@ -1,47 +1,49 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from 'react';
+
+// Элементы MUI
+import {
+    Box,
+    Button,
+    Modal,
+    Paper,
+    Grid,
+    Container,
+    Stack,
+    TextField,
+    FormControl,
+    InputLabel,
+    Select
+} from "@mui/material";
+
+// Компоненты
+import styleModal from "../../global-components/style/styleModal";
+import HeadBox from "../../global-components/style/HeadBox";
+
+//Контексты
 import AppContext from "./AppContext";
-import {styled} from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import {Box, Button, Container, FormControl, InputLabel, Select, Stack, TextField} from "@mui/material";
-import Modal from "@mui/material/Modal";
-import {AddCircle, Close} from "@mui/icons-material";
+import NameWaterObjectContext from "./context/NameWaterObjectContext";
 
 export default function FormWaterFeatureSelection() {
 
-    const globalHooks = useContext(AppContext);
-
-    const styleModal = {
-        position: 'absolute',
-        top: '52%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        outline: 0,
-        p: 1,
-        overflowY: 'auto'
-    };
-
-    const HeadBox = styled(Paper)(({theme}) => ({
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.primary,
-        background: '#eceff1',
-        fontSize: '18px'
-    }));
-
+    // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    // (конец) Блок открытия и закрытия модального окна
 
+    // Блок с контекстами
+    const globalHooks = useContext(AppContext);
+    const [nameWaterObjectCode, nameWaterObjectName, handleChange] = useContext(NameWaterObjectContext);
+    // (конец) Блок с контекстами
+
+    // Объект формы
     const [waterObjectCode, setWaterObjectCode] = useState('');
     const [waterObjectName, setWaterObjectName] = useState('');
     const [dataWaterObjectCode, setDataWaterObjectCode] = useState([]);
     const [dataWaterObjectName, setDataWaterObjectName] = useState([]);
+    // (конец) Объект формы
 
-    const [searchWaterObject, setSearchWaterObject] = useState([]);
-
-    const [waterObject, setWaterObject] = useState({});
-
+    // Блок запросов к API
     useEffect(() => {
         if (waterObjectCode.length === 0) {
             setDataWaterObjectCode([])
@@ -50,18 +52,18 @@ export default function FormWaterFeatureSelection() {
         const fetchData = async () => {
             globalHooks.setIsLoading(true);
 
-            await Liferay.Service(
-                '/opendata.setsviews/water-object-filter',
-                {
-                    filter: `{"waterObjectName":{"searchType":"CONTAIN","value":"${waterObjectName}"},"waterObjectCode":{"searchType":"CONTAIN","value":"${waterObjectCode}"}}`,
-                    page: '',
-                    size: '',
-                    sort: ''
-                },
-                function (obj) {
-                    setDataWaterObjectCode(obj.result.content);
-                }
-            );
+            // await Liferay.Service(
+            //     '/opendata.setsviews/water-object-filter',
+            //     {
+            //         filter: `{"waterObjectName":{"searchType":"CONTAIN","value":"${waterObjectName}"},"waterObjectCode":{"searchType":"CONTAIN","value":"${waterObjectCode}"}}`,
+            //         page: '',
+            //         size: '',
+            //         sort: ''
+            //     },
+            //     function (obj) {
+            //         setDataWaterObjectCode(obj.result.content);
+            //     }
+            // );
 
             globalHooks.setIsLoading(false);
         };
@@ -77,18 +79,18 @@ export default function FormWaterFeatureSelection() {
         const fetchData = async () => {
             globalHooks.setIsLoading(true);
 
-            await Liferay.Service(
-                '/opendata.setsviews/water-object-filter',
-                {
-                    filter: `{"waterObjectName":{"searchType":"CONTAIN","value":"${waterObjectName}"},"waterObjectCode":{"searchType":"CONTAIN","value":"${waterObjectCode}"}}`,
-                    page: '',
-                    size: '',
-                    sort: ''
-                },
-                function (obj) {
-                    setDataWaterObjectName(obj.result.content);
-                }
-            );
+            // await Liferay.Service(
+            //     '/opendata.setsviews/water-object-filter',
+            //     {
+            //         filter: `{"waterObjectName":{"searchType":"CONTAIN","value":"${waterObjectName}"},"waterObjectCode":{"searchType":"CONTAIN","value":"${waterObjectCode}"}}`,
+            //         page: '',
+            //         size: '',
+            //         sort: ''
+            //     },
+            //     function (obj) {
+            //         setDataWaterObjectName(obj.result.content);
+            //     }
+            // );
 
             globalHooks.setIsLoading(false);
         };
@@ -96,6 +98,8 @@ export default function FormWaterFeatureSelection() {
         fetchData();
 
     }, [waterObjectName]);
+
+    // (конец) Блок запросов к API
 
     const handleChangeMultiple = (event) => {
         const {options} = event.target;
@@ -113,15 +117,8 @@ export default function FormWaterFeatureSelection() {
         setSearchWaterObject(value);
     };
 
-    const handlerTransferWaterObject = () => {
-        const obj = {
-            code: waterObject.code,
-            name: waterObject.name
-        };
-        globalHooks.setNameWaterObject(obj);
-        handleClose();
-    }
 
+    // Блок шаблона
     return (
         <React.Fragment>
             <Grid item pt={2}>
@@ -142,22 +139,24 @@ export default function FormWaterFeatureSelection() {
                             <Box p={2}>
                                 <Container>
                                     <Stack spacing={2} direction='row'>
-                                        <TextField fullWidth id="input-water=object-code"
-                                                   value={waterObjectCode}
-                                                   label="Код вводного объекта"
-                                                   variant="standard"
-                                                   helperText='Введите минимум 2 символа для поиска'
-                                                   onChange={((event) => {
-                                                       setWaterObjectCode(event.target.value)
-                                                   })}/>
-                                        <TextField fullWidth id="input-water-object-name"
-                                                   value={waterObjectName}
-                                                   label="Название водного объекта"
-                                                   variant="standard"
-                                                   helperText='Введите минимум 2 символа для поиска'
-                                                   onChange={((event) => {
-                                                       setWaterObjectName(event.target.value)
-                                                   })}/>
+                                        <TextField
+                                            fullWidth
+                                            id="input-water=object-code"
+                                            label="Код вводного объекта"
+                                            variant="standard"
+                                            helperText='Введите минимум 2 символа для поиска'
+                                            name='nameWaterObjectCode'
+                                            value={nameWaterObjectCode}
+                                            onChange={handleChange}/>
+                                        <TextField
+                                            fullWidth
+                                            id="input-water-object-name"
+                                            label="Название водного объекта"
+                                            variant="standard"
+                                            helperText='Введите минимум 2 символа для поиска'
+                                            name='nameWaterObjectName'
+                                            value={nameWaterObjectName}
+                                            onChange={handleChange}/>
                                     </Stack>
                                 </Container>
                                 <Container>
@@ -200,24 +199,12 @@ export default function FormWaterFeatureSelection() {
                                         </Select>
                                     </FormControl>
                                 </Container>
-                                <Container>
-                                    <Stack spacing={2} direction="row" pt={2}>
-                                        <Button variant="contained" color="success" onClick={handlerTransferWaterObject}
-                                                startIcon={<AddCircle/>}>
-                                            Добавить
-                                        </Button>
-                                        <Button variant="contained" onClick={handleClose} color="error"
-                                                endIcon={<Close/>}>
-                                            Отмена
-                                        </Button>
-                                    </Stack>
-                                </Container>
                             </Box>
                         </Paper>
                     </Grid>
-                    <Grid item={true} xs={0} md={2} xl={2}/>
                 </Grid>
             </Modal>
         </React.Fragment>
     );
+    // (конец) Блок шаблона
 }

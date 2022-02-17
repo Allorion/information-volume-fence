@@ -8,6 +8,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import Home from "./pages/testForm/Home";
 
 const App = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +35,7 @@ const App = () => {
         <AppContext.Provider value={userSettings}>
             <BrowserRouter>
                 <Routes>
+                    <Route path='/' element={<Home/>}/>
                     <Route path="web/allorion/fw-list/" element={<SearchInformation />} />
                     <Route path="web/allorion/fw-add/" element={<SearchInformationVolumeFence/>} />
                 </Routes>
