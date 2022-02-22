@@ -1,13 +1,12 @@
-import React, {useContext} from "react";
-import {Button, Container, Stack, TextField} from "@mui/material";
+import React from 'react';
+
+// Routing
 import {Link} from "react-router-dom";
-import {ContextSearchInformationForm} from "../context/ContextSearchInformationForm";
 
+// MUI
+import {Button, Container, Stack, TextField} from "@mui/material";
 
-
-export default function FormSearch() {
-
-    const objContext = useContext(ContextSearchInformationForm);
+const FormSearch = () => {
 
     return(
         <React.Fragment>
@@ -35,10 +34,6 @@ export default function FormSearch() {
             <Container>
                 <TextField
                     fullWidth
-                    value={objContext.context}
-                    onChange={(event) => {
-                        objContext.setContext(event.target.value)
-                    }}
                     id="input-water-user-names"
                     label="Водопользователь (по части наименования)"
                     variant="standard"
@@ -58,11 +53,10 @@ export default function FormSearch() {
             <Container>
                 <Stack spacing={2} direction="row" mt={2}>
                     <Button variant="contained" color="info">Поиск</Button>
-                    <Link to="/web/allorion/fw-add/" style={{textDecoration:'none'}}>
-                        <Button variant="contained" color="secondary">Создать</Button>
-                    </Link>
                 </Stack>
             </Container>
         </React.Fragment>
     );
 };
+
+export default React.memo(FormSearch);

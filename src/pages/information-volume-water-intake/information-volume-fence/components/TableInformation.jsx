@@ -1,7 +1,9 @@
 import React from "react";
+
+// MUI
 import {Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Table, Paper} from "@mui/material";
 
-export default function TableInformation() {
+const TableInformation = () => {
 
     return (
         <React.Fragment>
@@ -82,3 +84,5 @@ export default function TableInformation() {
         </React.Fragment>
     );
 };
+
+export default React.memo(TableInformation);
