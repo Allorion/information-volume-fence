@@ -64,8 +64,8 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/water-usage/fact-wusage/" element={<FactWusage/>}/>
-                <Route path="/water-usage/fact-wusage/fw-list" element={<SearchInformation/>}/>
-                <Route path="fw-add/" element={<GlobalTemplate/>}/>
+                <Route path="/water-usage/fact-wusage/fw-list/" element={<SearchInformation/>}/>
+                <Route path="/water-usage/fact-wusage/fw-add/" element={<GlobalTemplate/>}/>
             </Routes>
         </BrowserRouter>
     );

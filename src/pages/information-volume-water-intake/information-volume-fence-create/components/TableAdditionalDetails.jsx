@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
+// MUI
 import {
     Fab,
     Grid,
@@ -11,10 +12,23 @@ import {
     TableContainer,
     Table
 } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from "@mui/material/Paper";
+
+// Контекст
+import TableAdditionalDetailsContext from "../context/TableAdditionalDetailsContext";
 
 const TableAdditionalDetails = () => {
 
+    // Получаем стейт из родительского компонента через контекст
+    const [addingInformation, setAddingInformation] = useContext(TableAdditionalDetailsContext);
+
+    // Функция удаления данных из таблицы
+    const handleRemoveItem = count => {
+        const temp = [...addingInformation];
+        temp.splice(count, 1);
+        setAddingInformation(temp);
+    };
 
     return(
         <React.Fragment>
@@ -90,7 +104,7 @@ const TableAdditionalDetails = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {listDetailsTable.map((option, count) => (
+                            {addingInformation.map((option, count) => (
                                 <TableRow key={count + 1} sx={{
                                     '&:nth-of-type(even) td, &:nth-of-type(odd) td, &:nth-of-type(even) th, &:nth-of-type(odd) th': {
                                         border: 1,
@@ -100,28 +114,28 @@ const TableAdditionalDetails = () => {
                                     }
                                 }}>
                                     <TableCell>{count + 1}</TableCell>
-                                    <TableCell>{option[0].nameWaterObject}</TableCell>
-                                    <TableCell>{option[0].typeWaterObject}</TableCell>
-                                    <TableCell>{option[0].codeWaterObject}</TableCell>
-                                    <TableCell>{option[0].waterQualityCategory}</TableCell>
-                                    <TableCell>{option[0].waterIntakeNumber}</TableCell>
-                                    <TableCell>{option[0].northernLatitudeDegrees}</TableCell>
-                                    <TableCell>{option[0].northernLatitudeMinutes}</TableCell>
-                                    <TableCell>{option[0].northernLatitudeSeconds}</TableCell>
-                                    <TableCell>{option[0].easternLongitudeDegrees}</TableCell>
-                                    <TableCell>{option[0].easternLongitudeMinutes}</TableCell>
-                                    <TableCell>{option[0].easternLongitudeSeconds}</TableCell>
-                                    <TableCell>{option[0].purposeWaterUse}</TableCell>
-                                    <TableCell>{option[0].volumePermissibleFence}</TableCell>
-                                    <TableCell>{option[0].fullVolume}</TableCell>
-                                    <TableCell>{option[0].firstMonth}</TableCell>
-                                    <TableCell>{option[0].secondMonth}</TableCell>
-                                    <TableCell>{option[0].thirdMonth}</TableCell>
+                                    <TableCell>sss</TableCell>
+                                    <TableCell>{option.typeWaterObject}</TableCell>
+                                    <TableCell>sss</TableCell>
+                                    <TableCell>{option.waterQualityCategory}</TableCell>
+                                    <TableCell>{option.waterIntakeNumber}</TableCell>
+                                    <TableCell>{option.northernLatitudeDegrees}</TableCell>
+                                    <TableCell>{option.northernLatitudeMinutes}</TableCell>
+                                    <TableCell>{option.northernLatitudeSeconds}</TableCell>
+                                    <TableCell>{option.easternLongitudeDegrees}</TableCell>
+                                    <TableCell>{option.easternLongitudeMinutes}</TableCell>
+                                    <TableCell>{option.easternLongitudeSeconds}</TableCell>
+                                    <TableCell>{option.purposeWaterUse}</TableCell>
+                                    <TableCell>{option.volumePermissibleFence}</TableCell>
+                                    <TableCell>{option.fullVolume}</TableCell>
+                                    <TableCell>{option.firstMonth}</TableCell>
+                                    <TableCell>{option.secondMonth}</TableCell>
+                                    <TableCell>{option.thirdMonth}</TableCell>
                                     <TableCell>
                                         <Stack direction="row" spacing={1}>
-                                            <FormEditDetailInformation count={count}
-                                                                       setListDetailsTable={setListDetailsTable}
-                                                                       listDetailsTable={listDetailsTable}/>
+                                            {/*<FormEditDetailInformation count={count}*/}
+                                            {/*                           setListDetailsTable={setListDetailsTable}*/}
+                                            {/*                           listDetailsTable={listDetailsTable}/>*/}
                                             <Fab color="primary" aria-label="delete"
                                                  onClick={() => handleRemoveItem(count)} size="small">
                                                 <DeleteIcon/>

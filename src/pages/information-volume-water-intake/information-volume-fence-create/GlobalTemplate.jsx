@@ -5,15 +5,16 @@ import Paper from "@mui/material/Paper";
 import HeadBox from "../../../global-components/style/HeadBox";
 import FormAddingInformation from "./components/FormAddingInformation";
 import FormAddingInformationContext from "./context/FormAddingInformationContext";
+import TableAdditionalDetails from "./components/TableAdditionalDetails";
+import TableAdditionalDetailsContext from "./context/TableAdditionalDetailsContext";
 
 const GlobalTemplate = () => {
 
-    const [addingInformation, setAddingInformation] = useState({});
+    const [addingInformation, setAddingInformation] = useState([]);
 
     const addingInformationMemo = useMemo(() =>{
-        return setAddingInformation;
+        return [addingInformation, setAddingInformation];
     }, [addingInformation])
-
 
     return(
       <React.Fragment>
@@ -40,6 +41,9 @@ const GlobalTemplate = () => {
                   <Grid item xs={0} md={2} xl={2}/>
               </Grid>
           </Grid>
+          <TableAdditionalDetailsContext.Provider value={addingInformationMemo}>
+              <TableAdditionalDetails/>
+          </TableAdditionalDetailsContext.Provider>
       </React.Fragment>
     );
 };

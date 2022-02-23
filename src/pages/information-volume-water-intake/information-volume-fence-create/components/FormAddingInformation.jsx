@@ -56,7 +56,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const FormAddingInformation = (props) => {
+const FormAddingInformation = () => {
 
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
@@ -116,17 +116,14 @@ const FormAddingInformation = (props) => {
     const {handleChange} = useForm(setValues);
 
     // Получение стейта из родительского компонента через контекст
-    const setAddingInformation = useContext(FormAddingInformationContext)
+    const [addingInformation, setAddingInformation] = useContext(FormAddingInformationContext)
 
 
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
         const [errors, textErrors] = validate(values);
         if (Object.keys(errors).length === 0) {
-            setAddingInformation((value) => ({
-                ...value,
-                [props.count]: values,
-            }));
+            setAddingInformation([...addingInformation, values]);
             setValues(initialState)
             handleClose();
         } else {
