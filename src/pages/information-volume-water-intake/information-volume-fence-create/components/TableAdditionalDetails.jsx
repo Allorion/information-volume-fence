@@ -17,6 +17,7 @@ import Paper from "@mui/material/Paper";
 
 // Контекст
 import TableAdditionalDetailsContext from "../context/TableAdditionalDetailsContext";
+import FormEditDetailInformation from "./FormEditDetailInformation";
 
 const TableAdditionalDetails = () => {
 
@@ -133,9 +134,9 @@ const TableAdditionalDetails = () => {
                                     <TableCell>{option.thirdMonth}</TableCell>
                                     <TableCell>
                                         <Stack direction="row" spacing={1}>
-                                            {/*<FormEditDetailInformation count={count}*/}
-                                            {/*                           setListDetailsTable={setListDetailsTable}*/}
-                                            {/*                           listDetailsTable={listDetailsTable}/>*/}
+                                            <FormEditDetailInformation count={count}
+                                                                       addingInformation={addingInformation}
+                                                                       setAddingInformation={setAddingInformation}/>
                                             <Fab color="primary" aria-label="delete"
                                                  onClick={() => handleRemoveItem(count)} size="small">
                                                 <DeleteIcon/>

@@ -34,16 +34,18 @@ const GlobalTemplate = () => {
                               count={'information' + Object.keys(addingInformation).length}
                           />
                       </FormAddingInformationContext.Provider>
-                      <Link to="/fw-list/" style={{textDecoration: 'none'}}>
+                      <Link to="/water-usage/fact-wusage/" style={{textDecoration: 'none'}}>
                           <Button variant="contained" color="success">Сохранить</Button>
                       </Link>
                   </Stack>
                   <Grid item xs={0} md={2} xl={2}/>
               </Grid>
           </Grid>
+
           <TableAdditionalDetailsContext.Provider value={addingInformationMemo}>
               <TableAdditionalDetails/>
           </TableAdditionalDetailsContext.Provider>
+
       </React.Fragment>
     );
 };
