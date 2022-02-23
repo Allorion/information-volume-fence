@@ -14,7 +14,6 @@ const GlobalTemplate = () => {
         return setAddingInformation;
     }, [addingInformation])
 
-    console.log(addingInformation)
 
     return(
       <React.Fragment>

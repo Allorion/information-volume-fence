@@ -56,13 +56,15 @@ import {
 // Страницы
 import SearchInformation from "./pages/information-volume-water-intake/information-volume-fence/SearchInformation";
 import GlobalTemplate from "./pages/information-volume-water-intake/information-volume-fence-create/GlobalTemplate";
+import FactWusage from "./pages/information-volume-water-intake/fact-wusage/FactWusage";
 
 const App = () => {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="fw-list/" element={<SearchInformation/>}/>
+                <Route path="/water-usage/fact-wusage/" element={<FactWusage/>}/>
+                <Route path="/water-usage/fact-wusage/fw-list" element={<SearchInformation/>}/>
                 <Route path="fw-add/" element={<GlobalTemplate/>}/>
             </Routes>
         </BrowserRouter>
