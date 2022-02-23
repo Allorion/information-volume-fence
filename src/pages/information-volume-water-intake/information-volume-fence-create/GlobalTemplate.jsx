@@ -7,6 +7,7 @@ import FormAddingInformation from "./components/FormAddingInformation";
 import FormAddingInformationContext from "./context/FormAddingInformationContext";
 import TableAdditionalDetails from "./components/TableAdditionalDetails";
 import TableAdditionalDetailsContext from "./context/TableAdditionalDetailsContext";
+import NavBar from "../../../global-components/components/NavBar";
 
 const GlobalTemplate = () => {
 
@@ -21,6 +22,7 @@ const GlobalTemplate = () => {
           <Grid container sx={{textOverflow: 'ellipsis'}}>
               <Grid item xs={0} md={2} xl={2}/>
               <Grid item xs={12} md={8} xl={8}>
+                  <NavBar/>
                   <Paper elevation={3}>
                       <HeadBox>Сведения по объему забора</HeadBox>
                       <Box p={4}>

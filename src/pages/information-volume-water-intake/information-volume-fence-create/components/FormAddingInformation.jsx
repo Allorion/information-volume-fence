@@ -18,6 +18,8 @@ import FormAddingInformationContext from "../context/FormAddingInformationContex
 import {Box, Button, Container, Grid, MenuItem, Modal, Snackbar, Stack, TextField, Typography} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import MuiAlert from "@mui/material/Alert";
+import FormWaterFeatureSelectionContext from "../context/FormWaterFeatureSelectionContext";
+import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
 
 
 // Блока списков select
@@ -107,7 +109,7 @@ const FormAddingInformation = () => {
         secondMonth: '',
         thirdMonth: ''
     });
-
+    console.log(values)
     // Стейт с ошибками
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
@@ -149,24 +151,22 @@ const FormAddingInformation = () => {
                         <Paper>
                             <HeadBox>Форма добавления сведений</HeadBox>
                             <Box p={2}>
-                                {/*<Container>*/}
-                                {/*    <Stack spacing={2} direction="row">*/}
-                                {/*        <TextField*/}
-                                {/*            fullWidth*/}
-                                {/*            disabled*/}
-                                {/*            id="input-name-water-object"*/}
-                                {/*            value={values.nameWaterObjectName + values.nameWaterObjectCode}*/}
-                                {/*            label="Наименование водного объекта - водоисточника"*/}
-                                {/*            variant="standard" helperText='Выберите водный источник'/>*/}
-                                {/*        <NameWaterObjectContext.Provider value={[*/}
-                                {/*            values.nameWaterObjectCode,*/}
-                                {/*            values.nameWaterObjectName,*/}
-                                {/*            handleChange*/}
-                                {/*        ]}>*/}
-                                {/*            <FormWaterFeatureSelection/>*/}
-                                {/*        </NameWaterObjectContext.Provider>*/}
-                                {/*    </Stack>*/}
-                                {/*</Container>*/}
+                                <Container>
+                                    <Stack spacing={2} direction="row">
+                                        <TextField
+                                            fullWidth
+                                            disabled
+                                            id="input-name-water-object"
+                                            value={values.nameWaterObjectName}
+                                            label="Наименование водного объекта - водоисточника"
+                                            variant="standard" helperText='Выберите водный источник'/>
+                                        <FormWaterFeatureSelectionContext.Provider value={[
+                                            setValues
+                                        ]}>
+                                            <FormWaterFeatureSelection/>
+                                        </FormWaterFeatureSelectionContext.Provider>
+                                    </Stack>
+                                </Container>
                                 <Container>
                                     <Grid item xs={12} md={12} xl={12}>
                                         <TextField

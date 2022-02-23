@@ -10,6 +10,7 @@ import FormSearch from "./components/FormSearch";
 // Стили
 import HeadBox from "../../../global-components/style/HeadBox";
 import {Link} from "react-router-dom";
+import NavBar from "../../../global-components/components/NavBar";
 
 
 const SearchInformation = () => {
@@ -19,6 +20,7 @@ const SearchInformation = () => {
             <Grid container sx={{textOverflow: 'ellipsis'}}>
                 <Grid item xs={0} md={2} xl={2}/>
                 <Grid item xs={12} md={8} xl={8}>
+                    <NavBar/>
                     <Paper elevation={3}>
                         <HeadBox>Сведения по объему забора</HeadBox>
                         <Box p={4}>
