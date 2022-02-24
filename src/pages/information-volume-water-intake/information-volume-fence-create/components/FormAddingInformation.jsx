@@ -120,7 +120,6 @@ const FormAddingInformation = () => {
     // Получение стейта из родительского компонента через контекст
     const [addingInformation, setAddingInformation] = useContext(FormAddingInformationContext)
 
-
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
         const [errors, textErrors] = validate(values);
@@ -136,8 +135,8 @@ const FormAddingInformation = () => {
     }
 
     const formWaterFeatureSelectionMemo = useMemo(() =>{
-        return [setValues];
-    }, [values])
+        return setValues;
+    }, [values.nameWaterObjectName, values.nameWaterObjectCode])
 
     return (
         <React.Fragment>
@@ -165,9 +164,9 @@ const FormAddingInformation = () => {
                                             value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}
                                             label="Наименование водного объекта - водоисточника / код водного объекта"
                                             variant="standard" helperText='Выберите водный источник'/>
-                                        <FormWaterFeatureSelectionContext.Provider value={[
+                                        <FormWaterFeatureSelectionContext.Provider value={
                                             formWaterFeatureSelectionMemo
-                                        ]}>
+                                        }>
                                             <FormWaterFeatureSelection/>
                                         </FormWaterFeatureSelectionContext.Provider>
                                     </Stack>

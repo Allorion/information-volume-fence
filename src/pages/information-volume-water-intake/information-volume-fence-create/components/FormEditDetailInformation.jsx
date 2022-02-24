@@ -103,8 +103,8 @@ const FormEditDetailInformation = (props) => {
     }
 
     const formWaterFeatureSelectionMemo = useMemo(() =>{
-        return [setValues];
-    }, [values])
+        return setValues;
+    }, [values.nameWaterObjectName, values.nameWaterObjectCode])
 
     return(
         <React.Fragment>
@@ -125,21 +125,21 @@ const FormEditDetailInformation = (props) => {
                             <HeadBox>Форма добавления сведений</HeadBox>
                             <Box p={2}>
                                 <Container>
-                                    {/*<Stack spacing={2} direction="row">*/}
-                                    {/*    <TextField*/}
-                                    {/*        error={errors.nameWaterObjectCode}*/}
-                                    {/*        fullWidth*/}
-                                    {/*        disabled*/}
-                                    {/*        id="input-name-water-object"*/}
-                                    {/*        value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}*/}
-                                    {/*        label="Наименование водного объекта - водоисточника / код водного объекта"*/}
-                                    {/*        variant="standard" helperText='Выберите водный источник'/>*/}
-                                    {/*    <FormWaterFeatureSelectionContext.Provider value={[*/}
-                                    {/*        formWaterFeatureSelectionMemo*/}
-                                    {/*    ]}>*/}
-                                    {/*        <FormWaterFeatureSelection/>*/}
-                                    {/*    </FormWaterFeatureSelectionContext.Provider>*/}
-                                    {/*</Stack>*/}
+                                    <Stack spacing={2} direction="row">
+                                        <TextField
+                                            error={errors.nameWaterObjectCode}
+                                            fullWidth
+                                            disabled
+                                            id="input-name-water-object"
+                                            value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}
+                                            label="Наименование водного объекта - водоисточника / код водного объекта"
+                                            variant="standard" helperText='Выберите водный источник'/>
+                                        <FormWaterFeatureSelectionContext.Provider value={
+                                            formWaterFeatureSelectionMemo
+                                        }>
+                                            <FormWaterFeatureSelection/>
+                                        </FormWaterFeatureSelectionContext.Provider>
+                                    </Stack>
                                 </Container>
                                 <Container>
                                     <Grid item xs={12} md={12} xl={12}>

@@ -28,8 +28,8 @@ const FormWaterFeatureSelection = () => {
 
     const {loading, handleLoading} = useLoading();
 
-    const [setValues] = useContext(FormWaterFeatureSelectionContext);
-    console.log(1)
+    const setValues = useContext(FormWaterFeatureSelectionContext);
+
     useEffect(() => {
         if (waterObjectCode.length === 0) {
             setDataWaterObjectCode([])
@@ -104,8 +104,8 @@ const FormWaterFeatureSelection = () => {
     const handlerTransferWaterObject = () => {
         setValues((value) => ({
             ...value,
-            nameWaterObjectCode: waterObject.code,
-            nameWaterObjectName: waterObject.name
+            nameWaterObjectCode: 'waterObject.code',
+            nameWaterObjectName: 'waterObject.name'
         }));
         handleClose();
     }
