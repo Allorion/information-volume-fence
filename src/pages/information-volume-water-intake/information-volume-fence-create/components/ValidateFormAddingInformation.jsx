@@ -4,6 +4,11 @@ export default function ValidateFormAddingInformation(values) {
     const errors = {};
     const textErrors = [];
 
+    if (values.nameWaterObjectCode === 'Код водного объекта') {
+        errors.nameWaterObjectCode = true;
+        textErrors.push('- Вы не выбрали водный объект')
+    }
+
     if (values.waterIntakeNumber === "") {
         errors.waterIntakeNumber = true;
         textErrors.push('- Пустое поле "Номер водозабора"')

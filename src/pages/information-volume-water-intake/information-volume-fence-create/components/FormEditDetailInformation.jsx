@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from '../../../../global-components/hooks/useModal'
@@ -28,6 +28,8 @@ import {
 import Paper from "@mui/material/Paper";
 import MuiAlert from "@mui/material/Alert";
 import EditIcon from "@mui/icons-material/Edit";
+import FormWaterFeatureSelectionContext from "../context/FormWaterFeatureSelectionContext";
+import FormWaterFeatureSelection from "./FormWaterFeatureSelection";
 
 // Блока списков select
 const listWaterBodies = ['МОРЕ', 'РЕКА', 'РЕКА ПЕРЕСЫХАЮЩАЯ', 'ОЗЕРО', 'БОЛОТО', 'ВОДОХРАНИЛИЩЕ РУСЛОВОЕ, ПРУД РУСЛОВОЙ',
@@ -100,6 +102,10 @@ const FormEditDetailInformation = (props) => {
         }
     }
 
+    const formWaterFeatureSelectionMemo = useMemo(() =>{
+        return [setValues];
+    }, [values])
+
     return(
         <React.Fragment>
             <Fab color="secondary" aria-label="edit" onClick={handleOpen} size="small">
@@ -118,24 +124,23 @@ const FormEditDetailInformation = (props) => {
                         <Paper>
                             <HeadBox>Форма добавления сведений</HeadBox>
                             <Box p={2}>
-                                {/*<Container>*/}
-                                {/*    <Stack spacing={2} direction="row">*/}
-                                {/*        <TextField*/}
-                                {/*            fullWidth*/}
-                                {/*            disabled*/}
-                                {/*            id="input-name-water-object"*/}
-                                {/*            value={values.nameWaterObjectName + values.nameWaterObjectCode}*/}
-                                {/*            label="Наименование водного объекта - водоисточника"*/}
-                                {/*            variant="standard" helperText='Выберите водный источник'/>*/}
-                                {/*        <NameWaterObjectContext.Provider value={[*/}
-                                {/*            values.nameWaterObjectCode,*/}
-                                {/*            values.nameWaterObjectName,*/}
-                                {/*            handleChange*/}
-                                {/*        ]}>*/}
-                                {/*            <FormWaterFeatureSelection/>*/}
-                                {/*        </NameWaterObjectContext.Provider>*/}
-                                {/*    </Stack>*/}
-                                {/*</Container>*/}
+                                <Container>
+                                    {/*<Stack spacing={2} direction="row">*/}
+                                    {/*    <TextField*/}
+                                    {/*        error={errors.nameWaterObjectCode}*/}
+                                    {/*        fullWidth*/}
+                                    {/*        disabled*/}
+                                    {/*        id="input-name-water-object"*/}
+                                    {/*        value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}*/}
+                                    {/*        label="Наименование водного объекта - водоисточника / код водного объекта"*/}
+                                    {/*        variant="standard" helperText='Выберите водный источник'/>*/}
+                                    {/*    <FormWaterFeatureSelectionContext.Provider value={[*/}
+                                    {/*        formWaterFeatureSelectionMemo*/}
+                                    {/*    ]}>*/}
+                                    {/*        <FormWaterFeatureSelection/>*/}
+                                    {/*    </FormWaterFeatureSelectionContext.Provider>*/}
+                                    {/*</Stack>*/}
+                                </Container>
                                 <Container>
                                     <Grid item xs={12} md={12} xl={12}>
                                         <TextField

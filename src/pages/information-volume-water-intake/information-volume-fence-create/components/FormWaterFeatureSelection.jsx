@@ -29,7 +29,7 @@ const FormWaterFeatureSelection = () => {
     const {loading, handleLoading} = useLoading();
 
     const [setValues] = useContext(FormWaterFeatureSelectionContext);
-
+    console.log(1)
     useEffect(() => {
         if (waterObjectCode.length === 0) {
             setDataWaterObjectCode([])

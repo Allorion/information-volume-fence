@@ -2,7 +2,7 @@ import React from "react";
 
 const styleModal = {
     position: 'absolute',
-    top: '52%',
+    top: '60%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     outline: 0,

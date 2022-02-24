@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from '../../../../global-components/hooks/useModal'
@@ -70,10 +70,10 @@ const FormAddingInformation = () => {
 
     // Пустые значения стейта
     const initialState = {
-        nameWaterObjectCode: '',
-        nameWaterObjectName: '',
-        typeWaterObject: '',
-        waterQualityCategory: '',
+        nameWaterObjectCode: 'Код водного объекта',
+        nameWaterObjectName: 'Наименование водного объекта',
+        typeWaterObject: listWaterBodies[0],
+        waterQualityCategory: listWaterQualityCategories[0],
         waterIntakeNumber: '',
         northernLatitudeDegrees: '',
         northernLatitudeMinutes: '',
@@ -81,7 +81,7 @@ const FormAddingInformation = () => {
         easternLongitudeDegrees: '',
         easternLongitudeMinutes: '',
         easternLongitudeSeconds: '',
-        purposeWaterUse: '',
+        purposeWaterUse: listWaterUseGoals[0],
         volumePermissibleFence: '',
         fullVolume: '',
         firstMonth: '',
@@ -91,10 +91,10 @@ const FormAddingInformation = () => {
 
     // Стейт с данными
     const [values, setValues] = useState({
-        nameWaterObjectCode: '',
-        nameWaterObjectName: '',
-        typeWaterObject: '',
-        waterQualityCategory: '',
+        nameWaterObjectCode: 'Код водного объекта',
+        nameWaterObjectName: 'Наименование водного объекта',
+        typeWaterObject: listWaterBodies[0],
+        waterQualityCategory: listWaterQualityCategories[0],
         waterIntakeNumber: '',
         northernLatitudeDegrees: '',
         northernLatitudeMinutes: '',
@@ -102,14 +102,14 @@ const FormAddingInformation = () => {
         easternLongitudeDegrees: '',
         easternLongitudeMinutes: '',
         easternLongitudeSeconds: '',
-        purposeWaterUse: '',
+        purposeWaterUse: listWaterUseGoals[0],
         volumePermissibleFence: '',
         fullVolume: '',
         firstMonth: '',
         secondMonth: '',
         thirdMonth: ''
     });
-    console.log(values)
+
     // Стейт с ошибками
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
@@ -135,6 +135,10 @@ const FormAddingInformation = () => {
         }
     }
 
+    const formWaterFeatureSelectionMemo = useMemo(() =>{
+        return [setValues];
+    }, [values])
+
     return (
         <React.Fragment>
             <Button variant="contained" color="secondary" onClick={handleOpen}>Добавить детали</Button>
@@ -154,14 +158,15 @@ const FormAddingInformation = () => {
                                 <Container>
                                     <Stack spacing={2} direction="row">
                                         <TextField
+                                            error={errors.nameWaterObjectCode}
                                             fullWidth
                                             disabled
                                             id="input-name-water-object"
-                                            value={values.nameWaterObjectName}
-                                            label="Наименование водного объекта - водоисточника"
+                                            value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}
+                                            label="Наименование водного объекта - водоисточника / код водного объекта"
                                             variant="standard" helperText='Выберите водный источник'/>
                                         <FormWaterFeatureSelectionContext.Provider value={[
-                                            setValues
+                                            formWaterFeatureSelectionMemo
                                         ]}>
                                             <FormWaterFeatureSelection/>
                                         </FormWaterFeatureSelectionContext.Provider>
