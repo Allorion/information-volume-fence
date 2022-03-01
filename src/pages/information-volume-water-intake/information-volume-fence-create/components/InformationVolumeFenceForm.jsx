@@ -1,14 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+
+// MUI
 import {Box, Container, Grid, MenuItem, Stack, TextField} from "@mui/material";
 import Paper from "@mui/material/Paper";
-import HeadBox from "../../../../global-components/style/HeadBox";
-import useForm from "../../../../global-components/hooks/useForm";
 import {LocalizationProvider} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {ru} from "date-fns/locale";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 
+// Прочие импорты
+import {ru} from "date-fns/locale";
 
+// Пользовательские хуки
+import useForm from "../../../../global-components/hooks/useForm";
+import useLoading from "../../../../global-components/hooks/useLoading";
+
+
+// Блок констант для селектов
 const subjects = [
     {
         value: 'Юр.лицо',
@@ -23,28 +33,140 @@ const subjects = [
         label: 'ИП',
     },
 ];
+// (конец) Блок констант для селектов
 
-const InformationVolumeFenceForm = () => {
 
-    const [values, setValues] = useState({
-        structuralDivision: '',
-        subject: subjects[0].value,
-        number: '',
-        period: [null, null],
-        nameOrganization: '',
-        inn: '',
-        kpp: '',
-        postalAddressOrganization: '',
-        organizationalLegalFormOrganization: '',
-        detailsDocumentFence: '',
-        brandWaterAccountingDevices: '',
-        dateLastVerification: '',
-        frequencyVerification: ''
-    });
+export default function InformationVolumeFenceForm() {
 
-    const {handleChange} = useForm(setValues);
+    // Создаем объект с полями для передачи в пользовательский хук заполнения полей формы
+    const [values, setValues] = useState(
+        {
+            structuralDivision: '',
+            subject: subjects[0].value,
+            number: '',
+            period: [null, null],
+            nameOrganization: '',
+            inn: '',
+            kpp: '',
+            postalAddressOrganization: '',
+            organizationalLegalFormOrganization: '',
+            federalDistrict: '',
+            subjectRf: '',
+            basinDistrict: '',
+            riverBasin: '',
+            subBasin: '',
+            waterManagementSite: '',
+            detailsDocumentFence: '',
+            brandWaterAccountingDevices: '',
+            dateLastVerification: '',
+            frequencyVerification: '',
+        }
+    );
 
-    console.log(values)
+    // Импортируем в компонент пользовательский хуки
+    const {
+        handleChange,
+        handleInputSelect,
+        handleInputDate
+    } = useForm(setValues);
+
+    const {loading, handleLoading} = useLoading();
+
+    const [federalDistrictArray, setFederalDistrictArray] = useState([])
+    const [subjectRfArray, setSubjectRfArray] = useState([]);
+
+    const [basinDistrictArray, setBasinDistrictArray] = useState([]);
+
+    const [riverBasinArray, setRiverBasinArray] = useState([]);
+
+    const [subBasinArray, setSubBasinArray] = useState([]);
+
+    const [waterManagementSiteArray, setWaterManagementSiteArray] = useState([]);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.federaldistrict/get-by-id',
+            {
+                id: '',
+            },
+            function (obj) {
+                setFederalDistrictArray(obj.result.content);
+            }
+        );
+        handleLoading(false);
+    }, []);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.rfsubject/rfs-by-fd-uuids',
+            {
+                filter: `{"fdUuids":["${values.federalDistrict}"]}`
+            },
+            function (obj) {
+                setSubjectRfArray(obj.result);
+            }
+        );
+        handleLoading(false);
+    }, [values.federalDistrict]);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.rfsubject/get-bd-by-rfs',
+            {
+                filter: `["${values.subjectRf}"]`
+            },
+            function (obj) {
+                setBasinDistrictArray(obj.result);
+            }
+        );
+        handleLoading(false);
+    }, [values.subjectRf]);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.riverbasin/rb-by-bd',
+            {
+                filter: `["${values.basinDistrict}"]`
+            },
+            function (obj) {
+                setRiverBasinArray(obj.result);
+            }
+        );
+        handleLoading(false);
+    }, [values.basinDistrict]);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.subbasin/sub-by-rb',
+            {
+                filter: `["${values.riverBasin}"]`
+            },
+            function (obj) {
+                setSubBasinArray(obj.result);
+            }
+        );
+        handleLoading(false);
+    }, [values.riverBasin]);
+
+    useEffect(() => {
+        handleLoading(true);
+        Liferay.Service(
+            '/catalog.heparcel/hep-by-sub',
+            {
+                filter: `["${values.subBasin}"]`
+            },
+            function (obj) {
+                setWaterManagementSiteArray(obj.result);
+            }
+        );
+        handleLoading(false);
+    }, [values.subBasin]);
+
     return (
         <React.Fragment>
             <Paper elevation={3}>
@@ -69,7 +191,7 @@ const InformationVolumeFenceForm = () => {
                                 label="Субъект"
                                 name='subject'
                                 value={values.subject}
-                                onChange={handleChange}
+                                onChange={handleInputSelect}
                                 helperText="Выберите субъект правоотношения"
                                 variant="standard"
                             >
@@ -99,13 +221,9 @@ const InformationVolumeFenceForm = () => {
                                     <DateRangePicker
                                         startText="от"
                                         endText="до"
-                                        name='period'
                                         value={values.period}
-                                        onChange={(newValue) => {
-                                            setValues((value) => ({
-                                                ...value,
-                                                'period': newValue
-                                            }));
+                                        onChange={(event) => {
+                                            handleInputDate(event, 'period')
                                         }}
                                         mask="__.__.____"
                                         renderInput={(startProps, endProps) => (
@@ -183,6 +301,144 @@ const InformationVolumeFenceForm = () => {
                                     helperText='Введите организационно-правовую форму организации'
                                 />
                             </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-federal-district"
+                                    select
+                                    label="Федеральный округ"
+                                    name='federalDistrict'
+                                    value={values.federalDistrict}
+                                    onChange={handleInputSelect}
+                                    helperText="Федеральный округ"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        federalDistrictArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-subject-rf"
+                                    select
+                                    label="Субъекты РФ"
+                                    name='subjectRf'
+                                    value={values.subjectRf}
+                                    onChange={handleInputSelect}
+                                    helperText="Субъекты РФ"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        subjectRfArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.code} - {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-basin-district"
+                                    select
+                                    label="Басейновый округ"
+                                    name='basinDistrict'
+                                    value={values.basinDistrict}
+                                    onChange={handleInputSelect}
+                                    helperText="Басейновый округ"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        basinDistrictArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.code} - {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-river-basin"
+                                    select
+                                    label="Речной бассейн"
+                                    name='riverBasin'
+                                    value={values.riverBasin}
+                                    onChange={handleInputSelect}
+                                    helperText="Басейновый округ"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        riverBasinArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.code} - {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-sub-basin"
+                                    select
+                                    label="Подбассейн"
+                                    name='subBasin'
+                                    value={values.subBasin}
+                                    onChange={handleInputSelect}
+                                    helperText="Подбассейн"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        subBasinArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.code} - {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    fullWidth
+                                    id="select-water-management-site"
+                                    select
+                                    label="Водохозяйственный участок"
+                                    name='waterManagementSite'
+                                    value={values.waterManagementSite}
+                                    onChange={handleInputSelect}
+                                    helperText="Водохозяйственный участок"
+                                    variant="standard"
+                                >
+                                    {loading ? (
+                                        <MenuItem>Загрузка...</MenuItem>
+                                    ) : (
+                                        waterManagementSiteArray.map((option) => (
+                                            <MenuItem key={option.id} value={option.name}>
+                                                {option.code} - {option.name}
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </TextField>
+                            </Grid>
                         </Grid>
                         <Grid container pt={2}>
                             <Grid item xs={12} md={12} xl={12}>
@@ -240,6 +496,4 @@ const InformationVolumeFenceForm = () => {
             </Paper>
         </React.Fragment>
     );
-};
-
-export default React.memo(InformationVolumeFenceForm);
+}

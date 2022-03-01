@@ -1,8 +1,6 @@
 import React, {useMemo, useState} from "react";
 import {Link} from "react-router-dom";
-import {Box, Button, Grid, Stack} from "@mui/material";
-import Paper from "@mui/material/Paper";
-import HeadBox from "../../../global-components/style/HeadBox";
+import {Button, Grid, Stack} from "@mui/material";
 import FormAddingInformation from "./components/FormAddingInformation";
 import FormAddingInformationContext from "./context/FormAddingInformationContext";
 import TableAdditionalDetails from "./components/TableAdditionalDetails";

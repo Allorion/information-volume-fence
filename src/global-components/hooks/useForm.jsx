@@ -3,6 +3,7 @@ import React from 'react';
 const useForm = (setValues) => {
 
     const handleChange = e => {
+
         const { name, value } = e.target;
         setValues(values => ({
             ...values,
@@ -10,7 +11,25 @@ const useForm = (setValues) => {
         }));
     };
 
-    return {handleChange};
+    const handleInputSelect = (event) => {
+        setValues(inputs => ({
+                ...inputs,
+                [event.target.name]: event.target.value}
+        ));
+    };
+
+    const handleInputDate = (event, name) => {
+        setValues((value) => ({
+            ...value,
+            [name]: event
+        }));
+    };
+
+    return {
+        handleChange,
+        handleInputSelect,
+        handleInputDate
+    };
 };
 
 export default useForm;
