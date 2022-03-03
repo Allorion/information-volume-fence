@@ -4,7 +4,7 @@ import {Grid, MenuItem, TextField} from "@mui/material";
 import WaterManagementSiteContext from "./context/WaterManagementSiteContext";
 import useForm from "../hooks/useForm";
 
-const WaterManagementSite = () => {
+const WaterTest = () => {
 
     const [inputs, setInputs] = useState({
         federalDistrict: '',
@@ -13,8 +13,6 @@ const WaterManagementSite = () => {
         riverBasin: '',
         subBasin: ''
     });
-
-    console.log(1)
 
     const {loading, handleLoading} = useLoading();
 
@@ -29,7 +27,7 @@ const WaterManagementSite = () => {
 
     const [waterManagementSiteArray, setWaterManagementSiteArray] = useState([]);
 
-    const [values, handleInputSelectParent] = useContext(WaterManagementSiteContext);
+    const [values, handleChange] = useContext(WaterManagementSiteContext);
 
     // Импортируем в компонент пользовательский хуки
     const {
@@ -245,7 +243,7 @@ const WaterManagementSite = () => {
                     label="Водохозяйственный участок"
                     name='waterManagementSite'
                     value={values.waterManagementSite}
-                    onChange={handleInputSelectParent}
+                    onChange={handleChange}
                     helperText="Водохозяйственный участок"
                     variant="standard"
                 >
@@ -264,4 +262,4 @@ const WaterManagementSite = () => {
     );
 }
 
-export default React.memo(WaterManagementSite);
+export default React.memo(WaterTest);

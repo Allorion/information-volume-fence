@@ -1,9 +1,9 @@
 import React from "react";
 
 import {Box, Grid} from "@mui/material";
-import HeadBox from "../../../global-components/style/HeadBox";
+import HeadBox from "../../global-components/style/HeadBox";
 import Paper from "@mui/material/Paper";
-import NavBar from "../../../global-components/components/NavBar";
+import NavBar from "../../global-components/components/NavBar";
 
 
 
