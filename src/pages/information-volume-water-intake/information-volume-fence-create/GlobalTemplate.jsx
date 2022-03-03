@@ -31,7 +31,7 @@ const GlobalTemplate = () => {
                               count={'information' + Object.keys(addingInformation).length}
                           />
                       </FormAddingInformationContext.Provider>
-                      <Link to="/water-usage/fact-wusage/" style={{textDecoration: 'none'}}>
+                      <Link to="/web/guest/factual-water-usage/" style={{textDecoration: 'none'}}>
                           <Button variant="contained" color="success">Сохранить</Button>
                       </Link>
                   </Stack>

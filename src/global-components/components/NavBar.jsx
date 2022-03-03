@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button, ButtonGroup, Container, Divider, Stack} from "@mui/material";
+import {Button, Divider, Stack} from "@mui/material";
 
 
 export default function NavBar() {
@@ -13,7 +13,7 @@ export default function NavBar() {
                     divider={<Divider orientation="vertical" flexItem />}
                     spacing={2}
                 >
-                    <Link to="/water-usage/fact-wusage/fw-list" style={{textDecoration: 'none'}}>
+                    <Link to="/web/guest/factual-water-usage/fw-list" style={{textDecoration: 'none'}}>
                         <Button variant="outlined">Сведения по объему забора</Button>
                     </Link>
                     <Link to="#" style={{textDecoration: 'none'}}>
