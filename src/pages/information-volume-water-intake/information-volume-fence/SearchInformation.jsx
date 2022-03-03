@@ -1,16 +1,17 @@
 import React from "react";
 
 // MUI
-import {Box, Button, Container, Grid, Paper, Stack} from "@mui/material";
+import {Box, Button, Grid, Paper, Stack} from "@mui/material";
 
 // Компоненты
 import TableInformation from "./components/TableInformation";
-import FormSearch from "./components/FormSearch";
+import NavBar from "../../../global-components/components/NavBar";
+import ReportSearchForm from "../../../global-components/components/ReportSearchForm";
 
 // Стили
 import HeadBox from "../../../global-components/style/HeadBox";
 import {Link} from "react-router-dom";
-import NavBar from "../../../global-components/components/NavBar";
+
 
 
 const SearchInformation = () => {
@@ -24,7 +25,7 @@ const SearchInformation = () => {
                     <Paper elevation={3}>
                         <HeadBox>Сведения по объему забора</HeadBox>
                         <Box p={4}>
-                            <FormSearch/>
+                            <ReportSearchForm/>
                         </Box>
                     </Paper>
                     <Stack spacing={2} direction="row" mt={2}>

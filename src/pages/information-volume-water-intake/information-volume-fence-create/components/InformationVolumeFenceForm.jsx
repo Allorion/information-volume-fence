@@ -14,10 +14,10 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import {ru} from "date-fns/locale";
 
 // Пользовательские хуки
-import useForm from "../../../../global-components/hooks/useForm";
+import useFormLate from "../../../../global-components/hooks/useFormLate";
 import useLoading from "../../../../global-components/hooks/useLoading";
 import WaterManagementSiteContext from "../../../../global-components/components/context/WaterManagementSiteContext";
-import WaterManagementSite from "../../../../global-components/components/WaterManagementSite";
+import WaterManagementSite from "../../../../global-components/components/WaterManagementSite2";
 
 
 // Блок констант для селектов
@@ -65,7 +65,7 @@ export default function InformationVolumeFenceForm() {
         handleChange,
         handleInputSelect,
         handleInputDate
-    } = useForm(setValues);
+    } = useFormLate(setValues);
 
     const {loading, handleLoading} = useLoading();
 

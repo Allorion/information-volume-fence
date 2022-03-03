@@ -2,7 +2,7 @@ import React, {useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from '../../../../global-components/hooks/useModal'
-import useForm from "../../../../global-components/hooks/useForm";
+import useFormLate from "../../../../global-components/hooks/useFormLate";
 
 // Компоненты
 import validate from './ValidateFormAddingInformation';
@@ -85,7 +85,7 @@ const FormEditDetailInformation = (props) => {
     const [values, setValues] = useState(props.addingInformation[props.count]);
 
     // Пользовательский хук для добавления данных из полей формы в стейт
-    const {handleChange} = useForm(setValues);
+    const {handleChange} = useFormLate(setValues);
 
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {

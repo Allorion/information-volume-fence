@@ -5,13 +5,15 @@ import {Box, Button, Grid, Paper, Stack} from "@mui/material";
 
 // Компоненты
 import NavBar from "../../../global-components/components/NavBar";
-import FormSearchReportsVolumeDischarge from "./components/FormSearchReportsVolumeDischarge";
+import ReportSearchForm from "../../../global-components/components/ReportSearchForm";
 
 // Стили
 import HeadBox from "../../../global-components/style/HeadBox";
 
 // Роутинг
 import {Link} from "react-router-dom";
+import TableInformation from "./components/TableInformation";
+
 
 
 
@@ -26,7 +28,7 @@ export default function SearchReportsVolumeDischarge() {
                     <Paper elevation={3}>
                         <HeadBox>Сведения по объему забора</HeadBox>
                         <Box p={4}>
-                            <FormSearchReportsVolumeDischarge/>
+                            <ReportSearchForm/>
                         </Box>
                     </Paper>
                     <Stack spacing={2} direction="row" mt={2}>
@@ -37,7 +39,7 @@ export default function SearchReportsVolumeDischarge() {
                 </Grid>
                 <Grid item xs={0} md={2} xl={2}/>
             </Grid>
-
+            <TableInformation/>
         </React.Fragment>
     );
 };

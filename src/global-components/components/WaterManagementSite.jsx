@@ -1,23 +1,33 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
+
+// ользовательские хуки
 import useLoading from "../hooks/useLoading";
-import {Grid, MenuItem, TextField} from "@mui/material";
-import WaterManagementSiteContext from "./context/WaterManagementSiteContext";
 import useForm from "../hooks/useForm";
+
+// Контекст
+import WaterManagementSiteContext from "./context/WaterManagementSiteContext";
+
+// MUI
+import {Grid, MenuItem, TextField} from "@mui/material";
 
 const WaterManagementSite = () => {
 
-    const [inputs, setInputs] = useState({
+    // Указывем требуемые поля для формы
+    const inputs = {
         federalDistrict: '',
         subjectRf: '',
         basinDistrict: '',
         riverBasin: '',
         subBasin: ''
-    });
+    };
 
-    console.log(1)
-
+    // Получаем хук для загрузки
     const {loading, handleLoading} = useLoading();
 
+    // Импортируем в компонент пользовательский хук формы
+    const {values, handleChange} = useForm(inputs);
+
+    // Блок стейтов для записи данных полученных из API
     const [federalDistrictArray, setFederalDistrictArray] = useState([]);
     const [subjectRfArray, setSubjectRfArray] = useState([]);
 
@@ -28,14 +38,12 @@ const WaterManagementSite = () => {
     const [subBasinArray, setSubBasinArray] = useState([]);
 
     const [waterManagementSiteArray, setWaterManagementSiteArray] = useState([]);
+    // (конец) Блок стейтов для записи данных полученных из API
 
-    const [values, handleInputSelectParent] = useContext(WaterManagementSiteContext);
+    // Получаем данные из родительского компонента через контекст
+    const [valuesParents, handleChangeParents] = useContext(WaterManagementSiteContext);
 
-    // Импортируем в компонент пользовательский хуки
-    const {
-        handleInputSelect,
-    } = useForm(setInputs);
-
+    // Блок с запросами к API
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
@@ -55,70 +63,71 @@ const WaterManagementSite = () => {
     //     Liferay.Service(
     //         '/catalog.rfsubject/rfs-by-fd-uuids',
     //         {
-    //             filter: `{"fdUuids":["${inputs.federalDistrict}"]}`
+    //             filter: `{"fdUuids":["${values.federalDistrict}"]}`
     //         },
     //         function (obj) {
     //             setSubjectRfArray(obj.result);
     //         }
     //     );
     //     handleLoading(false);
-    // }, [inputs.federalDistrict]);
+    // }, [values.federalDistrict]);
     //
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
     //         '/catalog.rfsubject/get-bd-by-rfs',
     //         {
-    //             filter: `["${inputs.subjectRf}"]`
+    //             filter: `["${values.subjectRf}"]`
     //         },
     //         function (obj) {
     //             setBasinDistrictArray(obj.result);
     //         }
     //     );
     //     handleLoading(false);
-    // }, [inputs.subjectRf]);
+    // }, [values.subjectRf]);
     //
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
     //         '/catalog.riverbasin/rb-by-bd',
     //         {
-    //             filter: `["${inputs.basinDistrict}"]`
+    //             filter: `["${values.basinDistrict}"]`
     //         },
     //         function (obj) {
     //             setRiverBasinArray(obj.result);
     //         }
     //     );
     //     handleLoading(false);
-    // }, [inputs.basinDistrict]);
+    // }, [values.basinDistrict]);
     //
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
     //         '/catalog.subbasin/sub-by-rb',
     //         {
-    //             filter: `["${inputs.riverBasin}"]`
+    //             filter: `["${values.riverBasin}"]`
     //         },
     //         function (obj) {
     //             setSubBasinArray(obj.result);
     //         }
     //     );
     //     handleLoading(false);
-    // }, [inputs.riverBasin]);
+    // }, [values.riverBasin]);
     //
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
     //         '/catalog.heparcel/hep-by-sub',
     //         {
-    //             filter: `["${inputs.subBasin}"]`
+    //             filter: `["${values.subBasin}"]`
     //         },
     //         function (obj) {
     //             setWaterManagementSiteArray(obj.result);
     //         }
     //     );
     //     handleLoading(false);
-    // }, [inputs.subBasin]);
+    // }, [values.subBasin]);
+    // Блок с запросами к API
 
     return (
         <React.Fragment>
@@ -129,8 +138,8 @@ const WaterManagementSite = () => {
                     select
                     label="Федеральный округ"
                     name='federalDistrict'
-                    value={inputs.federalDistrict}
-                    onChange={handleInputSelect}
+                    value={values.federalDistrict}
+                    onChange={handleChange}
                     helperText="Федеральный округ"
                     variant="standard"
                 >
@@ -152,8 +161,8 @@ const WaterManagementSite = () => {
                     select
                     label="Субъекты РФ"
                     name='subjectRf'
-                    value={inputs.subjectRf}
-                    onChange={handleInputSelect}
+                    value={values.subjectRf}
+                    onChange={handleChange}
                     helperText="Субъекты РФ"
                     variant="standard"
                 >
@@ -175,8 +184,8 @@ const WaterManagementSite = () => {
                     select
                     label="Басейновый округ"
                     name='basinDistrict'
-                    value={inputs.basinDistrict}
-                    onChange={handleInputSelect}
+                    value={values.basinDistrict}
+                    onChange={handleChange}
                     helperText="Басейновый округ"
                     variant="standard"
                 >
@@ -198,8 +207,8 @@ const WaterManagementSite = () => {
                     select
                     label="Речной бассейн"
                     name='riverBasin'
-                    value={inputs.riverBasin}
-                    onChange={handleInputSelect}
+                    value={values.riverBasin}
+                    onChange={handleChange}
                     helperText="Басейновый округ"
                     variant="standard"
                 >
@@ -221,8 +230,8 @@ const WaterManagementSite = () => {
                     select
                     label="Подбассейн"
                     name='subBasin'
-                    value={inputs.subBasin}
-                    onChange={handleInputSelect}
+                    value={values.subBasin}
+                    onChange={handleChange}
                     helperText="Подбассейн"
                     variant="standard"
                 >
@@ -244,8 +253,8 @@ const WaterManagementSite = () => {
                     select
                     label="Водохозяйственный участок"
                     name='waterManagementSite'
-                    value={values.waterManagementSite}
-                    onChange={handleInputSelectParent}
+                    value={valuesParents.waterManagementSite}
+                    onChange={handleChangeParents}
                     helperText="Водохозяйственный участок"
                     variant="standard"
                 >

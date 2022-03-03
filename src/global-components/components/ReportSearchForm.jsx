@@ -1,15 +1,15 @@
 import React, {useMemo, useState} from "react";
 
-import useForm2 from '../../../../global-components/hooks/useForm2'
+import useForm2 from '../../global-components/hooks/useForm'
 import {Box, Button, Container, Grid, Stack, TextField, Typography} from "@mui/material";
-import WaterManagementSiteContext from "../../../../global-components/components/context/WaterManagementSiteContext";
+import WaterManagementSiteContext from "../../global-components/components/context/WaterManagementSiteContext";
 import {LocalizationProvider} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import {ru} from "date-fns/locale";
 import DateRangePicker from "@mui/lab/DateRangePicker";
-import WaterTest from "../../../../global-components/components/WaterTest";
+import WaterManagementSite from "../../global-components/components/WaterManagementSite";
 
-const FormSearchReportsVolumeDischarge = () => {
+const ReportSearchForm = () => {
 
     const parentsValues = {
         division: '',
@@ -25,7 +25,7 @@ const FormSearchReportsVolumeDischarge = () => {
 
     const {values, handleChange, handleInputDate} = useForm2(parentsValues);
 
-    const testHandle = useMemo(() => {
+    const waterManagementSiteMemo = useMemo(() => {
         return [values, handleChange];
     }, [values.waterManagementSite]);
 
@@ -87,9 +87,9 @@ const FormSearchReportsVolumeDischarge = () => {
             <Container>
                 <Grid container>
                     <WaterManagementSiteContext.Provider
-                        value={testHandle}
+                        value={waterManagementSiteMemo}
                     >
-                        <WaterTest/>
+                        <WaterManagementSite/>
                     </WaterManagementSiteContext.Provider>
                 </Grid>
             </Container>
@@ -168,4 +168,4 @@ const FormSearchReportsVolumeDischarge = () => {
     );
 };
 
-export default FormSearchReportsVolumeDischarge;
+export default ReportSearchForm;

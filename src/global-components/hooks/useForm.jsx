@@ -1,21 +1,14 @@
-import React from 'react';
+import React, {useState} from "react";
 
-const useForm = (setValues) => {
+const useForm = (parentsValues) => {
 
-    const handleChange = e => {
+    const [values, setValues] = useState(parentsValues);
 
-        const { name, value } = e.target;
-        setValues(values => ({
-            ...values,
-            [name]: value
-        }));
-    };
-
-    const handleInputSelect = (event) => {
-        setValues(inputs => ({
-                ...inputs,
-                [event.target.name]: event.target.value}
-        ));
+    const handleChange = event => {
+        setValues(value => ({
+            ...value,
+            [event.target.name]: event.target.value
+        }))
     };
 
     const handleInputDate = (event, name) => {
@@ -25,11 +18,13 @@ const useForm = (setValues) => {
         }));
     };
 
+
     return {
+        values,
         handleChange,
-        handleInputSelect,
         handleInputDate
     };
 };
 
 export default useForm;
+
