@@ -104,8 +104,8 @@ const FormWaterFeatureSelection = () => {
     const handlerTransferWaterObject = () => {
         setValues((value) => ({
             ...value,
-            nameWaterObjectCode: 'waterObject.code',
-            nameWaterObjectName: 'waterObject.name'
+            code: waterObject.code,
+            name: waterObject.name
         }));
         handleClose();
     }
