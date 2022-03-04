@@ -72,7 +72,7 @@ const EditDetailsReportsVolumeDischarge = props => {
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
         const [errors, textErrors] = validate(values);
-        if (Object.keys(errors).length !== 0) {
+        if (Object.keys(errors).length === 0) {
             const temp = [...props.addingInformation];
             temp[props.count] = values;
             props.setAddingInformation(temp)
