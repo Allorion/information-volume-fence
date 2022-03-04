@@ -21,9 +21,9 @@ export default function ValidateDetailsReportsVolumeDischarge(values) {
         textErrors.push('- Вы не выбрали водный объект')
     }
 
-    if (values.waterIntakeNumber === "") {
-        errors.waterIntakeNumber = true;
-        textErrors.push('- Пустое поле "Номер водозабора"')
+    if (values.waterOutletNumber === "") {
+        errors.waterOutletNumber = true;
+        textErrors.push('- Пустое поле "Номер водовыпуска"')
     }
 
     if (values.northernLatitudeDegrees === "") {

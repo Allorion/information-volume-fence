@@ -1,9 +1,9 @@
-// *******************************************************
-// Компонент с добавлением деталей к отчету по сбросу воды
-// *******************************************************
+// ***********************************************************
+// Компонент с редактированием деталей к отчету по сбросу воды
+// ***********************************************************
 
 
-import React, {useContext, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from "../../../../global-components/hooks/useModal";
@@ -14,7 +14,7 @@ import {
     Box,
     Button,
     Container,
-    Dialog,
+    Dialog, Fab,
     Grid,
     MenuItem,
     Snackbar,
@@ -30,19 +30,20 @@ import Alert from '../../../../global-components/style/Alert';
 
 // Компоненты
 import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
-import ValidateDetailsReportsVolumeDischarge from "./ValidateDetailsReportsVolumeDischarge";
 import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
 
 // Контекст
-import AddDetailsReportsVolumeDischargeContext from "../context/AddDetailsReportsVolumeDischargeContext";
 import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
+import EditIcon from "@mui/icons-material/Edit";
+import validate
+    from "../../../information-volume-water-intake/information-volume-fence-create/components/ValidateFormAddingInformation";
 
 
 // Получаем данные из компонента с глобальными select
 const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
 
 
-export default function AddDetailsReportsVolumeDischarge() {
+const EditDetailsReportsVolumeDischarge = props => {
 
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
@@ -52,38 +53,12 @@ export default function AddDetailsReportsVolumeDischarge() {
     // Отображение окна с ошибками
     const [openAlert, setOpenAlert] = useState(false);
 
-    // Значения стейта
-    const initialState = {
-        nameWaterObjectCode: 'Код водного объекта',
-        nameWaterObjectName: 'Наименование водного объекта',
-        typeWaterObject: listWaterBodies[0],
-        waterQualityCategory: listWaterQualityCategories[0],
-        waterOutletNumber: '',
-        northernLatitudeDegrees: '',
-        northernLatitudeMinutes: '',
-        northernLatitudeSeconds: '',
-        easternLongitudeDegrees: '',
-        easternLongitudeMinutes: '',
-        easternLongitudeSeconds: '',
-        amountPermissibleDischarge: '',
-        fullVolume: '',
-        withoutCleaning: '',
-        insufficientlyCleaned: '',
-        normativelyPure: '',
-        biological: '',
-        physicoChemical: '',
-        mechanical: ''
-    };
-
     // Добавляем кастомный хук формы
-    const {values, setValues, handleChange} = useForm(initialState);
+    const {values, setValues, handleChange} = useForm(props.addingInformation[props.count]);
 
     // Стейт с ошибками
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
-
-    // Получаем данные из родительского компонента
-    const [addingInformation, setAddingInformation] = useContext(AddDetailsReportsVolumeDischargeContext);
 
     // Функция рендерит результат только при изменении поля с кодом и названием водного объекта
     const formWaterFeatureSelectionMemo = useMemo(() => {
@@ -92,12 +67,12 @@ export default function AddDetailsReportsVolumeDischarge() {
 
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
-        const [errors, textErrors] = ValidateDetailsReportsVolumeDischarge(values);
+        const [errors, textErrors] = validate(values);
         if (Object.keys(errors).length === 0) {
-            setAddingInformation([...addingInformation, values]);
+            const temp = [...props.addingInformation];
+            temp[props.count] = values;
+            props.setAddingInformation(temp)
             handleClose();
-            setValues(initialState);
-            setErrors({});
         } else {
             setTextAlert(textErrors);
             setOpenAlert(true);
@@ -107,7 +82,9 @@ export default function AddDetailsReportsVolumeDischarge() {
 
     return (
         <React.Fragment>
-            <Button variant="contained" color="secondary" onClick={handleOpen}>Добавить детали</Button>
+            <Fab color="secondary" aria-label="edit" onClick={handleOpen} size="small">
+                <EditIcon/>
+            </Fab>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -443,3 +420,5 @@ export default function AddDetailsReportsVolumeDischarge() {
         </React.Fragment>
     );
 };
+
+export default EditDetailsReportsVolumeDischarge;

@@ -15,17 +15,21 @@ import NavBar from "../../../global-components/components/NavBar";
 import FormReportAdd from "../../../global-components/components/FormReportAdd";
 import AddDetailsReportsVolumeDischarge from "./components/AddDetailsReportsVolumeDischarge";
 import AddDetailsReportsVolumeDischargeContext from "./context/AddDetailsReportsVolumeDischargeContext";
+import TableReportsVolumeDischarge from "./components/TableReportsVolumeDischarge";
+import TableReportsVolumeDischargeContext from "./context/TableReportsVolumeDischargeContext";
 
 
 const AddReportsVolumeDischarge = () => {
 
+    // Создаем массив для хранения значений таблицы дополнительных сведеней
     const [addingInformation, setAddingInformation] = useState([]);
 
-    const addingInformationMemo = useMemo(() =>{
+    // Функция для отправки данных в дочерний компонент по добавлению нового объекта в массив значений таблицы
+    const addingInformationMemo = useMemo(() => {
         return [addingInformation, setAddingInformation];
     }, [addingInformation])
 
-    return(
+    return (
         <React.Fragment>
             <Grid container sx={{textOverflow: 'ellipsis'}}>
                 <Grid item xs={0} md={2} xl={2}/>
@@ -43,7 +47,9 @@ const AddReportsVolumeDischarge = () => {
                     <Grid item xs={0} md={2} xl={2}/>
                 </Grid>
             </Grid>
-
+            <TableReportsVolumeDischargeContext.Provider value={addingInformationMemo}>
+                <TableReportsVolumeDischarge/>
+            </TableReportsVolumeDischargeContext.Provider>
         </React.Fragment>
     );
 };
