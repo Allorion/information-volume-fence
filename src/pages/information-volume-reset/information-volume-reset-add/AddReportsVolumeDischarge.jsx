@@ -13,6 +13,7 @@ import {Link} from "react-router-dom";
 // Компоненты
 import NavBar from "../../../global-components/components/NavBar";
 import FormReportAdd from "../../../global-components/components/FormReportAdd";
+import AddDetailsReportsVolumeDischarge from "./components/AddDetailsReportsVolumeDischarge";
 
 
 const AddReportsVolumeDischarge = () => {
@@ -28,6 +29,7 @@ const AddReportsVolumeDischarge = () => {
                         <Link to="/web/guest/factual-water-usage/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="success">Сохранить</Button>
                         </Link>
+                        <AddDetailsReportsVolumeDischarge/>
                     </Stack>
                     <Grid item xs={0} md={2} xl={2}/>
                 </Grid>
