@@ -1,16 +1,31 @@
-import React, {useMemo, useState} from "react";
+// *********************************************************
+// Компонент формы для поиска отчета по забору и сбросу воды
+// *********************************************************
 
-import useForm2 from '../../global-components/hooks/useForm'
+import React, {useMemo} from "react";
+
+// MUI
 import {Box, Button, Container, Grid, Stack, TextField, Typography} from "@mui/material";
-import WaterManagementSiteContext from "../../global-components/components/context/WaterManagementSiteContext";
 import {LocalizationProvider} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {ru} from "date-fns/locale";
 import DateRangePicker from "@mui/lab/DateRangePicker";
+
+// Пользовательские хуки
+import useForm from '../../global-components/hooks/useForm';
+
+// Контекст
+import WaterManagementSiteContext from "../../global-components/components/context/WaterManagementSiteContext";
+
+// Сторонние модули
+import {ru} from "date-fns/locale";
+
+// Компоненты
 import WaterManagementSite from "../../global-components/components/WaterManagementSite";
+
 
 const ReportSearchForm = () => {
 
+    // Указывем поля формы для передачи в кастомный хук формы
     const parentsValues = {
         division: '',
         waterUserDirectory: '',
@@ -23,13 +38,15 @@ const ReportSearchForm = () => {
         periodQuarter: ''
     };
 
-    const {values, handleChange, handleInputDate} = useForm2(parentsValues);
+    // Добавляем кастомный хук формы
+    const {values, handleChange, handleInputDate} = useForm(parentsValues);
 
+    // Создаем передачу данных в компонент с выбором водного объекта только по изменению поля с объектом
     const waterManagementSiteMemo = useMemo(() => {
         return [values, handleChange];
     }, [values.waterManagementSite]);
 
-    return(
+    return (
         <React.Fragment>
             <Container>
                 <TextField

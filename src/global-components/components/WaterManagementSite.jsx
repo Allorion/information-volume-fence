@@ -1,6 +1,10 @@
+// ***********************************************************
+// Компонет с выбором водного объекта
+// ***********************************************************
+
 import React, {useContext, useState, useEffect} from "react";
 
-// ользовательские хуки
+// Пользовательские хуки
 import useLoading from "../hooks/useLoading";
 import useForm from "../hooks/useForm";
 

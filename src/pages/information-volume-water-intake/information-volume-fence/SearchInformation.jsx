@@ -29,7 +29,7 @@ const SearchInformation = () => {
                         </Box>
                     </Paper>
                     <Stack spacing={2} direction="row" mt={2}>
-                        <Link to="/web/guest/factual-water-usage/fw-add/" style={{textDecoration: 'none'}}>
+                        <Link to="/web/guest/factual-water-usage/fd-add/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="secondary">Создать</Button>
                         </Link>
                     </Stack>

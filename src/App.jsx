@@ -13,6 +13,8 @@ import GlobalTemplate from "./pages/information-volume-water-intake/information-
 import FactWusage from "./pages/fact-wusage/FactWusage";
 import SearchReportsVolumeDischarge
     from "./pages/information-volume-reset/information-volume-reset-list/SearchReportsVolumeDischarge";
+import AddReportsVolumeDischarge
+    from "./pages/information-volume-reset/information-volume-reset-add/AddReportsVolumeDischarge";
 
 const App = () => {
 
@@ -23,6 +25,7 @@ const App = () => {
                 <Route path="/web/guest/factual-water-usage/fw-list/" element={<SearchInformation/>}/>
                 <Route path="/web/guest/factual-water-usage/fw-add/" element={<GlobalTemplate/>}/>
                 <Route path='/web/guest/factual-water-usage/fd-list/' element={<SearchReportsVolumeDischarge/>}/>
+                <Route path='/web/guest/factual-water-usage/fd-add/' element={<AddReportsVolumeDischarge/>}/>
             </Routes>
         </BrowserRouter>
     );

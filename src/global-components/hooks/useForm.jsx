@@ -1,9 +1,15 @@
+// *******************************************************
+// Пользовательский хук для заполнения полей input в форме
+// *******************************************************
+
 import React, {useState} from "react";
 
 const useForm = (parentsValues) => {
 
+    // Сотстояние для записи объекта полей формы
     const [values, setValues] = useState(parentsValues);
 
+    // Запись обычных input
     const handleChange = event => {
         setValues(value => ({
             ...value,
@@ -11,6 +17,7 @@ const useForm = (parentsValues) => {
         }))
     };
 
+    // Запись input с датой
     const handleInputDate = (event, name) => {
         setValues((value) => ({
             ...value,
@@ -18,7 +25,7 @@ const useForm = (parentsValues) => {
         }));
     };
 
-
+    // Возвращаем данные для использования внутри компонентов
     return {
         values,
         handleChange,

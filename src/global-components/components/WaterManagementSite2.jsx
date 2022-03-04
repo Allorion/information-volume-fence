@@ -14,8 +14,6 @@ const WaterManagementSite2 = () => {
         subBasin: ''
     });
 
-    console.log(1)
-
     const {loading, handleLoading} = useLoading();
 
     const [federalDistrictArray, setFederalDistrictArray] = useState([]);

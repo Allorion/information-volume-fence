@@ -1,3 +1,7 @@
+// ****************************************************
+// Родительский компонент поиска отчетов по сбросу воды
+// ****************************************************
+
 import React from "react";
 
 // MUI
@@ -15,8 +19,6 @@ import {Link} from "react-router-dom";
 import TableInformation from "./components/TableInformation";
 
 
-
-
 export default function SearchReportsVolumeDischarge() {
 
     return(
@@ -32,7 +34,7 @@ export default function SearchReportsVolumeDischarge() {
                         </Box>
                     </Paper>
                     <Stack spacing={2} direction="row" mt={2}>
-                        <Link to="/web/guest/factual-water-usage/fw-add/" style={{textDecoration: 'none'}}>
+                        <Link to="/web/guest/factual-water-usage/fd-add/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="secondary">Создать</Button>
                         </Link>
                     </Stack>
