@@ -1,26 +1,44 @@
-import React, {useMemo, useState} from "react";
+// *******************************************************
+// Компонент с добавлением деталей к отчету по сбросу воды
+// *******************************************************
+
+
+import React, {useContext, useMemo, useState} from "react";
+
+// Пользовательские хуки
 import useModal from "../../../../global-components/hooks/useModal";
 import useForm from "../../../../global-components/hooks/useForm";
+
+// MUI
 import {
     Box,
     Button,
     Container,
-    Dialog, DialogContent,
+    Dialog,
     Grid,
     MenuItem,
-    Modal,
     Snackbar,
     Stack,
     TextField,
     Typography
 } from "@mui/material";
-import styleModal from "../../../../global-components/style/styleModal";
-import HeadBox from "../../../../global-components/style/HeadBox";
 import Paper from "@mui/material/Paper";
-import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
-import Alert from '../../../../global-components/style/Alert';
-import ValidateDetailsReportsVolumeDischarge from "./ValidateDetailsReportsVolumeDischarge";
 
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+import Alert from '../../../../global-components/style/Alert';
+
+// Компоненты
+import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
+import ValidateDetailsReportsVolumeDischarge from "./ValidateDetailsReportsVolumeDischarge";
+import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
+
+// Контекст
+import AddDetailsReportsVolumeDischargeContext from "../context/AddDetailsReportsVolumeDischargeContext";
+import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
+
+
+// Получаем данные из компонента с глобальными select
 const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
 
 
@@ -34,7 +52,7 @@ export default function AddDetailsReportsVolumeDischarge() {
     // Отображение окна с ошибками
     const [openAlert, setOpenAlert] = useState(false);
 
-    // Пустые значения стейта
+    // Значения стейта
     const initialState = {
         nameWaterObjectCode: 'Код водного объекта',
         nameWaterObjectName: 'Наименование водного объекта',
@@ -58,21 +76,28 @@ export default function AddDetailsReportsVolumeDischarge() {
     };
 
     // Добавляем кастомный хук формы
-    const {values, handleChange} = useForm(initialState);
+    const {values, setValues, handleChange} = useForm(initialState);
 
     // Стейт с ошибками
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
 
+    // Получаем данные из родительского компонента
+    const [addingInformation, setAddingInformation] = useContext(AddDetailsReportsVolumeDischargeContext);
+
+    // Функция рендерит результат только при изменении поля с кодом и названием водного объекта
     const formWaterFeatureSelectionMemo = useMemo(() => {
-        return [handleChange];
+        return setValues;
     }, [values.nameWaterObjectName, values.nameWaterObjectCode]);
 
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
         const [errors, textErrors] = ValidateDetailsReportsVolumeDischarge(values);
         if (Object.keys(errors).length === 0) {
+            setAddingInformation([...addingInformation, values]);
             handleClose();
+            setValues(initialState);
+            setErrors({});
         } else {
             setTextAlert(textErrors);
             setOpenAlert(true);
@@ -93,6 +118,23 @@ export default function AddDetailsReportsVolumeDischarge() {
                 <Paper>
                     <HeadBox>Форма добавления сведений</HeadBox>
                     <Box p={2}>
+                        <Container>
+                            <Stack spacing={2} direction="row">
+                                <TextField
+                                    error={errors.nameWaterObjectCode}
+                                    fullWidth
+                                    disabled
+                                    id="input-name-water-object"
+                                    value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}
+                                    label="Наименование водного объекта - водоисточника / код водного объекта"
+                                    variant="standard" helperText='Выберите водный источник'/>
+                                <ChoosingWaterFeatureContext.Provider value={
+                                    formWaterFeatureSelectionMemo
+                                }>
+                                    <ChoosingWaterFeature/>
+                                </ChoosingWaterFeatureContext.Provider>
+                            </Stack>
+                        </Container>
                         <Container>
                             <Grid item xs={12} md={12} xl={12}>
                                 <TextField

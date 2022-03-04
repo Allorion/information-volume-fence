@@ -28,6 +28,7 @@ const useForm = (parentsValues) => {
     // Возвращаем данные для использования внутри компонентов
     return {
         values,
+        setValues,
         handleChange,
         handleInputDate
     };
