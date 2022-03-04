@@ -3,7 +3,7 @@
 // ***********************************************************
 
 
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from "../../../../global-components/hooks/useModal";
@@ -42,7 +42,6 @@ import validate
 // Получаем данные из компонента с глобальными select
 const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
 
-
 const EditDetailsReportsVolumeDischarge = props => {
 
     // Блок открытия и закрытия модального окна
@@ -56,6 +55,11 @@ const EditDetailsReportsVolumeDischarge = props => {
     // Добавляем кастомный хук формы
     const {values, setValues, handleChange} = useForm(props.addingInformation[props.count]);
 
+    // Обновляем стейт если было удален первый элемент
+    useEffect(() => {
+        setValues(props.addingInformation[props.count]);
+    }, [props.addingInformation, props.count]);
+
     // Стейт с ошибками
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
@@ -68,7 +72,7 @@ const EditDetailsReportsVolumeDischarge = props => {
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
         const [errors, textErrors] = validate(values);
-        if (Object.keys(errors).length === 0) {
+        if (Object.keys(errors).length !== 0) {
             const temp = [...props.addingInformation];
             temp[props.count] = values;
             props.setAddingInformation(temp)
