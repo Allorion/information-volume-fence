@@ -17,6 +17,8 @@ import AddReportsVolumeDischarge
     from "./pages/information-volume-reset/information-volume-reset-add/AddReportsVolumeDischarge";
 import SearchReportWaterQualityAccounting
     from "./pages/information-water-quality-accounting/information-water-quality-accounting-list/SearchReportWaterQualityAccounting";
+import AddReportWaterQualityAccounting
+    from "./pages/information-water-quality-accounting/information-water-quality-accounting-add/AddReportWaterQualityAccounting";
 
 const App = () => {
 
@@ -29,6 +31,7 @@ const App = () => {
                 <Route path='/web/guest/factual-water-usage/fd-list/' element={<SearchReportsVolumeDischarge/>}/>
                 <Route path='/web/guest/factual-water-usage/fd-add/' element={<AddReportsVolumeDischarge/>}/>
                 <Route path='/web/guest/factual-water-usage/fq-list/' element={<SearchReportWaterQualityAccounting/>}/>
+                <Route path='/web/guest/factual-water-usage/fq-add/' element={<AddReportWaterQualityAccounting/>}/>
             </Routes>
         </BrowserRouter>
     );
