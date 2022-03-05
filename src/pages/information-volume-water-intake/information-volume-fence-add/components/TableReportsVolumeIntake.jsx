@@ -1,3 +1,9 @@
+// ******************************************************************
+// Компонент с таблицей дополнительных сведеней по отчету забору воды
+// ******************************************************************
+
+
+
 import React, {useContext} from 'react';
 
 // MUI
@@ -16,13 +22,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from "@mui/material/Paper";
 
 // Контекст
-import TableAdditionalDetailsContext from "../context/TableAdditionalDetailsContext";
-import FormEditDetailInformation from "./FormEditDetailInformation";
+import TableReportsVolumeIntakeContext from "../context/TableReportsVolumeIntakeContext";
 
-const TableAdditionalDetails = () => {
+// Компоненты
+import EditDetailsReportsVolumeIntake from "./EditDetailsReportsVolumeIntake";
+
+
+const TableReportsVolumeIntake = () => {
 
     // Получаем стейт из родительского компонента через контекст
-    const [addingInformation, setAddingInformation] = useContext(TableAdditionalDetailsContext);
+    const [addingInformation, setAddingInformation] = useContext(TableReportsVolumeIntakeContext);
 
     // Функция удаления данных из таблицы
     const handleRemoveItem = count => {
@@ -134,7 +143,7 @@ const TableAdditionalDetails = () => {
                                     <TableCell>{option.thirdMonth}</TableCell>
                                     <TableCell>
                                         <Stack direction="row" spacing={1}>
-                                            <FormEditDetailInformation count={count}
+                                            <EditDetailsReportsVolumeIntake count={count}
                                                                        addingInformation={addingInformation}
                                                                        setAddingInformation={setAddingInformation}/>
                                             <Fab color="primary" aria-label="delete"
@@ -154,4 +163,4 @@ const TableAdditionalDetails = () => {
     );
 };
 
-export default React.memo(TableAdditionalDetails);
+export default React.memo(TableReportsVolumeIntake);

@@ -1,3 +1,9 @@
+// ******************************************************************
+// Компонент с таблицей дополнительных сведеней по отчету сброса воды
+// ******************************************************************
+
+
+
 import React, {useContext} from 'react';
 
 // MUI
@@ -15,8 +21,10 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from "@mui/material/Paper";
 
-// Контекст
+// Контектс
 import TableReportsVolumeDischargeContext from "../context/TableReportsVolumeDischargeContext";
+
+// Контекст
 import EditDetailsReportsVolumeDischarge from "./EditDetailsReportsVolumeDischarge";
 
 

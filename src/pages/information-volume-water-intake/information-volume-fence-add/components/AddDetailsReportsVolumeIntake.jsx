@@ -1,13 +1,21 @@
 // *******************************************************
-// Компонент с добавлением деталей к отчету по сбросу воды
+// Компонент с добавлением деталей к отчету по забору воды
 // *******************************************************
 
 
 import React, {useContext, useMemo, useState} from "react";
 
 // Пользовательские хуки
-import useModal from "../../../../global-components/hooks/useModal";
+import useModal from '../../../../global-components/hooks/useModal';
 import useForm from "../../../../global-components/hooks/useForm";
+
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+import Alert from '../../../../global-components/style/Alert';
+
+// Контекст
+import AddDetailsReportsVolumeIntakeContext from "../context/AddDetailsReportsVolumeIntakeContext";
+import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 
 // MUI
 import {
@@ -24,25 +32,17 @@ import {
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
-// Стили
-import HeadBox from "../../../../global-components/style/HeadBox";
-import Alert from '../../../../global-components/style/Alert';
-
 // Компоненты
+import validate from './ValidateDetailsReportsVolumeIntake';
 import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
-import ValidateDetailsReportsVolumeDischarge from "./ValidateDetailsReportsVolumeDischarge";
 import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
-
-// Контекст
-import AddDetailsReportsVolumeDischargeContext from "../context/AddDetailsReportsVolumeDischargeContext";
-import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 
 
 // Получаем данные из компонента с глобальными select
-const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
+const {listWaterBodies, listWaterQualityCategories, listWaterUseGoals} = AddDetailReportSelects();
 
 
-const AddDetailsReportsVolumeDischarge = () => {
+const AddDetailsReportsVolumeIntake = () => {
 
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
@@ -58,22 +58,20 @@ const AddDetailsReportsVolumeDischarge = () => {
         nameWaterObjectName: 'Наименование водного объекта',
         typeWaterObject: listWaterBodies[0],
         waterQualityCategory: listWaterQualityCategories[0],
-        waterOutletNumber: '',
+        waterIntakeNumber: '',
         northernLatitudeDegrees: '',
         northernLatitudeMinutes: '',
         northernLatitudeSeconds: '',
         easternLongitudeDegrees: '',
         easternLongitudeMinutes: '',
         easternLongitudeSeconds: '',
-        amountPermissibleDischarge: '',
+        purposeWaterUse: listWaterUseGoals[0],
+        volumePermissibleFence: '',
         fullVolume: '',
-        withoutCleaning: '',
-        insufficientlyCleaned: '',
-        normativelyPure: '',
-        biological: '',
-        physicoChemical: '',
-        mechanical: ''
-    };
+        firstMonth: '',
+        secondMonth: '',
+        thirdMonth: ''
+    }
 
     // Добавляем кастомный хук формы
     const {values, setValues, handleChange} = useForm(initialState);
@@ -82,17 +80,18 @@ const AddDetailsReportsVolumeDischarge = () => {
     const [errors, setErrors] = useState({});
     const [textAlert, setTextAlert] = useState([]);
 
-    // Получаем данные из родительского компонента
-    const [addingInformation, setAddingInformation] = useContext(AddDetailsReportsVolumeDischargeContext);
+    // Получение стейта из родительского компонента через контекст
+    const [addingInformation, setAddingInformation] = useContext(AddDetailsReportsVolumeIntakeContext)
 
     // Функция рендерит результат только при изменении поля с кодом и названием водного объекта
     const formWaterFeatureSelectionMemo = useMemo(() => {
         return setValues;
     }, [values.nameWaterObjectName, values.nameWaterObjectCode]);
 
+
     // Функция для сохранения новых данных в глобальный масив
     function handleAdd() {
-        const [errors, textErrors] = ValidateDetailsReportsVolumeDischarge(values);
+        const [errors, textErrors] = validate(values);
         if (Object.keys(errors).length === 0) {
             setAddingInformation([...addingInformation, values]);
             handleClose();
@@ -126,7 +125,7 @@ const AddDetailsReportsVolumeDischarge = () => {
                                     disabled
                                     id="input-name-water-object"
                                     value={values.nameWaterObjectName + ' / ' + values.nameWaterObjectCode}
-                                    label="Наименование водного объекта - водоприемника / код водного объекта"
+                                    label="Наименование водного объекта - водоисточника / код водного объекта"
                                     variant="standard" helperText='Выберите водный источник'/>
                                 <ChoosingWaterFeatureContext.Provider value={
                                     formWaterFeatureSelectionMemo
@@ -141,7 +140,7 @@ const AddDetailsReportsVolumeDischarge = () => {
                                     fullWidth
                                     id="select-type-water-object"
                                     select
-                                    label="Вид водного объекта - водоприемника"
+                                    label="Вид водного объекта - водоисточника"
                                     value={values.typeWaterObject}
                                     name='typeWaterObject'
                                     onChange={handleChange}
@@ -180,13 +179,13 @@ const AddDetailsReportsVolumeDischarge = () => {
                         <Container>
                             <Grid item xs={12} md={12} xl={12}>
                                 <TextField
-                                    error={errors.waterOutletNumber}
+                                    error={errors.waterIntakeNumber}
                                     fullWidth
-                                    id="input-water-outlet-number"
-                                    name='waterOutletNumber'
-                                    value={values.waterOutletNumber}
+                                    id="input-water-intake-number"
+                                    name='waterIntakeNumber'
+                                    value={values.waterIntakeNumber}
                                     onChange={handleChange}
-                                    label="Номер водовыпуска"
+                                    label="Номер водозабора"
                                     variant="standard"
                                     helperText='Введите номер водозабора'/>
                             </Grid>
@@ -283,22 +282,42 @@ const AddDetailsReportsVolumeDischarge = () => {
                         <Container>
                             <Grid item xs={12} md={12} xl={12}>
                                 <TextField
-                                    error={errors.amountPermissibleDischarge}
                                     fullWidth
-                                    id="input-volume-permissible-discharge"
-                                    name='amountPermissibleDischarge'
-                                    value={values.amountPermissibleDischarge}
+                                    id="select-purpose-water-use"
+                                    select
+                                    label="Цель водопользования"
+                                    name='purposeWaterUse'
+                                    value={values.purposeWaterUse}
+                                    onChange={handleChange}
+                                    helperText="Выберите цель водопользования"
+                                    variant="standard"
+                                >
+                                    {listWaterUseGoals.map((option, count) => (
+                                        <MenuItem key={count + 1} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                        </Container>
+                        <Container>
+                            <Grid item xs={12} md={12} xl={12}>
+                                <TextField
+                                    error={errors.volumePermissibleFence}
+                                    fullWidth
+                                    id="input-volume-permissible-fence"
+                                    name='volumePermissibleFence'
+                                    value={values.volumePermissibleFence}
                                     onChange={handleChange}
                                     type="number"
-                                    label="Объем допустимого сброса, тыс. м3"
+                                    label="Объем допустимого забора, тыс. м3"
                                     variant="standard"
-                                    helperText='Введите объем допустимого сброса, тыс. м3'
+                                    helperText='Введите объем допустимого забора, тыс. м3'
                                 />
                             </Grid>
                         </Container>
                         <Container>
-                            <Typography variant="h5" pt={2}>
-                                Фактический отведено сточных, в том числе дренажных, вод, тыс. м3</Typography>
+                            <Typography variant="h5" pt={2}>Фактический объем забора, тыс. м3</Typography>
                         </Container>
                         <Container>
                             <Grid item xs={12} md={12} xl={12}>
@@ -316,106 +335,50 @@ const AddDetailsReportsVolumeDischarge = () => {
                             </Grid>
                         </Container>
                         <Container>
-                            <Paper>
-                                <HeadBox>Загрязненных</HeadBox>
-                                <Box p={2}>
-                                    <Container>
-                                        <Stack>
-                                            <TextField
-                                                error={errors.withoutCleaning}
-                                                fullWidth
-                                                id="input-without-cleaning"
-                                                name='withoutCleaning'
-                                                value={values.withoutCleaning}
-                                                onChange={handleChange}
-                                                type='number'
-                                                label="Без очистки"
-                                                variant="standard"
-                                                helperText='Введите объем вод без очистки'
-                                            />
-                                            <TextField
-                                                error={errors.insufficientlyCleaned}
-                                                fullWidth
-                                                id="input-insufficiently-сleaned"
-                                                name='insufficientlyCleaned'
-                                                value={values.insufficientlyCleaned}
-                                                onChange={handleChange}
-                                                type='number'
-                                                label="Недостаточно очищенные"
-                                                variant="standard"
-                                                helperText='Введите объем недостаточно очищенных вод'
-                                            />
-                                        </Stack>
-                                    </Container>
-                                </Box>
-                            </Paper>
-                        </Container>
-                        <Container sx={{marginTop: 1}}>
-                            <TextField
-                                error={errors.normativelyPure}
-                                fullWidth
-                                id="input-normatively-pure"
-                                name='normativelyPure'
-                                value={values.normativelyPure}
-                                onChange={handleChange}
-                                type='number'
-                                label="Нормативночистых (без очистки)"
-                                variant="standard"
-                                helperText='Введите объем нормативночистых (без очистки) вод'
-                            />
-                        </Container>
-                        <Container>
-                            <Paper>
-                                <HeadBox>Нормативно очищенных на сооружениях очистки</HeadBox>
-                                <Box p={2}>
-                                    <Container>
-                                        <Stack>
-                                            <TextField
-                                                error={errors.biological}
-                                                fullWidth
-                                                id="input-biological"
-                                                name='biological'
-                                                value={values.biological}
-                                                onChange={handleChange}
-                                                type='number'
-                                                label="Биологической"
-                                                variant="standard"
-                                                helperText='Введите объем вод биологической очистки'
-                                            />
-                                            <TextField
-                                                error={errors.physicoChemical}
-                                                fullWidth
-                                                id="input-physico-chemical"
-                                                name='physicoChemical'
-                                                value={values.physicoChemical}
-                                                onChange={handleChange}
-                                                type='number'
-                                                label="Физико-химической"
-                                                variant="standard"
-                                                helperText='Введите объем вод физико-химической очистки'
-                                            />
-                                            <TextField
-                                                error={errors.mechanical}
-                                                fullWidth
-                                                id="input-mechanical"
-                                                name='mechanical'
-                                                value={values.mechanical}
-                                                onChange={handleChange}
-                                                type='number'
-                                                label="Механической"
-                                                variant="standard"
-                                                helperText='Введите объем вод механической очистки'
-                                            />
-                                        </Stack>
-                                    </Container>
-                                </Box>
-                            </Paper>
+                            <Grid item>
+                                <Stack spacing={3} direction="row" sx={{
+                                    lineHeight: '40px'
+                                }}>
+                                    <Typography variant="span" textAlign="center" pt={1} sx={{
+                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        whiteSpace: 'nowrap'
+                                    }}>По месяцам квартала</Typography>
+                                    <TextField
+                                        error={errors.firstMonth}
+                                        id="input-first-month"
+                                        type="number"
+                                        variant="standard"
+                                        name='firstMonth'
+                                        value={values.firstMonth}
+                                        onChange={handleChange}/>
+                                    <TextField
+                                        error={errors.secondMonth}
+                                        id="input-second-month"
+                                        type="number"
+                                        variant="standard"
+                                        name='secondMonth'
+                                        value={values.secondMonth}
+                                        onChange={handleChange}/>
+                                    <TextField
+                                        error={errors.thirdMonth}
+                                        id="input-third-month"
+                                        type="number"
+                                        variant="standard"
+                                        name='thirdMonth'
+                                        value={values.thirdMonth}
+                                        onChange={handleChange}/>
+                                </Stack>
+                            </Grid>
                         </Container>
                         <Container>
                             <Stack direction='row' spacing={2} mt={1}>
                                 <Button variant="contained" color="success"
                                         onClick={handleAdd}>Добавить</Button>
-                                <Button variant="contained" color="error" onClick={handleClose}>
+                                <Button variant="contained" color="error" onClick={() => {
+                                    handleClose();
+                                    setValues(initialState);
+                                }}
+                                >
                                     Отмена
                                 </Button>
                             </Stack>
@@ -444,4 +407,4 @@ const AddDetailsReportsVolumeDischarge = () => {
     );
 };
 
-export default React.memo(AddDetailsReportsVolumeDischarge);
+export default React.memo(AddDetailsReportsVolumeIntake);

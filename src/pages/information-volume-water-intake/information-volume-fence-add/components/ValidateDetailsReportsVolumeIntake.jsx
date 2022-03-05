@@ -1,6 +1,12 @@
+// ***************************************************************************
+// Компонент с проверкой валидности формы дополнительных данных по забору воды
+// ***************************************************************************
+
+
+
 import React from "react";
 
-export default function ValidateFormAddingInformation(values) {
+export default function ValidateDetailsReportsVolumeIntake(values) {
     const errors = {};
     const textErrors = [];
 

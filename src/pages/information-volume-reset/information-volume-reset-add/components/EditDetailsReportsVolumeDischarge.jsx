@@ -3,7 +3,7 @@
 // ***********************************************************
 
 
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
 // Пользовательские хуки
 import useModal from "../../../../global-components/hooks/useModal";
@@ -36,7 +36,7 @@ import ChoosingWaterFeature from "../../../../global-components/components/Choos
 import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 import EditIcon from "@mui/icons-material/Edit";
 import validate
-    from "../../../information-volume-water-intake/information-volume-fence-create/components/ValidateFormAddingInformation";
+    from "../../../information-volume-water-intake/information-volume-fence-add/components/ValidateDetailsReportsVolumeIntake";
 
 
 // Получаем данные из компонента с глобальными select
@@ -425,4 +425,4 @@ const EditDetailsReportsVolumeDischarge = props => {
     );
 };
 
-export default EditDetailsReportsVolumeDischarge;
+export default React.memo(EditDetailsReportsVolumeDischarge);

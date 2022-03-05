@@ -10,13 +10,14 @@ import {Box, Button, Grid, Paper, Stack} from "@mui/material";
 // Компоненты
 import NavBar from "../../../global-components/components/NavBar";
 import ReportSearchForm from "../../../global-components/components/ReportSearchForm";
+import TableInformation from "./components/TableInformation";
 
 // Стили
 import HeadBox from "../../../global-components/style/HeadBox";
 
 // Роутинг
 import {Link} from "react-router-dom";
-import TableInformation from "./components/TableInformation";
+
 
 
 export default function SearchReportsVolumeDischarge() {
