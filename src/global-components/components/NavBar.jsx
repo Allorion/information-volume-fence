@@ -27,7 +27,7 @@ export default function NavBar() {
                 <Link to="/web/guest/factual-water-usage/fd-list/" style={{textDecoration: 'none'}}>
                     <Button variant="outlined">Сведения по объему сброса</Button>
                 </Link>
-                <Link to="#" style={{textDecoration: 'none'}}>
+                <Link to="/web/guest/factual-water-usage/fq-list/" style={{textDecoration: 'none'}}>
                     <Button variant="outlined">Сведения по учету качества воды</Button>
                 </Link>
             </Stack>
