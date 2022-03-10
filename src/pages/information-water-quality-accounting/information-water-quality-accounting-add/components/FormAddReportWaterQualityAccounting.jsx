@@ -246,7 +246,7 @@ const FormAddReportWaterQualityAccounting = () => {
                         </Grid>
                     </Container>
                     <Container>
-                        <Paper elevation={3}>
+                        <Paper elevation={3} sx={{marginTop: 2}}>
                             <HeadBox>Реквизиты аттестата аккредитации лаборатории (центра)</HeadBox>
                             <Box p={4}>
                                 <Grid container spacing={2}>
