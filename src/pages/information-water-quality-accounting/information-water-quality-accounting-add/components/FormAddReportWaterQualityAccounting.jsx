@@ -25,6 +25,7 @@ import WaterManagementSiteContext from "../../../../global-components/components
 
 // Компоненты
 import WaterManagementSite from "../../../../global-components/components/WaterManagementSite";
+import useUser from "../../../../global-components/hooks/useUser";
 
 
 // Блок констант для селектов
@@ -47,13 +48,16 @@ const subjects = [
 
 const FormAddReportWaterQualityAccounting = () => {
 
+    // Получаем данные из личного кабинета пользователя через API
+    const {user} = useUser();
+
     // Создаем объект с полями для передачи в пользовательский хук заполнения полей формы
     const inputs = {
         structuralDivision: '',
         subject: subjects[0].value,
         number: '',
         period: [null, null],
-        nameOrganization: '',
+        nameOrganization: user.jobTitle,
         inn: '',
         kpp: '',
         postalAddressOrganization: '',
@@ -156,7 +160,7 @@ const FormAddReportWaterQualityAccounting = () => {
                                     disabled
                                     name='nameOrganization'
                                     id="input-name-organization"
-                                    value={values.nameOrganization}
+                                    value={inputs.nameOrganization}
                                     label="Наименование организации"
                                     variant="standard" helperText='Выберите из списка свою организацию'
                                 />

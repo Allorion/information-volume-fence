@@ -31,13 +31,13 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/web/guest/factual-water-usage/" element={<FactWusage/>}/>
-                <Route path="/web/guest/factual-water-usage/fw-list/" element={<SearchInformation/>}/>
-                <Route path="/web/guest/factual-water-usage/fw-add/" element={<AddReportsVolumeIntake/>}/>
-                <Route path='/web/guest/factual-water-usage/fd-list/' element={<SearchReportsVolumeDischarge/>}/>
-                <Route path='/web/guest/factual-water-usage/fd-add/' element={<AddReportsVolumeDischarge/>}/>
-                <Route path='/web/guest/factual-water-usage/fq-list/' element={<SearchReportWaterQualityAccounting/>}/>
-                <Route path='/web/guest/factual-water-usage/fq-add/' element={<AddReportWaterQualityAccounting/>}/>
+                <Route path="/web/guest/factual-waterusage/" element={<FactWusage/>}/>
+                <Route path="/web/guest/factual-waterusage/fw-list/" element={<SearchInformation/>}/>
+                <Route path="/web/guest/factual-waterusage/fw-add/" element={<AddReportsVolumeIntake/>}/>
+                <Route path='/web/guest/factual-waterusage/fd-list/' element={<SearchReportsVolumeDischarge/>}/>
+                <Route path='/web/guest/factual-waterusage/fd-add/' element={<AddReportsVolumeDischarge/>}/>
+                <Route path='/web/guest/factual-waterusage/fq-list/' element={<SearchReportWaterQualityAccounting/>}/>
+                <Route path='/web/guest/factual-waterusage/fq-add/' element={<AddReportWaterQualityAccounting/>}/>
             </Routes>
         </BrowserRouter>
     );

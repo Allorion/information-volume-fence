@@ -21,13 +21,13 @@ export default function NavBar() {
                 divider={<Divider orientation="vertical" flexItem/>}
                 spacing={2}
             >
-                <Link to="/web/guest/factual-water-usage/fw-list" style={{textDecoration: 'none'}}>
+                <Link to="/web/guest/factual-waterusage/fw-list" style={{textDecoration: 'none'}}>
                     <Button variant="outlined">Сведения по объему забора</Button>
                 </Link>
-                <Link to="/web/guest/factual-water-usage/fd-list/" style={{textDecoration: 'none'}}>
+                <Link to="/web/guest/factual-waterusage/fd-list/" style={{textDecoration: 'none'}}>
                     <Button variant="outlined">Сведения по объему сброса</Button>
                 </Link>
-                <Link to="/web/guest/factual-water-usage/fq-list/" style={{textDecoration: 'none'}}>
+                <Link to="/web/guest/factual-waterusage/fq-list/" style={{textDecoration: 'none'}}>
                     <Button variant="outlined">Сведения по учету качества воды</Button>
                 </Link>
             </Stack>

@@ -43,7 +43,7 @@ const AddReportsVolumeDischarge = () => {
                         <AddDetailsReportsVolumeDischargeContext.Provider value={addingInformationMemo}>
                             <AddDetailsReportsVolumeDischarge/>
                         </AddDetailsReportsVolumeDischargeContext.Provider>
-                        <Link to="/web/guest/factual-water-usage/" style={{textDecoration: 'none'}}>
+                        <Link to="/web/guest/factual-waterusage/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="success">Сохранить</Button>
                         </Link>
                     </Stack>

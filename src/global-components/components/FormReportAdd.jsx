@@ -25,6 +25,7 @@ import WaterManagementSiteContext from "./context/WaterManagementSiteContext";
 
 // Компоненты
 import WaterManagementSite from "./WaterManagementSite";
+import useUser from "../hooks/useUser";
 
 
 // Блок констант для селектов
@@ -47,13 +48,16 @@ const subjects = [
 
 const FormReportAdd = () => {
 
+    // Получаем данные из личного кабинета пользователя через API
+    const {user} = useUser();
+
     // Создаем объект с полями для передачи в пользовательский хук заполнения полей формы
     const inputs = {
         structuralDivision: '',
         subject: subjects[0].value,
         number: '',
         period: [null, null],
-        nameOrganization: '',
+        nameOrganization: user.jobTitle,
         inn: '',
         kpp: '',
         postalAddressOrganization: '',
@@ -156,9 +160,10 @@ const FormReportAdd = () => {
                                     disabled
                                     name='nameOrganization'
                                     id="input-name-organization"
-                                    value={values.nameOrganization}
+                                    value={inputs.nameOrganization}
                                     label="Наименование организации"
-                                    variant="standard" helperText='Выберите из списка свою организацию'
+                                    variant="standard"
+                                    helperText='Выберите из списка свою организацию'
                                 />
                             </Grid>
                             <Grid item xs={12} md={3} xl={3}>

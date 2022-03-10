@@ -36,7 +36,7 @@ export default function AddReportWaterQualityAccounting() {
                             value={addingWaterQualityAccountingMemo}>
                             <AddDetailsReportWaterQualityAccounting/>
                         </AddDetailsReportWaterQualityAccountingContext.Provider>
-                        <Link to="/web/guest/factual-water-usage/" style={{textDecoration: 'none'}}>
+                        <Link to="/web/guest/factual-waterusage/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="success">Сохранить</Button>
                         </Link>
                     </Stack>

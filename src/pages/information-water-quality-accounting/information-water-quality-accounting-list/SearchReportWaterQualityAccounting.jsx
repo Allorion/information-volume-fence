@@ -37,7 +37,7 @@ export default function SearchReportWaterQualityAccounting() {
                         </Box>
                     </Paper>
                     <Stack spacing={2} direction="row" mt={2}>
-                        <Link to="/web/guest/factual-water-usage/fq-add/" style={{textDecoration: 'none'}}>
+                        <Link to="/web/guest/factual-waterusage/fq-add/" style={{textDecoration: 'none'}}>
                             <Button variant="contained" color="secondary">Создать</Button>
                         </Link>
                     </Stack>
