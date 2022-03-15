@@ -42,8 +42,15 @@ export default function AddDetailReportSelects() {
         '2. Производство электрической энергии без забора (изъятия) водных ресурсов из водных объектов, тыс.кВт/ч',
         '3. Использование акватории водных объектов, кв.км'
     ];
+
+    const listQuartersYear = [
+        'Первый – январь, февраль и март',
+        'Второй – апрель, май и июнь',
+        'Третий – июль, август и сентябрь',
+        'Четвертый – октябрь, ноябрь и декабрь'
+    ];
 // (конец) Блока списков select
 
-    return {listWaterBodies, listWaterQualityCategories, listWaterUseGoals};
+    return {listWaterBodies, listWaterQualityCategories, listWaterUseGoals, listQuartersYear};
 
 };

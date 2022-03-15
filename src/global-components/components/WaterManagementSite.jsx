@@ -135,143 +135,147 @@ const WaterManagementSite = () => {
 
     return (
         <React.Fragment>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-federal-district"
-                    select
-                    label="Федеральный округ"
-                    name='federalDistrict'
-                    value={values.federalDistrict}
-                    onChange={handleChange}
-                    helperText="Федеральный округ"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        federalDistrictArray.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
+            <Grid container spacing={2} pt={2}>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                    <TextField
+                        fullWidth
+                        id="select-federal-district"
+                        select
+                        label="Федеральный округ"
+                        name='federalDistrict'
+                        value={values.federalDistrict}
+                        onChange={handleChange}
+                        helperText="Выберите федеральный округ из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            federalDistrictArray.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
+                    <TextField
+                        fullWidth
+                        id="select-subject-rf"
+                        select
+                        label="Субъекты РФ"
+                        name='subjectRf'
+                        value={values.subjectRf}
+                        onChange={handleChange}
+                        helperText="Выберите субъект РФ из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            subjectRfArray.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.code} - {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
             </Grid>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-subject-rf"
-                    select
-                    label="Субъекты РФ"
-                    name='subjectRf'
-                    value={values.subjectRf}
-                    onChange={handleChange}
-                    helperText="Субъекты РФ"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        subjectRfArray.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.code} - {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
-            </Grid>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-basin-district"
-                    select
-                    label="Басейновый округ"
-                    name='basinDistrict'
-                    value={values.basinDistrict}
-                    onChange={handleChange}
-                    helperText="Басейновый округ"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        basinDistrictArray.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.code} - {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
-            </Grid>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-river-basin"
-                    select
-                    label="Речной бассейн"
-                    name='riverBasin'
-                    value={values.riverBasin}
-                    onChange={handleChange}
-                    helperText="Басейновый округ"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        riverBasinArray.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.code} - {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
-            </Grid>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-sub-basin"
-                    select
-                    label="Подбассейн"
-                    name='subBasin'
-                    value={values.subBasin}
-                    onChange={handleChange}
-                    helperText="Подбассейн"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        subBasinArray.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.code} - {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
-            </Grid>
-            <Grid item xs={12} md={12} xl={12}>
-                <TextField
-                    fullWidth
-                    id="select-water-management-site"
-                    select
-                    label="Водохозяйственный участок"
-                    name='waterManagementSite'
-                    value={valuesParents.waterManagementSite}
-                    onChange={handleChangeParents}
-                    helperText="Водохозяйственный участок"
-                    variant="standard"
-                >
-                    {loading ? (
-                        <MenuItem>Загрузка...</MenuItem>
-                    ) : (
-                        waterManagementSiteArray.map((option) => (
-                            <MenuItem key={option.id} value={option.name}>
-                                {option.code} - {option.name}
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
+            <Grid container spacing={2} pt={2} pb={2}>
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
+                    <TextField
+                        fullWidth
+                        id="select-basin-district"
+                        select
+                        label="Басейновый округ"
+                        name='basinDistrict'
+                        value={values.basinDistrict}
+                        onChange={handleChange}
+                        helperText="Выберите басейновый округ из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            basinDistrictArray.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.code} - {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
+                    <TextField
+                        fullWidth
+                        id="select-river-basin"
+                        select
+                        label="Речной бассейн"
+                        name='riverBasin'
+                        value={values.riverBasin}
+                        onChange={handleChange}
+                        helperText="Выберите речной бассейн из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            riverBasinArray.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.code} - {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
+                    <TextField
+                        fullWidth
+                        id="select-sub-basin"
+                        select
+                        label="Подбассейн"
+                        name='subBasin'
+                        value={values.subBasin}
+                        onChange={handleChange}
+                        helperText="Выберите подбассейн из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            subBasinArray.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.code} - {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
+                    <TextField
+                        fullWidth
+                        id="select-water-management-site"
+                        select
+                        label="Водохозяйственный участок"
+                        name='waterManagementSite'
+                        value={valuesParents.waterManagementSite}
+                        onChange={handleChangeParents}
+                        helperText="Выберите водохозяйственный участок из списка"
+                        variant="standard"
+                    >
+                        {loading ? (
+                            <MenuItem>Загрузка...</MenuItem>
+                        ) : (
+                            waterManagementSiteArray.map((option) => (
+                                <MenuItem key={option.id} value={option.name}>
+                                    {option.code} - {option.name}
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
+                </Grid>
             </Grid>
         </React.Fragment>
     );

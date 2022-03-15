@@ -11,8 +11,8 @@ import useForm from "../hooks/useForm";
 import HeadBox from "../style/HeadBox";
 
 // MUI
-import {Box, Container, Grid, MenuItem, Stack, TextField} from "@mui/material";
-import {LocalizationProvider} from "@mui/lab";
+import {Box, Grid, MenuItem, Stack, TextField} from "@mui/material";
+import {DatePicker, LocalizationProvider, MobileDatePicker} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import Paper from "@mui/material/Paper";
@@ -26,6 +26,7 @@ import WaterManagementSiteContext from "./context/WaterManagementSiteContext";
 // Компоненты
 import WaterManagementSite from "./WaterManagementSite";
 import useUser from "../hooks/useUser";
+import AddDetailReportSelects from "./selects/AddDetailReportSelects";
 
 
 // Блок констант для селектов
@@ -43,6 +44,8 @@ const subjects = [
         label: 'ИП',
     },
 ];
+
+const {listQuartersYear} = AddDetailReportSelects();
 // (конец) Блок констант для селектов
 
 
@@ -55,8 +58,8 @@ const FormReportAdd = () => {
     const inputs = {
         structuralDivision: '',
         subject: subjects[0].value,
-        number: '',
-        period: [null, null],
+
+        quartersYear: '',
         nameOrganization: user.jobTitle,
         inn: '',
         kpp: '',
@@ -80,14 +83,15 @@ const FormReportAdd = () => {
     const formReportAddMemo = useMemo(() => {
         return [values, handleChange];
     }, [values.waterManagementSite]);
+    const [value, setValue] = React.useState(null);
 
     return (
         <React.Fragment>
             <Paper elevation={3}>
                 <HeadBox>Сведения по объему забора</HeadBox>
                 <Box p={4}>
-                    <Container>
-                        <Stack direction='row' spacing={2}>
+                    <Grid container p={3} spacing={2}>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                             <TextField
                                 fullWidth
                                 name='structuralDivision'
@@ -98,6 +102,8 @@ const FormReportAdd = () => {
                                 helperText="Структурное подразделение"
                                 variant="standard"
                             />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                             <TextField
                                 fullWidth
                                 id="select-subject"
@@ -115,165 +121,156 @@ const FormReportAdd = () => {
                                     </MenuItem>
                                 ))}
                             </TextField>
-                        </Stack>
-                    </Container>
-                    <Container>
-                        <Grid container spacing={2} pt={2}>
-                            <Grid item xs={12} md={4} xl={4}>
-                                <TextField
-                                    fullWidth
-                                    disabled
-                                    name='number'
-                                    value={values.number}
-                                    id="input-number"
-                                    label="Номер"
-                                    variant="standard"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={8} xl={8}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
-                                    <DateRangePicker
-                                        startText="от"
-                                        endText="до"
-                                        value={values.period}
-                                        onChange={(event) => {
-                                            handleInputDate(event, 'period')
-                                        }}
-                                        mask="__.__.____"
-                                        renderInput={(startProps, endProps) => (
-                                            <React.Fragment>
-                                                <TextField {...startProps} />
-                                                <Box sx={{mx: 2}}> период </Box>
-                                                <TextField {...endProps} />
-                                            </React.Fragment>
-                                        )}
-                                    />
-                                </LocalizationProvider>
-                            </Grid>
                         </Grid>
-                    </Container>
-                    <Container>
-                        <Grid container spacing={2} pt={2}>
-                            <Grid item xs={8} md={4} xl={4}>
-                                <TextField
-                                    fullWidth
-                                    disabled
-                                    name='nameOrganization'
-                                    id="input-name-organization"
-                                    value={inputs.nameOrganization}
-                                    label="Наименование организации"
-                                    variant="standard"
-                                    helperText='Выберите из списка свою организацию'
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={3} xl={3}>
-                                <TextField
-                                    fullWidth
-                                    disabled
-                                    name='inn'
-                                    value={values.inn}
-                                    id="input-inn"
-                                    label="ИНН"
-                                    variant="standard"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={3} xl={3}>
-                                <TextField
-                                    fullWidth
-                                    disabled
-                                    name='kpp'
-                                    value={values.kpp}
-                                    id="input-kpp"
-                                    label="КПП"
-                                    variant="standard"
-                                />
-                            </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <TextField
+                                fullWidth
+                                disabled
+                                name='nameOrganization'
+                                id="input-name-organization"
+                                value={inputs.nameOrganization}
+                                label="Наименование организации"
+                                variant="standard"
+                            />
                         </Grid>
-                    </Container>
-                    <Container>
-                        <Grid container pt={2}>
-                            <Grid item xs={12} md={12} xl={12}>
-                                <TextField
-                                    fullWidth
-                                    name='postalAddressOrganization'
-                                    value={values.postalAddressOrganization}
-                                    onChange={handleChange}
-                                    id="input-postal-address-organization"
-                                    label="Почтовый адрес организации"
-                                    variant="standard"
-                                    helperText='Введите почтовый адрес организации'
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={12} xl={12}>
-                                <TextField
-                                    fullWidth
-                                    name='organizationalLegalFormOrganization'
-                                    value={values.organizationalLegalFormOrganization}
-                                    onChange={handleChange}
-                                    id="input-organizational-legal-form-organization"
-                                    label="Организационно-правовая форма организации"
-                                    variant="standard"
-                                    helperText='Введите организационно-правовую форму организации'
-                                />
-                            </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <TextField
+                                fullWidth
+                                disabled
+                                name='inn'
+                                value={values.inn}
+                                id="input-inn"
+                                label="ИНН"
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <TextField
+                                fullWidth
+                                disabled
+                                name='kpp'
+                                value={values.kpp}
+                                id="input-kpp"
+                                label="КПП"
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} mt={1}>
+                            <LocalizationProvider
+                                dateAdapter={AdapterDateFns}
+                                locale={ru}
+                            >
+                            <MobileDatePicker
+                                fullWidth
+                                label="For mobile"
+                                value={value}
+                                onChange={(newValue) => {
+                                    setValue(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
+                            <TextField
+                                fullWidth
+                                id="select-quarters-year"
+                                select
+                                label="Квартал года"
+                                name='quartersYear'
+                                value={values.quartersYear}
+                                onChange={handleChange}
+                                helperText="Выберите квартал года"
+                                variant="standard"
+                            >
+                                {listQuartersYear.map((option, index) => (
+                                    <MenuItem key={index} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                            <TextField
+                                fullWidth
+                                name='postalAddressOrganization'
+                                value={values.postalAddressOrganization}
+                                onChange={handleChange}
+                                id="input-postal-address-organization"
+                                label="Почтовый адрес организации"
+                                variant="standard"
+                                helperText='Введите почтовый адрес организации'
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                            <TextField
+                                fullWidth
+                                name='organizationalLegalFormOrganization'
+                                value={values.organizationalLegalFormOrganization}
+                                onChange={handleChange}
+                                id="input-organizational-legal-form-organization"
+                                label="Организационно-правовая форма организации"
+                                variant="standard"
+                                helperText='Введите организационно-правовую форму организации'
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                             <WaterManagementSiteContext.Provider
                                 value={formReportAddMemo}
                             >
                                 <WaterManagementSite/>
                             </WaterManagementSiteContext.Provider>
                         </Grid>
-                        <Grid container pt={2}>
-                            <Grid item xs={12} md={12} xl={12}>
-                                <TextField
-                                    fullWidth
-                                    disabled
-                                    name='detailsDocumentFence'
-                                    value={values.detailsDocumentFence}
-                                    onChange={handleChange}
-                                    id="input-details-document-fence"
-                                    label="Реквизиты документа на забор (изъятие водных ресурсов)"
-                                    variant="standard"
-                                    helperText='Выберите реквизиты документа на забор (изъятие водных ресурсов)'
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={12} xl={12} pt={2}>
-                                <TextField
-                                    fullWidth
-                                    name='brandWaterAccountingDevices'
-                                    value={values.brandWaterAccountingDevices}
-                                    onChange={handleChange}
-                                    id="input-brand-water-accounting-devices"
-                                    label="Марка приборов водоучета"
-                                    variant="standard"
-                                    helperText='Введите марку приборов водоучета'
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={12} xl={12} pt={2}>
-                                <TextField
-                                    fullWidth
-                                    name='dateLastVerification'
-                                    value={values.dateLastVerification}
-                                    onChange={handleChange}
-                                    id="input-date-last-verification"
-                                    label="Дата последней поверки"
-                                    variant="standard"
-                                    helperText='Введите дату последней поверки'
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={12} xl={12}>
-                                <TextField
-                                    fullWidth
-                                    name='frequencyVerification'
-                                    value={values.frequencyVerification}
-                                    onChange={handleChange}
-                                    id="input-frequency-verification"
-                                    label="Периодичность поверки"
-                                    variant="standard"
-                                    helperText='Введите периодичность поверки'
-                                />
-                            </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                            <TextField
+                                fullWidth
+                                disabled
+                                name='detailsDocumentFence'
+                                value={values.detailsDocumentFence}
+                                onChange={handleChange}
+                                id="input-details-document-fence"
+                                label="Реквизиты документа на забор (изъятие водных ресурсов)"
+                                variant="standard"
+                                helperText='Выберите реквизиты документа на забор (изъятие водных ресурсов)'
+                            />
                         </Grid>
-                    </Container>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
+                            <TextField
+                                fullWidth
+                                name='brandWaterAccountingDevices'
+                                value={values.brandWaterAccountingDevices}
+                                onChange={handleChange}
+                                id="input-brand-water-accounting-devices"
+                                label="Марка приборов водоучета"
+                                variant="standard"
+                                helperText='Введите марку приборов водоучета'
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
+                            <TextField
+                                fullWidth
+                                name='dateLastVerification'
+                                value={values.dateLastVerification}
+                                onChange={handleChange}
+                                id="input-date-last-verification"
+                                label="Дата последней поверки"
+                                variant="standard"
+                                helperText='Введите дату последней поверки'
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
+                            <TextField
+                                fullWidth
+                                name='frequencyVerification'
+                                value={values.frequencyVerification}
+                                onChange={handleChange}
+                                id="input-frequency-verification"
+                                label="Периодичность поверки"
+                                variant="standard"
+                                helperText='Введите периодичность поверки'
+                            />
+                        </Grid>
+                            </Grid>
                 </Box>
             </Paper>
         </React.Fragment>
