@@ -25,8 +25,8 @@ export default function SearchReportsVolumeDischarge() {
     return(
         <React.Fragment>
             <Grid container sx={{textOverflow: 'ellipsis'}}>
-                <Grid item xs={0} md={2} xl={2}/>
-                <Grid item xs={12} md={8} xl={8}>
+                <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
+                <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
                     <NavBar/>
                     <Paper elevation={3}>
                         <HeadBox>Поиск отчетов по объему сбросу</HeadBox>
@@ -40,7 +40,7 @@ export default function SearchReportsVolumeDischarge() {
                         </Link>
                     </Stack>
                 </Grid>
-                <Grid item xs={0} md={2} xl={2}/>
+                <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
             </Grid>
             <TableInformation/>
         </React.Fragment>

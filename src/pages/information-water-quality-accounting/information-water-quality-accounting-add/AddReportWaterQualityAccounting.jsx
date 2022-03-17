@@ -27,8 +27,8 @@ export default function AddReportWaterQualityAccounting() {
     return (
         <React.Fragment>
             <Grid container sx={{textOverflow: 'ellipsis'}}>
-                <Grid item xs={0} md={2} xl={2}/>
-                <Grid item xs={12} md={8} xl={8}>
+                <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
+                <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
                     <NavBar/>
                     <FormAddReportWaterQualityAccounting/>
                     <Stack spacing={2} direction='row' mt={4}>
@@ -40,7 +40,7 @@ export default function AddReportWaterQualityAccounting() {
                             <Button variant="contained" color="success">Сохранить</Button>
                         </Link>
                     </Stack>
-                    <Grid item xs={0} md={2} xl={2}/>
+                    <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
                 </Grid>
             </Grid>
             <TableDetailsReportWaterQualityAccountingContext.Provider value={addingWaterQualityAccountingMemo}>

@@ -49,7 +49,7 @@ const {listQuartersYear} = AddDetailReportSelects();
 // (конец) Блок констант для селектов
 
 
-const FormReportAdd = () => {
+const FormReportAdd = (props) => {
 
     // Получаем данные из личного кабинета пользователя через API
     const {user} = useUser();
@@ -87,7 +87,7 @@ const FormReportAdd = () => {
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Создание отчета по объему забора</HeadBox>
+                <HeadBox>{props.title}</HeadBox>
                 <Box p={4}>
                     <Grid container p={3} spacing={2}>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>

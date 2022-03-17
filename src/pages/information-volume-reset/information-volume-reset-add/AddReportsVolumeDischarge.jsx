@@ -35,10 +35,10 @@ const AddReportsVolumeDischarge = () => {
     return (
         <React.Fragment>
             <Grid container sx={{textOverflow: 'ellipsis'}}>
-                <Grid item xs={0} md={2} xl={2}/>
-                <Grid item xs={12} md={8} xl={8}>
+                <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
+                <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
                     <NavBar/>
-                    <FormReportAdd/>
+                    <FormReportAdd title='Создание отчета по объему сброса'/>
                     <Stack spacing={2} direction='row' mt={4}>
                         <AddDetailsReportsVolumeDischargeContext.Provider value={addingInformationMemo}>
                             <AddDetailsReportsVolumeDischarge/>
@@ -47,7 +47,7 @@ const AddReportsVolumeDischarge = () => {
                             <Button variant="contained" color="success">Сохранить</Button>
                         </Link>
                     </Stack>
-                    <Grid item xs={0} md={2} xl={2}/>
+                    <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
                 </Grid>
             </Grid>
             <TableReportsVolumeDischargeContext.Provider value={addingInformationMemo}>

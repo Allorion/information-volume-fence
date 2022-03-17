@@ -40,7 +40,7 @@ const AddReportsVolumeIntake = () => {
               <Grid item xs={0} sm={0} md={1} lg={1} xl={1}/>
               <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
                   <NavBar/>
-                  <FormReportAdd/>
+                  <FormReportAdd title='Создание отчета по объему забора'/>
                   <Stack spacing={2} direction='row' mt={4}>
                       <AddDetailsReportsVolumeIntakeContext.Provider value={addingInformationMemo}>
                           <AddDetailsReportsVolumeIntake/>

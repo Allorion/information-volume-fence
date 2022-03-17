@@ -3,21 +3,10 @@
 // ******************************************************************
 
 
-
 import React, {useContext} from 'react';
 
 // MUI
-import {
-    Fab,
-    Grid,
-    Stack,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    TableContainer,
-    Table
-} from "@mui/material";
+import {Fab, Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from "@mui/material/Paper";
 
@@ -26,7 +15,6 @@ import TableReportsVolumeDischargeContext from "../context/TableReportsVolumeDis
 
 // Контекст
 import EditDetailsReportsVolumeDischarge from "./EditDetailsReportsVolumeDischarge";
-
 
 
 const TableAdditionalDetails = () => {
@@ -41,7 +29,7 @@ const TableAdditionalDetails = () => {
         setAddingInformation(temp);
     };
 
-    return(
+    return (
         <React.Fragment>
             <Grid container pt={5} pb={5}>
                 <TableContainer component={Paper} sx={{border: 1}}>
@@ -60,7 +48,8 @@ const TableAdditionalDetails = () => {
                                 <TableCell size="small" align="center" rowSpan={3} sx={{border: 1}}>Объем допустимого
                                     сброса, тыс. м<sup>3</sup></TableCell>
                                 <TableCell size="small" align="center" rowSpan={1} colSpan={7} sx={{border: 1}}>
-                                    Фактический отведено сточных, в том числе дренажных, вод, тыс. м<sup>3</sup></TableCell>
+                                    Фактический отведено сточных, в том числе дренажных, вод, тыс.
+                                    м<sup>3</sup></TableCell>
                                 <TableCell size="small" align="center" rowSpan={3} sx={{border: 1}}>Действие</TableCell>
                             </TableRow>
                             <TableRow>
@@ -153,8 +142,8 @@ const TableAdditionalDetails = () => {
                                     <TableCell>
                                         <Stack direction="row" spacing={1}>
                                             <EditDetailsReportsVolumeDischarge count={count}
-                                                                       addingInformation={addingInformation}
-                                                                       setAddingInformation={setAddingInformation}/>
+                                                                               addingInformation={addingInformation}
+                                                                               setAddingInformation={setAddingInformation}/>
                                             <Fab color="primary" aria-label="delete"
                                                  onClick={() => handleRemoveItem(count)} size="small">
                                                 <DeleteIcon/>

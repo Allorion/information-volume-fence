@@ -18,18 +18,7 @@ import AddDetailsReportsVolumeIntakeContext from "../context/AddDetailsReportsVo
 import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 
 // MUI
-import {
-    Box,
-    Button,
-    Container,
-    Dialog,
-    Grid,
-    MenuItem,
-    Snackbar,
-    Stack,
-    TextField,
-    Typography
-} from "@mui/material";
+import {Box, Button, Container, Dialog, Grid, MenuItem, Snackbar, Stack, TextField, Typography} from "@mui/material";
 import Paper from "@mui/material/Paper";
 
 // Компоненты
@@ -186,52 +175,50 @@ const AddDetailsReportsVolumeIntake = () => {
                                         variant="standard"
                                         helperText='Введите номер водозабора'/>
                                 </Grid>
-                                <Grid>
-                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
-                                        <Stack spacing={2} direction="row" sx={{
-                                            lineHeight: '40px'
-                                        }}>
-                                            <Typography variant="span" textAlign="center" pt={2} sx={{
-                                                color: 'rgba(0, 0, 0, 0.6)',
-                                                whiteSpace: 'nowrap'
-                                            }}
-                                            >
-                                                Северная широта
-                                            </Typography>
-                                            <TextField
-                                                error={errors.northernLatitudeDegrees}
-                                                id="input-northern-latitude-degrees"
-                                                label="Градусы °"
-                                                variant="standard"
-                                                type="number"
-                                                name='northernLatitudeDegrees'
-                                                value={values.northernLatitudeDegrees}
-                                                onChange={handleChange}
-                                            />
-                                            <TextField
-                                                error={errors.northernLatitudeMinutes}
-                                                id="input-northern-latitude-minutes"
-                                                label="Минуты '"
-                                                variant="standard"
-                                                type="number"
-                                                name='northernLatitudeMinutes'
-                                                value={values.northernLatitudeMinutes}
-                                                onChange={handleChange}
-                                            />
-                                            <TextField
-                                                error={errors.northernLatitudeSeconds}
-                                                id="input-northern-latitude-seconds"
-                                                label='Секунды "'
-                                                variant="standard"
-                                                type="number"
-                                                name='northernLatitudeSeconds'
-                                                value={values.northernLatitudeSeconds}
-                                                onChange={handleChange}
-                                            />
-                                        </Stack>
-                                    </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
+                                    <Stack spacing={2} direction="row" sx={{
+                                        lineHeight: '40px'
+                                    }}>
+                                        <Typography variant="span" textAlign="center" pt={2} sx={{
+                                            color: 'rgba(0, 0, 0, 0.6)',
+                                            whiteSpace: 'nowrap'
+                                        }}
+                                        >
+                                            Северная широта
+                                        </Typography>
+                                        <TextField
+                                            error={errors.northernLatitudeDegrees}
+                                            id="input-northern-latitude-degrees"
+                                            label="Градусы °"
+                                            variant="standard"
+                                            type="number"
+                                            name='northernLatitudeDegrees'
+                                            value={values.northernLatitudeDegrees}
+                                            onChange={handleChange}
+                                        />
+                                        <TextField
+                                            error={errors.northernLatitudeMinutes}
+                                            id="input-northern-latitude-minutes"
+                                            label="Минуты '"
+                                            variant="standard"
+                                            type="number"
+                                            name='northernLatitudeMinutes'
+                                            value={values.northernLatitudeMinutes}
+                                            onChange={handleChange}
+                                        />
+                                        <TextField
+                                            error={errors.northernLatitudeSeconds}
+                                            id="input-northern-latitude-seconds"
+                                            label='Секунды "'
+                                            variant="standard"
+                                            type="number"
+                                            name='northernLatitudeSeconds'
+                                            value={values.northernLatitudeSeconds}
+                                            onChange={handleChange}
+                                        />
+                                    </Stack>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <Stack spacing={2} direction="row" sx={{
                                         lineHeight: '40px'
                                     }}>
@@ -273,7 +260,7 @@ const AddDetailsReportsVolumeIntake = () => {
                                         />
                                     </Stack>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <TextField
                                         fullWidth
                                         id="select-purpose-water-use"
@@ -292,9 +279,9 @@ const AddDetailsReportsVolumeIntake = () => {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
                                     <TextField
-                                        sx={{width: '50%'}}
+                                        fullWidth
                                         error={errors.volumePermissibleFence}
                                         id="input-volume-permissible-fence"
                                         name='volumePermissibleFence'
@@ -306,10 +293,10 @@ const AddDetailsReportsVolumeIntake = () => {
                                         helperText='Введите объем допустимого забора, тыс. м3'
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <Typography variant="h5" pt={2}>Фактический объем забора, тыс. м3</Typography>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <TextField
                                         error={errors.fullVolume}
                                         sx={{width: '50%'}}
@@ -322,11 +309,11 @@ const AddDetailsReportsVolumeIntake = () => {
                                         variant="standard" helperText='Введите полный объем'
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <Stack spacing={3} direction="row" sx={{
                                         lineHeight: '40px'
                                     }}>
-                                        <Typography variant="span" textAlign="center" pt={1} sx={{
+                                        <Typography variant="span" textAlign="center" mt={2} sx={{
                                             color: 'rgba(0, 0, 0, 0.6)',
                                             whiteSpace: 'nowrap'
                                         }}>По месяцам квартала</Typography>
@@ -335,6 +322,7 @@ const AddDetailsReportsVolumeIntake = () => {
                                             id="input-first-month"
                                             type="number"
                                             variant="standard"
+                                            label="За первый месяц"
                                             name='firstMonth'
                                             value={values.firstMonth}
                                             onChange={handleChange}/>
@@ -342,6 +330,7 @@ const AddDetailsReportsVolumeIntake = () => {
                                             error={errors.secondMonth}
                                             id="input-second-month"
                                             type="number"
+                                            label="За второй месяц"
                                             variant="standard"
                                             name='secondMonth'
                                             value={values.secondMonth}
@@ -350,13 +339,14 @@ const AddDetailsReportsVolumeIntake = () => {
                                             error={errors.thirdMonth}
                                             id="input-third-month"
                                             type="number"
+                                            label="За третий месяц"
                                             variant="standard"
                                             name='thirdMonth'
                                             value={values.thirdMonth}
                                             onChange={handleChange}/>
                                     </Stack>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2} pl={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                                     <Stack direction='row' spacing={2}>
                                         <Button variant="contained" color="success"
                                                 onClick={handleAdd}>Добавить</Button>
