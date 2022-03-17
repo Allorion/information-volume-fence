@@ -58,7 +58,7 @@ const FormReportAdd = () => {
     const inputs = {
         structuralDivision: '',
         subject: subjects[0].value,
-
+        dateDispatch: new Date(),
         quartersYear: '',
         nameOrganization: user.jobTitle,
         inn: '',
@@ -83,12 +83,11 @@ const FormReportAdd = () => {
     const formReportAddMemo = useMemo(() => {
         return [values, handleChange];
     }, [values.waterManagementSite]);
-    const [value, setValue] = React.useState(null);
 
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Сведения по объему забора</HeadBox>
+                <HeadBox>Создание отчета по объему забора</HeadBox>
                 <Box p={4}>
                     <Grid container p={3} spacing={2}>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -155,20 +154,21 @@ const FormReportAdd = () => {
                                 variant="standard"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} mt={1}>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} mt={1} textAlign='center'>
                             <LocalizationProvider
                                 dateAdapter={AdapterDateFns}
                                 locale={ru}
                             >
-                            <MobileDatePicker
-                                fullWidth
-                                label="For mobile"
-                                value={value}
-                                onChange={(newValue) => {
-                                    setValue(newValue);
-                                }}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
+                                <MobileDatePicker
+                                    label="Дата создания отчета"
+                                    value={values.dateDispatch}
+                                    onChange={(newValue) => {
+                                        handleInputDate(newValue, 'dateDispatch');
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} helperText="Укажите дату создания отчета" />
+                                    )}
+                                />
                             </LocalizationProvider>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
@@ -270,7 +270,7 @@ const FormReportAdd = () => {
                                 helperText='Введите периодичность поверки'
                             />
                         </Grid>
-                            </Grid>
+                    </Grid>
                 </Box>
             </Paper>
         </React.Fragment>

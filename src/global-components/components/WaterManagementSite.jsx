@@ -51,7 +51,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.federaldistrict/get-by-id',
+    //         '/factualwaterusage.federaldistrict/get-by-id',
     //         {
     //             id: '',
     //         },
@@ -65,7 +65,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.rfsubject/rfs-by-fd-uuids',
+    //         '/factualwaterusage.rfsubject/rfs-by-fd-uuids',
     //         {
     //             filter: `{"fdUuids":["${values.federalDistrict}"]}`
     //         },
@@ -79,7 +79,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.rfsubject/get-bd-by-rfs',
+    //         '/factualwaterusage.rfsubject/get-bd-by-rfs',
     //         {
     //             filter: `["${values.subjectRf}"]`
     //         },
@@ -93,7 +93,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.riverbasin/rb-by-bd',
+    //         '/factualwaterusage.riverbasin/rb-by-bd',
     //         {
     //             filter: `["${values.basinDistrict}"]`
     //         },
@@ -107,7 +107,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.subbasin/sub-by-rb',
+    //         '/factualwaterusage.subbasin/sub-by-rb',
     //         {
     //             filter: `["${values.riverBasin}"]`
     //         },
@@ -121,7 +121,7 @@ const WaterManagementSite = () => {
     // useEffect(() => {
     //     handleLoading(true);
     //     Liferay.Service(
-    //         '/catalog.heparcel/hep-by-sub',
+    //         '/factualwaterusage.heparcel/hep-by-sub',
     //         {
     //             filter: `["${values.subBasin}"]`
     //         },

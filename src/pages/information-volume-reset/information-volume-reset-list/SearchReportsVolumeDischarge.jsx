@@ -29,7 +29,7 @@ export default function SearchReportsVolumeDischarge() {
                 <Grid item xs={12} md={8} xl={8}>
                     <NavBar/>
                     <Paper elevation={3}>
-                        <HeadBox>Сведения по объему забора</HeadBox>
+                        <HeadBox>Поиск отчетов по объему сбросу</HeadBox>
                         <Box p={4}>
                             <ReportSearchForm/>
                         </Box>

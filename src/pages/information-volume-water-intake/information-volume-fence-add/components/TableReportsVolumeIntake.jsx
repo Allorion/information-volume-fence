@@ -124,9 +124,9 @@ const TableReportsVolumeIntake = () => {
                                     }
                                 }}>
                                     <TableCell>{count + 1}</TableCell>
-                                    <TableCell>sss</TableCell>
+                                    <TableCell>{option.nameWaterObjectName}</TableCell>
                                     <TableCell>{option.typeWaterObject}</TableCell>
-                                    <TableCell>sss</TableCell>
+                                    <TableCell>{option.nameWaterObjectCode}</TableCell>
                                     <TableCell>{option.waterQualityCategory}</TableCell>
                                     <TableCell>{option.waterIntakeNumber}</TableCell>
                                     <TableCell>{option.northernLatitudeDegrees}</TableCell>
