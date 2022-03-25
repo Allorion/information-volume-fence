@@ -1,20 +1,38 @@
+// *********************************************************************************************************************
+// Компонент с данными документов отчитывающейся организации
+// *********************************************************************************************************************
+
+
 import React, {useEffect} from "react";
+
+// MUI
 import Paper from "@mui/material/Paper";
-import {Box, Button, Grid, Stack, TextField} from "@mui/material";
+import {Box, Grid, Stack, TextField} from "@mui/material";
+
+// Пользовательские хуки
 import useForm from "../../../global-components/hooks/useForm";
 
+// Компоненты
+import AddOkved from "./AddOkved";
+import AddOkato from "./AddOkato";
+
+
+// Дефолтные input передаваемые в пользовательский хук
 const field = {
     okpo: '',
     okved: '',
     guiv: '',
-    inn:'',
-    okato:''
+    inn: '',
+    okato: ''
 };
+
 
 const CodeReportingOrganization = props => {
 
+    // Хук для сохранения данных из input
     const {values, handleChange} = useForm(field);
 
+    // Обновление родительского стейта
     useEffect(() => {
         props.setField(values)
     }, [props, values]);
@@ -51,7 +69,7 @@ const CodeReportingOrganization = props => {
                                     variant="standard"
                                     helperText='Выберите из списка ОКВЭД'
                                 />
-                                <Button variant="outlined" style={{height: "fit-content", marginTop:'20px'}}>Выбрать</Button>
+                                <AddOkved/>
                             </Stack>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -97,7 +115,7 @@ const CodeReportingOrganization = props => {
                                     variant="standard"
                                     helperText='Выберите из списка ОКАТО'
                                 />
-                                <Button variant="outlined" style={{height: "fit-content", marginTop:'20px'}}>Выбрать</Button>
+                                <AddOkato/>
                             </Stack>
                         </Grid>
                     </Grid>
