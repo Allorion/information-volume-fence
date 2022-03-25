@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 // MUI
 import {Box, Grid, Typography} from "@mui/material";
@@ -22,6 +22,20 @@ export default function GeneralDataTemplate() {
     const [organizationField, setOrganizationField] = useState();
     const [codeReportingOrganizationField, setCodeReportingOrganizationField] = useState();
     const [personProvidingInformationField, setPersonProvidingInformationField] = useState();
+
+    // Блок сохранение данных из полей в Local Storage
+    useEffect(() => {
+        localStorage.setItem ("organizationField", JSON.stringify(organizationField));
+    }, [organizationField]);
+
+    useEffect(() => {
+        localStorage.setItem ("codeReportingOrganizationField", JSON.stringify(codeReportingOrganizationField));
+    }, [codeReportingOrganizationField]);
+
+    useEffect(() => {
+        localStorage.setItem ("personProvidingInformationField", JSON.stringify(personProvidingInformationField));
+    }, [personProvidingInformationField]);
+    // Блок сохранение данных из полей в Local Storage
 
     return (
         <React.Fragment>
