@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useEffect, useState} from "react";
+import React, {useRef} from "react";
 
 // MUI
 import {Box, Grid, Typography} from "@mui/material";
@@ -19,23 +19,9 @@ import PersonProvidingInformation from "./components/PersonProvidingInformation"
 export default function GeneralDataTemplate() {
 
     // Стейты для хранения данных дочерних компонентов
-    const [organizationField, setOrganizationField] = useState();
-    const [codeReportingOrganizationField, setCodeReportingOrganizationField] = useState();
-    const [personProvidingInformationField, setPersonProvidingInformationField] = useState();
-
-    // Блок сохранение данных из полей в Local Storage
-    useEffect(() => {
-        localStorage.setItem ("organizationField", JSON.stringify(organizationField));
-    }, [organizationField]);
-
-    useEffect(() => {
-        localStorage.setItem ("codeReportingOrganizationField", JSON.stringify(codeReportingOrganizationField));
-    }, [codeReportingOrganizationField]);
-
-    useEffect(() => {
-        localStorage.setItem ("personProvidingInformationField", JSON.stringify(personProvidingInformationField));
-    }, [personProvidingInformationField]);
-    // Блок сохранение данных из полей в Local Storage
+    const organizationField = useRef();
+    const codeReportingOrganizationField = useRef();
+    const personProvidingInformationField = useRef();
 
     return (
         <React.Fragment>
@@ -48,17 +34,17 @@ export default function GeneralDataTemplate() {
                             <Typography variant="h5" align='center'>Общие данные</Typography>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={2}>
                                 <ReportingOrganization
-                                    setField={setOrganizationField}
+                                    setField={organizationField}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={2}>
                                 <CodeReportingOrganization
-                                    setField={setCodeReportingOrganizationField}
+                                    setField={codeReportingOrganizationField}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={2}>
                                 <PersonProvidingInformation
-                                    setField={setPersonProvidingInformationField}
+                                    setField={personProvidingInformationField}
                                 />
                             </Grid>
                         </Box>
