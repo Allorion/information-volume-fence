@@ -29,7 +29,6 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 import Alert from '../../../../global-components/style/Alert';
 
 // Компоненты
-import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
 import ValidateDetailsReportsVolumeDischarge from "./ValidateDetailsReportsVolumeDischarge";
 import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
 
@@ -38,11 +37,17 @@ import AddDetailsReportsVolumeDischargeContext from "../context/AddDetailsReport
 import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 
 
-// Получаем данные из компонента с глобальными select
-const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
+// Selects
+import ListWaterBodies from "../../../../global-components/components/selects/ListWaterBodies";
+import ListWaterQualityCategories from "../../../../global-components/components/selects/ListWaterQualityCategories";
+
 
 
 const AddDetailsReportsVolumeDischarge = () => {
+
+    // Получаем данные из компонента с глобальными select
+    const {arrayObj, loadingListWaterBodies} = ListWaterBodies();
+    const {listWaterQualityCategories, loadingListWaterQualityCategories} = ListWaterQualityCategories();
 
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
@@ -56,8 +61,8 @@ const AddDetailsReportsVolumeDischarge = () => {
     const initialState = {
         nameWaterObjectCode: 'Код водного объекта',
         nameWaterObjectName: 'Наименование водного объекта',
-        typeWaterObject: listWaterBodies[0],
-        waterQualityCategory: listWaterQualityCategories[0],
+        typeWaterObject: '',
+        waterQualityCategory: '',
         waterOutletNumber: '',
         northernLatitudeDegrees: '',
         northernLatitudeMinutes: '',
@@ -149,11 +154,15 @@ const AddDetailsReportsVolumeDischarge = () => {
                                         helperText="Выберите вид водного объекта - водоисточника"
                                         variant="standard"
                                     >
-                                        {listWaterBodies.map((option, count) => (
-                                            <MenuItem key={count + 1} value={option}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
+                                        {loadingListWaterBodies ? (
+                                            <MenuItem>Загрузка...</MenuItem>
+                                        ) : (
+                                            arrayObj.map((option) => (
+                                                <MenuItem key={option.id} value={option.id}>
+                                                    {option.name}
+                                                </MenuItem>
+                                            ))
+                                        )}
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
@@ -168,11 +177,15 @@ const AddDetailsReportsVolumeDischarge = () => {
                                         helperText="Выберите категорию качества воды"
                                         variant="standard"
                                     >
-                                        {listWaterQualityCategories.map((option, count) => (
-                                            <MenuItem key={count + 1} value={option}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
+                                        {loadingListWaterQualityCategories ? (
+                                            <MenuItem>Загрузка...</MenuItem>
+                                        ) : (
+                                            listWaterQualityCategories.map((option) => (
+                                                <MenuItem key={option.id} value={option.id}>
+                                                    {option.getCode} - {option.name}
+                                                </MenuItem>
+                                            ))
+                                        )}
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
@@ -309,34 +322,34 @@ const AddDetailsReportsVolumeDischarge = () => {
                                         <Box p={2}>
                                             <Container>
                                                 <Grid container spacing={2}>
-                                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                                                    <TextField
-                                                        error={errors.withoutCleaning}
-                                                        fullWidth
-                                                        id="input-without-cleaning"
-                                                        name='withoutCleaning'
-                                                        value={values.withoutCleaning}
-                                                        onChange={handleChange}
-                                                        type='number'
-                                                        label="Без очистки"
-                                                        variant="standard"
-                                                        helperText='Введите объем вод без очистки'
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                                                    <TextField
-                                                        error={errors.insufficientlyCleaned}
-                                                        fullWidth
-                                                        id="input-insufficiently-сleaned"
-                                                        name='insufficientlyCleaned'
-                                                        value={values.insufficientlyCleaned}
-                                                        onChange={handleChange}
-                                                        type='number'
-                                                        label="Недостаточно очищенные"
-                                                        variant="standard"
-                                                        helperText='Введите объем недостаточно очищенных вод'
-                                                    />
-                                            </Grid>
+                                                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                                        <TextField
+                                                            error={errors.withoutCleaning}
+                                                            fullWidth
+                                                            id="input-without-cleaning"
+                                                            name='withoutCleaning'
+                                                            value={values.withoutCleaning}
+                                                            onChange={handleChange}
+                                                            type='number'
+                                                            label="Без очистки"
+                                                            variant="standard"
+                                                            helperText='Введите объем вод без очистки'
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                                        <TextField
+                                                            error={errors.insufficientlyCleaned}
+                                                            fullWidth
+                                                            id="input-insufficiently-сleaned"
+                                                            name='insufficientlyCleaned'
+                                                            value={values.insufficientlyCleaned}
+                                                            onChange={handleChange}
+                                                            type='number'
+                                                            label="Недостаточно очищенные"
+                                                            variant="standard"
+                                                            helperText='Введите объем недостаточно очищенных вод'
+                                                        />
+                                                    </Grid>
                                                 </Grid>
                                             </Container>
                                         </Box>
@@ -377,32 +390,32 @@ const AddDetailsReportsVolumeDischarge = () => {
                                                         />
                                                     </Grid>
                                                     <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                                                    <TextField
-                                                        error={errors.physicoChemical}
-                                                        fullWidth
-                                                        id="input-physico-chemical"
-                                                        name='physicoChemical'
-                                                        value={values.physicoChemical}
-                                                        onChange={handleChange}
-                                                        type='number'
-                                                        label="Физико-химической"
-                                                        variant="standard"
-                                                        helperText='Введите объем вод физико-химической очистки'
-                                                    />
+                                                        <TextField
+                                                            error={errors.physicoChemical}
+                                                            fullWidth
+                                                            id="input-physico-chemical"
+                                                            name='physicoChemical'
+                                                            value={values.physicoChemical}
+                                                            onChange={handleChange}
+                                                            type='number'
+                                                            label="Физико-химической"
+                                                            variant="standard"
+                                                            helperText='Введите объем вод физико-химической очистки'
+                                                        />
                                                     </Grid>
                                                     <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                                                    <TextField
-                                                        error={errors.mechanical}
-                                                        fullWidth
-                                                        id="input-mechanical"
-                                                        name='mechanical'
-                                                        value={values.mechanical}
-                                                        onChange={handleChange}
-                                                        type='number'
-                                                        label="Механической"
-                                                        variant="standard"
-                                                        helperText='Введите объем вод механической очистки'
-                                                    />
+                                                        <TextField
+                                                            error={errors.mechanical}
+                                                            fullWidth
+                                                            id="input-mechanical"
+                                                            name='mechanical'
+                                                            value={values.mechanical}
+                                                            onChange={handleChange}
+                                                            type='number'
+                                                            label="Механической"
+                                                            variant="standard"
+                                                            helperText='Введите объем вод механической очистки'
+                                                        />
                                                     </Grid>
                                                 </Grid>
                                             </Container>

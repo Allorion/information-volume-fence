@@ -31,43 +31,46 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 
 // Компоненты
 import Alert from "../../../../global-components/style/Alert";
-import AddDetailReportSelects from "../../../../global-components/components/selects/AddDetailReportSelects";
 import validate
     from "../../../information-volume-water-intake/information-volume-fence-add/components/ValidateDetailsReportsVolumeIntake";
 import ChoosingWaterFeatureContext from "../../../../global-components/components/context/ChoosingWaterFeatureContext";
 import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
 
-
-// Получаем данные из компонента с глобальными select
-const {listWaterBodies, listWaterQualityCategories} = AddDetailReportSelects();
-
-// Значения стейта
-const initialState = {
-    nameWaterObjectCode: 'Код водного объекта',
-    nameWaterObjectName: 'Наименование водного объекта',
-    typeWaterObject: listWaterBodies[0],
-    waterQualityCategory: listWaterQualityCategories[0],
-    waterOutletNumber: '',
-    northernLatitudeDegrees: '',
-    northernLatitudeMinutes: '',
-    northernLatitudeSeconds: '',
-    easternLongitudeDegrees: '',
-    easternLongitudeMinutes: '',
-    easternLongitudeSeconds: '',
-    pollutingSubstance: '',
-    actualDischargePollutantMgDm3: '',
-    actualDischargePollutantKg: '',
-    actualDischargePollutantT: '',
-    legallyPermissibleMgDm3: '',
-    legallyPermissibleKg: '',
-    legallyPermissibleT: '',
-    limitSetMgDm3: '',
-    limitSetKg: '',
-    limitSetT: ''
-}
+// Selects
+import ListWaterBodies from "../../../../global-components/components/selects/ListWaterBodies";
+import ListWaterQualityCategories from "../../../../global-components/components/selects/ListWaterQualityCategories";
 
 
 const EditDetailsReportWaterQualityAccounting = props => {
+
+    // Получаем данные из компонента с глобальными select
+    const {arrayObj, loadingListWaterBodies} = ListWaterBodies();
+    const {listWaterQualityCategories, loadingListWaterQualityCategories} = ListWaterQualityCategories();
+
+    // Значения стейта
+    const initialState = {
+        nameWaterObjectCode: 'Код водного объекта',
+        nameWaterObjectName: 'Наименование водного объекта',
+        typeWaterObject: '',
+        waterQualityCategory: '',
+        waterOutletNumber: '',
+        northernLatitudeDegrees: '',
+        northernLatitudeMinutes: '',
+        northernLatitudeSeconds: '',
+        easternLongitudeDegrees: '',
+        easternLongitudeMinutes: '',
+        easternLongitudeSeconds: '',
+        pollutingSubstance: '',
+        actualDischargePollutantMgDm3: '',
+        actualDischargePollutantKg: '',
+        actualDischargePollutantT: '',
+        legallyPermissibleMgDm3: '',
+        legallyPermissibleKg: '',
+        legallyPermissibleT: '',
+        limitSetMgDm3: '',
+        limitSetKg: '',
+        limitSetT: ''
+    }
 
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
@@ -155,11 +158,15 @@ const EditDetailsReportWaterQualityAccounting = props => {
                                         helperText="Выберите вид водного объекта - водоисточника"
                                         variant="standard"
                                     >
-                                        {listWaterBodies.map((option, count) => (
-                                            <MenuItem key={count + 1} value={option}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
+                                        {loadingListWaterBodies ? (
+                                            <MenuItem>Загрузка...</MenuItem>
+                                        ) : (
+                                            arrayObj.map((option) => (
+                                                <MenuItem key={option.id} value={option.id}>
+                                                    {option.name}
+                                                </MenuItem>
+                                            ))
+                                        )}
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
@@ -174,11 +181,15 @@ const EditDetailsReportWaterQualityAccounting = props => {
                                         helperText="Выберите категорию качества воды"
                                         variant="standard"
                                     >
-                                        {listWaterQualityCategories.map((option, count) => (
-                                            <MenuItem key={count + 1} value={option}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
+                                        {loadingListWaterQualityCategories ? (
+                                            <MenuItem>Загрузка...</MenuItem>
+                                        ) : (
+                                            listWaterQualityCategories.map((option) => (
+                                                <MenuItem key={option.id} value={option.id}>
+                                                    {option.getCode} - {option.name}
+                                                </MenuItem>
+                                            ))
+                                        )}
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
