@@ -10,9 +10,9 @@ import {Box, Button, Dialog, Grid, MenuItem, TextField, Typography} from "@mui/m
 import Paper from "@mui/material/Paper";
 
 // Пользовательские хуки
-import useModal from "../../../global-components/hooks/useModal";
-import useForm from "../../../global-components/hooks/useForm";
-import useDisableField from "../../../global-components/hooks/useDisableField";
+import useModal from "../../../../global-components/hooks/useModal";
+import useForm from "../../../../global-components/hooks/useForm";
+import useDisableField from "../../../../global-components/hooks/useDisableField";
 
 
 // Дефолтные input передаваемые в пользовательский хук

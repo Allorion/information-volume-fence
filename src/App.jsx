@@ -26,7 +26,7 @@ import SearchReportWaterQualityAccounting
 import AddReportWaterQualityAccounting
     from "./pages/information-water-quality-accounting/information-water-quality-accounting-add/AddReportWaterQualityAccounting";
 import MenuTemplate from "./pages/respondent-module-menu/MenuTemplate";
-import GeneralDataTemplate from "./pages/respondent-module-general-data/GeneralDataTemplate";
+import GeneralDataTemplate from "./pages/respondent-module/respondent-module-general-data/GeneralDataTemplate";
 
 const App = () => {
 

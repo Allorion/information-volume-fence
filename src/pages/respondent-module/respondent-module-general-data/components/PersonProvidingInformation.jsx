@@ -8,15 +8,12 @@ import React, {useEffect} from "react";
 // MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, TextField, Typography} from "@mui/material";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {LocalizationProvider, MobileDatePicker} from "@mui/lab";
 
 // Пользовательский хук
-import useInput from "../../../global-components/hooks/useInput";
-import useInputDate from "../../../global-components/hooks/useInputDate";
+import useInput from "../../../../global-components/hooks/useInput";
 
-// одуль локализации даты
-import {ru} from "date-fns/locale";
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
 
 
 const PersonProvidingInformation = props => {
@@ -25,8 +22,7 @@ const PersonProvidingInformation = props => {
     const post = useInput("", {isEmpty: true});
     const fio = useInput("", {isEmpty: true});
     const phoneNumber = useInput("", {isEmpty: true});
-    const datePreparationDocument = useInputDate(new Date());
-
+    const email = useInput('', {isEmpty: true, isEmail: true});
 
     // Обновление стейта родительского компонента
     useEffect(() => {
@@ -34,12 +30,13 @@ const PersonProvidingInformation = props => {
             post: post.value,
             fio: fio.value,
             phoneNumber: phoneNumber.value,
-            datePreparationDocument: datePreparationDocument.value
+            email: email.value,
         }
-    }, [datePreparationDocument.value, fio.value, phoneNumber.value, post.value, props]);
+    }, [email.value, fio.value, phoneNumber.value, post.value, props.setField]);
 
     return (
         <Paper elevation={3}>
+            <HeadBox>Должностное лицо, ответственное за предоставление статистической информации</HeadBox>
             <Box p={4}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -92,22 +89,25 @@ const PersonProvidingInformation = props => {
                                     пустым</Typography>}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
-                        <LocalizationProvider
-                            dateAdapter={AdapterDateFns}
-                            locale={ru}
-                        >
-                            <MobileDatePicker
-                                label="Дата составления документа"
-                                value={datePreparationDocument.value}
-                                onChange={(newValue) => {
-                                    datePreparationDocument.onChange(newValue);
-                                }}
-                                renderInput={(params) => (
-                                    <TextField {...params} helperText="Укажите дату составления документа"/>
-                                )}
-                            />
-                        </LocalizationProvider>
+                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                        <TextField
+                            fullWidth
+                            error={(email.isDirty && email.isEmpty) || (email.isDirty && email.emailError)}
+                            type="email"
+                            name="email"
+                            value={email.value}
+                            onChange={email.onChange}
+                            onBlur={email.onBlur}
+                            id="email"
+                            label="Электронная почта"
+                            variant="standard"
+                        />
+                        {(email.isDirty && email.isEmpty) &&
+                            <Typography variant="span" style={{color: 'red', fontSize: '14px'}}>Поле не должно быть
+                                пустым</Typography>}
+                        {(email.isDirty && email.emailError) &&
+                            <Typography variant="span" style={{color: 'red', fontSize: '14px'}}>Неккоректная запись
+                                электронной почты</Typography>}
                     </Grid>
                 </Grid>
             </Box>
@@ -115,4 +115,4 @@ const PersonProvidingInformation = props => {
     );
 };
 
-export default React.memo(PersonProvidingInformation);
+export default PersonProvidingInformation;

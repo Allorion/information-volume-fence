@@ -4,7 +4,7 @@
 
 
 
-import React from 'react';
+import React, from 'react';
 
 //MUI
 import {Box, Grid} from "@mui/material";
