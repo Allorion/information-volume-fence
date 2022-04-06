@@ -25,8 +25,7 @@ import SearchReportWaterQualityAccounting
     from "./pages/information-water-quality-accounting/information-water-quality-accounting-list/SearchReportWaterQualityAccounting";
 import AddReportWaterQualityAccounting
     from "./pages/information-water-quality-accounting/information-water-quality-accounting-add/AddReportWaterQualityAccounting";
-import MenuTemplate from "./pages/respondent-module-menu/MenuTemplate";
-import GeneralDataTemplate from "./pages/respondent-module/respondent-module-general-data/GeneralDataTemplate";
+import Home2TpModule from "./pages/2tp-module/Home2TpModule";
 
 const App = () => {
 
@@ -42,8 +41,7 @@ const App = () => {
                 <Route path='/web/guest/factual-waterusage/fq-add/' element={<AddReportWaterQualityAccounting/>}/>
 
                 {/* 2ТП */}
-                <Route path="/web/guest/respondent-module/" element={<MenuTemplate/>}/>
-                <Route path="/web/guest/respondent-module/general-data" element={<GeneralDataTemplate/>}/>
+                <Route path="/web/guest/2tp-report/" element={<Home2TpModule/>}/>
             </Routes>
         </BrowserRouter>
     );

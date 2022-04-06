@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 
 // MUI
 import Paper from "@mui/material/Paper";
@@ -14,25 +14,28 @@ import useInput from "../../../../global-components/hooks/useInput";
 
 // Стили
 import HeadBox from "../../../../global-components/style/HeadBox";
+import GeneralDataContext from "../../context/GeneralDataContext";
 
 
-const PersonProvidingInformation = props => {
+const PersonProvidingInformation = () => {
+
+    const [organizationField, personProvidingInformationField, dateReportingField] = useContext(GeneralDataContext);
 
     // Хук для сохранения данных из input
-    const post = useInput("", {isEmpty: true});
-    const fio = useInput("", {isEmpty: true});
-    const phoneNumber = useInput("", {isEmpty: true});
-    const email = useInput('', {isEmpty: true, isEmail: true});
+    const post = useInput(personProvidingInformationField.current.post, {isEmpty: true});
+    const fio = useInput(personProvidingInformationField.current.fio, {isEmpty: true});
+    const phoneNumber = useInput(personProvidingInformationField.current.phoneNumber, {isEmpty: true});
+    const email = useInput(personProvidingInformationField.current.email, {isEmpty: true, isEmail: true});
 
     // Обновление стейта родительского компонента
     useEffect(() => {
-        props.setField.current = {
+        personProvidingInformationField.current = {
             post: post.value,
             fio: fio.value,
             phoneNumber: phoneNumber.value,
             email: email.value,
         }
-    }, [email.value, fio.value, phoneNumber.value, post.value, props.setField]);
+    }, [email.value, fio.value, phoneNumber.value, post.value, personProvidingInformationField]);
 
     return (
         <Paper elevation={3}>

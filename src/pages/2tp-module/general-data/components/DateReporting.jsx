@@ -1,5 +1,12 @@
-import React, {useEffect} from "react";
-import useInputDate from "../../../../global-components/hooks/useInputDate";
+// *********************************************************************************************************************
+// Блок с датами страницы "Общие данные"
+// *********************************************************************************************************************
+
+
+
+import React, {useContext, useEffect} from "react";
+
+// MUI
 import {Grid, Stack, TextField} from "@mui/material";
 import {DatePicker, LocalizationProvider, MobileDatePicker} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -7,19 +14,27 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // Дополнительные модули
 import {ru} from "date-fns/locale";
 
+// Пользовательские хуки
+import useInputDate from "../../../../global-components/hooks/useInputDate";
 
-const DateReporting = props => {
+// Контекст
+import GeneralDataContext from "../../context/GeneralDataContext";
 
-    const dateReportingYear = useInputDate(new Date());
-    const datePreparationDocument = useInputDate(new Date());
+
+const DateReporting = () => {
+
+    const [organizationField, personProvidingInformationField, dateReportingField] = useContext(GeneralDataContext);
+
+    const dateReportingYear = useInputDate(dateReportingField.current.dateReportingYear);
+    const datePreparationDocument = useInputDate(dateReportingField.current.datePreparationDocument);
 
     // Обновление стейта родительского компонента
     useEffect(() => {
-        props.setField.current = {
+        dateReportingField.current = {
             dateReportingYear: dateReportingYear.value,
             datePreparationDocument: datePreparationDocument.value
         }
-    }, [datePreparationDocument.value, dateReportingYear.value, props.setField]);
+    }, [datePreparationDocument.value, dateReportingYear.value, dateReportingField]);
 
     return (
         <React.Fragment>

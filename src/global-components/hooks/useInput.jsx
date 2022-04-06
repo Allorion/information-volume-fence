@@ -26,7 +26,7 @@ const useInput = (initialValue, validations) => {
         setDirty(true);
     };
 
-    return {value, onChange, onBlur, isDirty, ...valid};
+    return {value, setValue, onChange, onBlur, isDirty, ...valid};
 }
 
 export default useInput;

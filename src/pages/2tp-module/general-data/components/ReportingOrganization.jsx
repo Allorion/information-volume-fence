@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 
 // MUI
 import {Box, Grid, Stack, TextField, Typography} from "@mui/material";
@@ -16,24 +16,27 @@ import useInput from "../../../../global-components/hooks/useInput";
 import AddOkved from "./AddOkved";
 import AddOkato from "./AddOkato";
 import HeadBox from "../../../../global-components/style/HeadBox";
+import GeneralDataContext from "../../context/GeneralDataContext";
 
 
-const ReportingOrganization = props => {
+const ReportingOrganization = () => {
+
+    const [organizationField, personProvidingInformationField, dateReportingField] = useContext(GeneralDataContext);
 
     // Создаем состояния для полей
-    const nameReportingOrganization = useInput('', {isEmpty: true});
-    const postalAddress = useInput('', {isEmpty: true});
-    const legalAddress = useInput('', {isEmpty: true});
+    const nameReportingOrganization = useInput(organizationField.current.nameReportingOrganization, {isEmpty: true});
+    const postalAddress = useInput(organizationField.current.postalAddress, {isEmpty: true});
+    const legalAddress = useInput(organizationField.current.legalAddress, {isEmpty: true});
 
-    const okpo = useInput('', {isEmpty: true, isSymbolOkpo: true});
-    const okved = useInput('', {isEmpty: true});
-    const guiv = useInput('', {isEmpty: true, isSymbolGuiv: true});
-    const inn = useInput('', {isEmpty: true, isSymbolInn: true});
-    const okato = useInput('', {isEmpty: true});
+    const okpo = useInput(organizationField.current.okpo, {isEmpty: true, isSymbolOkpo: true});
+    const okved = useInput(organizationField.current.okved, {isEmpty: true});
+    const guiv = useInput(organizationField.current.guiv, {isEmpty: true, isSymbolGuiv: true});
+    const inn = useInput(organizationField.current.inn, {isEmpty: true, isSymbolInn: true});
+    const okato = useInput(organizationField.current.okato, {isEmpty: true});
 
     // Обновление стейта родительского компонента
     useEffect(() => {
-        props.setField.current = {
+        organizationField.current = {
             nameReportingOrganization: nameReportingOrganization.value,
             postalAddress: postalAddress.value,
             legalAddress: legalAddress.value,
@@ -44,7 +47,7 @@ const ReportingOrganization = props => {
             okato: okato.value
         }
     }, [guiv.value, inn.value, legalAddress.value, nameReportingOrganization.value, okato.value, okpo.value,
-        okved.value, postalAddress.value, props.setField]);
+        okved.value, postalAddress.value, organizationField]);
 
     return (
         <React.Fragment>
