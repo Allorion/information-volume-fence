@@ -1,12 +1,36 @@
-import React from "react";
+// *********************************************************************************************************************
+// Форма "Использовано за год по кодам видов использования"
+// *********************************************************************************************************************
+
+
+import React, {useContext, useEffect} from "react";
+
+// MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, IconButton, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+// Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
+
+// Контекст
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 const UsedForTheYearForm = props => {
 
+    // Получаем стейт из родительского компонента
+    const {usedForTheYearField} = useContext(MovementWaterResourcesContext);
+
+    // Стейт для записи данных из формы
     const volume = useInput('');
+
+    // Сохранение данных в стейт в родительском компоненте
+    useEffect(() => {
+        usedForTheYearField.current[props.keyCount] = {
+            code: Object.keys(usedForTheYearField.current).length,
+            volume: volume.value
+        };
+    }, [volume])
 
     return (
         <React.Fragment>
@@ -36,7 +60,8 @@ const UsedForTheYearForm = props => {
                         </Grid>
                         <Grid item xs={12} sm={12} md={2} lg={2} xl={2} mt={2}>
                             <IconButton aria-label="delete" color='error' onClick={() => {
-                                props.delete(props.keyCount)
+                                props.delete(props.keyCount);
+                                delete usedForTheYearField.current[props.keyCount]
                             }}>
                                 <DeleteIcon/>
                             </IconButton>

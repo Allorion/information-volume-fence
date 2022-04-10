@@ -1,16 +1,43 @@
-import React from "react";
+// *********************************************************************************************************************
+// Компонент с данными воде
+// *********************************************************************************************************************
+
+
+import React, {useContext, useEffect} from "react";
+
+// MUI
 import {Box, Grid, TextField} from "@mui/material";
-import useInput from "../../../../global-components/hooks/useInput";
-import HeadBox from "../../../../global-components/style/HeadBox";
 import Paper from "@mui/material/Paper";
+
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+
+// Пользовательские хуки
+import useInput from "../../../../global-components/hooks/useInput";
+
+// Контекст
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 export default function AvailableAccounted() {
 
-    const permissibleVolumeWaterIntake = useInput('');
-    const measured = useInput('');
-    const transportationLosses = useInput('');
+    // Получаем данные из родительского компонента с помощью контекста
+    const {authorizationDocumentField, availableAccountedField} = useContext(MovementWaterResourcesContext);
+    // Стейты для сохранения данных из формы
+    const permissibleVolumeWaterIntake = useInput(availableAccountedField.current.permissibleVolumeWaterIntake);
+    const measured = useInput(availableAccountedField.current.measured);
+    const transportationLosses = useInput(availableAccountedField.current.transportationLosses);
 
-    return(
+    // Сохраняем введенные данные в родительский компонент
+    useEffect(() => {
+        availableAccountedField.current = {
+            permissibleVolumeWaterIntake: permissibleVolumeWaterIntake.value,
+            measured: measured.value,
+            transportationLosses: transportationLosses.value
+        };
+    }, [availableAccountedField, measured.value, permissibleVolumeWaterIntake.value, transportationLosses.value])
+
+
+    return (
         <React.Fragment>
             <Paper elevation={3}>
                 <HeadBox>Допустимо и учтено</HeadBox>
@@ -18,6 +45,7 @@ export default function AvailableAccounted() {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             <TextField
+                                disabled={authorizationDocumentField.current.codeGuivProvider !== ''}
                                 type='number'
                                 fullWidth
                                 name='permissibleVolumeWaterIntake'
@@ -25,11 +53,19 @@ export default function AvailableAccounted() {
                                 label="Допустимый объем забора воды"
                                 variant="standard"
                                 value={permissibleVolumeWaterIntake.value}
-                                onChange={permissibleVolumeWaterIntake.onChange}
+                                onChange={(e) => {
+                                    if (authorizationDocumentField.current.codeGuivProvider !== '') {
+                                        permissibleVolumeWaterIntake.setValue(0);
+                                        measured.setValue(0);
+                                    } else {
+                                        permissibleVolumeWaterIntake.onChange(e);
+                                    }
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             <TextField
+                                disabled={authorizationDocumentField.current.codeGuivProvider !== ''}
                                 type='number'
                                 fullWidth
                                 name='measured'
@@ -37,7 +73,9 @@ export default function AvailableAccounted() {
                                 label="Учтено средствами измерений"
                                 variant="standard"
                                 value={measured.value}
-                                onChange={measured.onChange}
+                                onChange={(e) => {
+                                    measured.onChange(e);
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
@@ -45,7 +83,7 @@ export default function AvailableAccounted() {
                                 type='number'
                                 fullWidth
                                 name='transportationLosses'
-                                id="transportationLosses"
+                                id="transportation-losses"
                                 label="Потери при транспортировке"
                                 variant="standard"
                                 value={transportationLosses.value}

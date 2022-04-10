@@ -1,14 +1,38 @@
-import React from "react";
+// *********************************************************************************************************************
+// Форма "Передано для использования или отведения без использования, по кодам категории воды"
+// *********************************************************************************************************************
+
+
+import React, {useContext, useEffect} from "react";
+
+// MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, IconButton, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+// Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
+
+// Контекст
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 export default function TransmittedWithoutUseForm(props) {
 
+    // Получаем стейт из родительского компонента
+    const {transmittedWithoutUseField} = useContext(MovementWaterResourcesContext);
+
+    // Стейт для записи данных из формы
     const volume = useInput('');
 
-    return(
+    // Сохранение данных в стейт в родительском компоненте
+    useEffect(() => {
+        transmittedWithoutUseField.current[props.keyCount] = {
+            code: Object.keys(transmittedWithoutUseField.current).length,
+            volume: volume.value
+        };
+    }, [volume])
+
+    return (
         <React.Fragment>
             <Paper sx={{marginTop: 2}} elevation={4}>
                 <Box p={2}>
@@ -37,6 +61,7 @@ export default function TransmittedWithoutUseForm(props) {
                         <Grid item xs={12} sm={12} md={2} lg={2} xl={2} mt={2}>
                             <IconButton aria-label="delete" color='error' onClick={() => {
                                 props.delete(props.keyCount)
+                                delete transmittedWithoutUseField.current[props.keyCount]
                             }}>
                                 <DeleteIcon/>
                             </IconButton>

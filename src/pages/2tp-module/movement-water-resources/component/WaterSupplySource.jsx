@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useMemo} from "react";
+import React, {useContext, useEffect, useMemo} from "react";
 
 // MUI
 import {Box, Grid, MenuItem, Stack, TextField} from "@mui/material";
@@ -22,18 +22,35 @@ import useInput from "../../../../global-components/hooks/useInput";
 import ChoosingWaterFeature from "../../../../global-components/components/ChoosingWaterFeature";
 import ListWaterBodies from "../../../../global-components/components/selects/ListWaterBodies";
 import ListWaterQualityCategories from "../../../../global-components/components/selects/ListWaterQualityCategories";
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 
 export default function WaterSupplySource() {
 
+    // Контекст для передачи данных из родительского компонента
+    const {waterSupplySourceField} = useContext(MovementWaterResourcesContext);
+
     // Стейты для сохранения полей формы
     const nameWaterObjectCodeName = useInput({
-        nameWaterObjectName: 'Наименование водного объекта',
-        nameWaterObjectCode: 'Код водного объекта'
+        nameWaterObjectName: waterSupplySourceField.current.nameWaterObjectName,
+        nameWaterObjectCode: waterSupplySourceField.current.nameWaterObjectCode
     });
-    const typeSource = useInput('');
-    const distanceMouth = useInput('');
-    const waterQualityCategories = useInput('');
+    const typeSource = useInput(waterSupplySourceField.current.typeSource);
+    const distanceMouth = useInput(waterSupplySourceField.current.distanceMouth);
+    const waterQualityCategories = useInput(waterSupplySourceField.current.waterQualityCategories);
+
+    // Сохранение данных в родительский компонент
+    useEffect(() => {
+        waterSupplySourceField.current = {
+            nameWaterObjectName: nameWaterObjectCodeName.value.nameWaterObjectName,
+            nameWaterObjectCode: nameWaterObjectCodeName.value.nameWaterObjectCode,
+            typeSource: typeSource.value,
+            distanceMouth: distanceMouth.value,
+            waterQualityCategories: waterQualityCategories.value
+        }
+    }, [distanceMouth.value, nameWaterObjectCodeName.value.nameWaterObjectCode,
+        nameWaterObjectCodeName.value.nameWaterObjectName, typeSource.value, waterQualityCategories.value,
+        waterSupplySourceField]);
 
     // Получаем селект
     const {arrayObj, loadingListWaterBodies} = ListWaterBodies();

@@ -1,16 +1,32 @@
+// *********************************************************************************************************************
+// Компонент со списком форм "Передано для использования или отведения без использования, по кодам категории воды"
+// *********************************************************************************************************************
+
+
+
 import React, {useRef, useState} from 'react';
-import TransmittedWithoutUseForm from "./TransmittedWithoutUseForm";
+
+// MUI
 import Paper from "@mui/material/Paper";
-import HeadBox from "../../../../global-components/style/HeadBox";
 import {Box, Fab, Grid} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
+// Компоненты
+import TransmittedWithoutUseForm from "./TransmittedWithoutUseForm";
+
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+
+
 export default function TransmittedWithoutUseTemplate() {
 
+    // Стейт со списками форм
     const [arrayTransmittedOrWithdrawnByCodes, setArrayTransmittedOrWithdrawnByCodes] = useState([]);
 
+    // Счетчик для отслеживания формы
     const count = useRef(0);
 
+    // Добавляем форму в массив
     const onAddUsedYearCodes = () => {
         if (arrayTransmittedOrWithdrawnByCodes.length < 6) {
             setArrayTransmittedOrWithdrawnByCodes(arrayTransmittedOrWithdrawnByCodes.concat(
@@ -23,6 +39,7 @@ export default function TransmittedWithoutUseTemplate() {
         }
     };
 
+    // Функция удаления формы из массива
     const dell = key => {
         setArrayTransmittedOrWithdrawnByCodes(prevState => prevState.filter(el => +el.key !== +key))
     };

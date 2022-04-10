@@ -1,12 +1,37 @@
-import React from "react";
+// *********************************************************************************************************************
+// Компонент с формой "Передано для использования или отведения после использования"
+// *********************************************************************************************************************
+
+
+import React, {useContext, useEffect} from "react";
+
+// Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
+
+// MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, IconButton, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+// Контекст
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
+
+
 export default function TransmittedAfterUseForm(props) {
 
+    // Получаем стейт из родительского компонента
+    const {transmittedAfterUseField} = useContext(MovementWaterResourcesContext);
+
+    // Стейт для записи данных из формы
     const volume = useInput('');
+
+    // Сохранение данных в стейт в родительском компоненте
+    useEffect(() => {
+        transmittedAfterUseField.current[props.keyCount] = {
+            code: Object.keys(transmittedAfterUseField.current).length,
+            volume: volume.value
+        };
+    }, [volume])
 
     return (
         <React.Fragment>
@@ -36,7 +61,8 @@ export default function TransmittedAfterUseForm(props) {
                         </Grid>
                         <Grid item xs={12} sm={12} md={2} lg={2} xl={2} mt={2}>
                             <IconButton aria-label="delete" color='error' onClick={() => {
-                                props.delete(props.keyCount)
+                                props.delete(props.keyCount);
+                                delete transmittedAfterUseField.current[props.keyCount];
                             }}>
                                 <DeleteIcon/>
                             </IconButton>

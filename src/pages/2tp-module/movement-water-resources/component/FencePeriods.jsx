@@ -4,7 +4,7 @@
 
 
 
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 
 // Стили
 import HeadBox from "../../../../global-components/style/HeadBox";
@@ -15,24 +15,28 @@ import {Box, Grid, InputAdornment, TextField} from "@mui/material";
 
 // Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 
 export default function FencePeriods() {
 
+    // Получаем данные из родительского компонента с помощью контекста
+    const {fencePeriodsField} = useContext(MovementWaterResourcesContext);
+
     // Стейты для сохранения данных из полей формы
-    const january = useInput('');
-    const february = useInput('');
-    const march = useInput('');
-    const april = useInput('');
-    const may = useInput('');
-    const june = useInput('');
-    const july = useInput('');
-    const august = useInput('');
-    const september = useInput('');
-    const october = useInput('');
-    const november = useInput('');
-    const december = useInput('');
-    const justYear = useInput('')
+    const january = useInput(fencePeriodsField.current.january);
+    const february = useInput(fencePeriodsField.current.february);
+    const march = useInput(fencePeriodsField.current.march);
+    const april = useInput(fencePeriodsField.current.april);
+    const may = useInput(fencePeriodsField.current.may);
+    const june = useInput(fencePeriodsField.current.june);
+    const july = useInput(fencePeriodsField.current.july);
+    const august = useInput(fencePeriodsField.current.august);
+    const september = useInput(fencePeriodsField.current.september);
+    const october = useInput(fencePeriodsField.current.october);
+    const november = useInput(fencePeriodsField.current.november);
+    const december = useInput(fencePeriodsField.current.december);
+    const justYear = useInput(fencePeriodsField.current.justYear)
 
     // Функция для подсчета суммы за год
     useEffect(() => {
@@ -53,6 +57,26 @@ export default function FencePeriods() {
         justYear.setValue(summa)
     }, [april.value, august.value, december.value, february.value, january.value, july.value, june.value,
         justYear, march.value, may.value, november.value, october.value, september.value]);
+
+    // Сохраняем данные в родительский компонент
+    useEffect(() => {
+        fencePeriodsField.current = {
+            january: january.value,
+            february: february.value,
+            march: march.value,
+            april: january.value,
+            may: january.value,
+            june: june.value,
+            july: july.value,
+            august: august.value,
+            september: september.value,
+            october: january.value,
+            november: november.value,
+            december: december.value,
+            justYear: justYear.value
+        };
+    }, [august.value, december.value, february.value, fencePeriodsField, january.value, july.value, june.value,
+        justYear.value, march.value, november.value, september.value]);
 
     return(
         <React.Fragment>
@@ -242,6 +266,7 @@ export default function FencePeriods() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={4}>
                             <TextField
+                                disabled={true}
                                 type='number'
                                 name='justYear'
                                 id="just-year"

@@ -4,7 +4,7 @@
 
 
 
-import React from "react";
+import React, {useContext, useEffect} from "react";
 
 // MUI
 import HeadBox from "../../../../global-components/style/HeadBox";
@@ -13,12 +13,24 @@ import Paper from "@mui/material/Paper";
 
 // Пользовательский хук
 import useInput from "../../../../global-components/hooks/useInput";
+import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 export default function UsedWater() {
 
-    const processed = useInput('');
-    const repeat = useInput('');
-    const usedForYear = useInput('');
+    // Получаем данные из родительского компонента с помощью контекста
+    const {usedWaterField} = useContext(MovementWaterResourcesContext);
+
+    const processed = useInput(usedWaterField.current.processed);
+    const repeat = useInput(usedWaterField.current.repeat);
+    const usedForYear = useInput(usedWaterField.current.usedForYear);
+    
+    useEffect(() => {
+        usedWaterField.current = {
+            processed: processed.value,
+            repeat: repeat.value,
+            usedForYear: usedForYear.value
+        };
+    }, [processed.value, repeat.value, usedForYear.value, usedWaterField]);
 
     return(
         <React.Fragment>

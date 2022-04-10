@@ -1,16 +1,32 @@
+// *********************************************************************************************************************
+// Компонент со списком форм "Использовано за год по кодам видов использования"
+// *********************************************************************************************************************
+
+
+
 import React, {useRef, useState} from "react";
-import UsedForTheYearForm from "./UsedForTheYearForm";
-import HeadBox from "../../../../global-components/style/HeadBox";
+
+// MUI
 import {Box, Fab, Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
 
+// Стили
+import HeadBox from "../../../../global-components/style/HeadBox";
+
+// Компоненты
+import UsedForTheYearForm from "./UsedForTheYearForm";
+
+
 export default function UsedForTheYearTemplate() {
 
+    // Стейт со списками форм
     const [arrayAddUsedYearCodes, setArrayAddUsedYearCodes] = useState([]);
 
+    // Счетчик для отслеживания формы
     const count = useRef(0);
 
+    // Добавляем форму в массив
     const onAddUsedYearCodes = () => {
         if (arrayAddUsedYearCodes.length < 10) {
             setArrayAddUsedYearCodes(arrayAddUsedYearCodes.concat(
@@ -23,6 +39,7 @@ export default function UsedForTheYearTemplate() {
         }
     };
 
+    // Функция удаления формы из массива
     const dell = key => {
         setArrayAddUsedYearCodes(prevState => prevState.filter(el => +el.key !== +key))
     };

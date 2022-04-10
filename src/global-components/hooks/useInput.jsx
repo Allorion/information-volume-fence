@@ -16,7 +16,7 @@ const useInput = (initialValue, validations) => {
     // Импорт хука проверки поля
     const valid = useValidation(value, validations);
 
-    // Функция обработки обнавления inputa
+    // Функция обработки обнавления input
     const onChange = event => {
         setValue(event.target.value)
     };

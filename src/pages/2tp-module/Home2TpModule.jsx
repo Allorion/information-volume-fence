@@ -12,15 +12,21 @@ import Paper from "@mui/material/Paper";
 //Стили
 import HeadBox from "../../global-components/style/HeadBox";
 
+// Контекст
+import GeneralDataContext from "./context/GeneralDataContext";
+import MovementWaterResourcesContext from "./context/MovementWaterResourcesContext";
+
 //Компоненты
 import GeneralDataTemplate from "./general-data/GeneralDataTemplate";
 import MovementWaterResourcesTemplate
     from "./movement-water-resources/MovementWaterResourcesTemplate";
-import GeneralDataContext from "./context/GeneralDataContext";
+import TestComponent from "./test/TestComponent";
+
 
 
 export default function Home2TpModule() {
 
+    // Стейты для смены компонента
     const [numberPage, setNumberPage] = useState(0);
     const [page, setPage] = useState();
 
@@ -47,6 +53,50 @@ export default function Home2TpModule() {
     });
 
 
+    const authorizationDocumentField = useRef({
+        typeDocument: 'null',
+        numberDocument: '',
+        dateDocument: new Date(),
+        codeGuivProvider: ''
+    });
+
+    const waterSupplySourceField = useRef({
+        nameWaterObjectName: 'Наименование водного объекта',
+        nameWaterObjectCode: 'Код водного объекта',
+        typeSource: '',
+        distanceMouth: '',
+        waterQualityCategories: ''
+    });
+    const fencePeriodsField = useRef({
+        january: '',
+        february: '',
+        march: '',
+        april: '',
+        may: '',
+        june: '',
+        july: '',
+        august: '',
+        september: '',
+        october: '',
+        november: '',
+        december: '',
+        justYear: ''
+    });
+    const availableAccountedField = useRef({
+        permissibleVolumeWaterIntake: '',
+        measured: '',
+        transportationLosses: ''
+    });
+    const usedWaterField = useRef({
+        processed: '',
+        repeat: '',
+        usedForYear: ''
+    });
+    const usedForTheYearField = useRef({});
+    const transmittedWithoutUseField = useRef({});
+    const transmittedAfterUseField = useRef({});
+
+    // Смена компонентов
     useEffect(() => {
         switch (numberPage) {
             case 0:
@@ -61,10 +111,23 @@ export default function Home2TpModule() {
                 );
                 break;
             case 1:
-                setPage(<MovementWaterResourcesTemplate/>);
+                setPage(
+                    <MovementWaterResourcesContext.Provider value={{
+                        authorizationDocumentField,
+                        waterSupplySourceField,
+                        fencePeriodsField,
+                        availableAccountedField,
+                        usedWaterField,
+                        usedForTheYearField,
+                        transmittedWithoutUseField,
+                        transmittedAfterUseField
+                    }}>
+                        <MovementWaterResourcesTemplate/>
+                    </MovementWaterResourcesContext.Provider>
+                );
                 break;
             default:
-                setPage(<GeneralDataTemplate/>);
+                setPage(<TestComponent/>);
                 break;
         }
     }, [numberPage])
