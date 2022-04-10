@@ -115,36 +115,37 @@ const AuthorizationDocument = (props) => {
                         </Box>
                     </Paper>
                 </Grid>
-                {/*<Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>*/}
-                {/*    <Paper elevation={3}>*/}
-                {/*        <HeadBox>Поставщик</HeadBox>*/}
-                {/*        <Box p={4}>*/}
-                {/*            <Grid container spacing={2}>*/}
-                {/*                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>*/}
-                {/*                    <TextField*/}
-                {/*                        disabled={typeDocument.value !== 'null'}*/}
-                {/*                        error={(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv)}*/}
-                {/*                        onInput={(e) => {*/}
-                {/*                            e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 6)*/}
-                {/*                        }}*/}
-                {/*                        type='number'*/}
-                {/*                        fullWidth*/}
-                {/*                        name='codeGuivProvider'*/}
-                {/*                        id="code-guiv-provider"*/}
-                {/*                        label="Код поставщика по ГУИВ"*/}
-                {/*                        variant="standard"*/}
-                {/*                        value={codeGuivProvider.value}*/}
-                {/*                        onChange={codeGuivProvider.onChange}*/}
-                {/*                        onBlur={e => codeGuivProvider.onBlur(e)}*/}
-                {/*                    />*/}
-                {/*                    {(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv) &&*/}
-                {/*                        <Typography variant="span" style={{color: 'red'}}>Код ГУИВ должен быть 6*/}
-                {/*                            цифр</Typography>}*/}
-                {/*                </Grid>*/}
-                {/*            </Grid>*/}
-                {/*        </Box>*/}
-                {/*    </Paper>*/}
-                {/*</Grid>*/}
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
+                    <Paper elevation={3}>
+                        <HeadBox>Поставщик</HeadBox>
+                        <Box p={4}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <TextField
+                                        sx={{paddingBottom: '15px'}}
+                                        disabled={typeDocument.value !== 'null'}
+                                        error={(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv)}
+                                        onInput={(e) => {
+                                            e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 6)
+                                        }}
+                                        type='number'
+                                        fullWidth
+                                        name='codeGuivProvider'
+                                        id="code-guiv-provider"
+                                        label="Код поставщика по ГУИВ"
+                                        variant="standard"
+                                        value={codeGuivProvider.value}
+                                        onChange={codeGuivProvider.onChange}
+                                        onBlur={e => codeGuivProvider.onBlur(e)}
+                                    />
+                                    {(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv) &&
+                                        <Typography variant="span" style={{color: 'red'}}>Код ГУИВ должен быть 6
+                                            цифр</Typography>}
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Paper>
+                </Grid>
             </Grid>
         </React.Fragment>
     );

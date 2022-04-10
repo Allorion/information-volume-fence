@@ -74,7 +74,12 @@ export default function AvailableAccounted() {
                                 variant="standard"
                                 value={measured.value}
                                 onChange={(e) => {
-                                    measured.onChange(e);
+                                    if (authorizationDocumentField.current.codeGuivProvider !== '') {
+                                        permissibleVolumeWaterIntake.setValue(0);
+                                        measured.setValue(0);
+                                    } else {
+                                        measured.onChange(e);
+                                    }
                                 }}
                             />
                         </Grid>

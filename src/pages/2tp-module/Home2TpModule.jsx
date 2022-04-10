@@ -20,7 +20,6 @@ import MovementWaterResourcesContext from "./context/MovementWaterResourcesConte
 import GeneralDataTemplate from "./general-data/GeneralDataTemplate";
 import MovementWaterResourcesTemplate
     from "./movement-water-resources/MovementWaterResourcesTemplate";
-import TestComponent from "./test/TestComponent";
 
 
 
@@ -127,7 +126,7 @@ export default function Home2TpModule() {
                 );
                 break;
             default:
-                setPage(<TestComponent/>);
+                setPage(<GeneralDataTemplate/>);
                 break;
         }
     }, [numberPage])
