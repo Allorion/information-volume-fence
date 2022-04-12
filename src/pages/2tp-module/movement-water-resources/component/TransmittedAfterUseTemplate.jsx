@@ -48,21 +48,19 @@ export default function TransmittedAfterUseTemplate() {
             <Paper elevation={3}>
                 <HeadBox>Передано для использования или отведения после использования</HeadBox>
                 <Box p={4}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
-                            <Fab
-                                disabled={arrayTransmittedAfterUse.length >= 2}
-                                sx={{marginTop: 2}}
-                                variant="extended"
-                                size="small"
-                                color="primary"
-                                aria-label="add"
-                                onClick={onAddUsedYearCodes}
-                            >
-                                <AddIcon/>
-                                Добавить
-                            </Fab>
-                        </Grid>
+                    <Grid container spacing={2} justifyContent='center' alignContent='center'>
+                        <Fab
+                            disabled={arrayTransmittedAfterUse.length >= 2}
+                            sx={{marginTop: 2}}
+                            variant="extended"
+                            size="small"
+                            color="primary"
+                            aria-label="add"
+                            onClick={onAddUsedYearCodes}
+                        >
+                            <AddIcon/>
+                            Добавить
+                        </Fab>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             {arrayTransmittedAfterUse}
                         </Grid>

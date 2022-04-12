@@ -47,7 +47,7 @@ const AuthorizationDocument = (props) => {
     return (
         <React.Fragment>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
                     <Paper elevation={3}>
                         <HeadBox>Разрешающий документ</HeadBox>
                         <Box p={4}>

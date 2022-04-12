@@ -38,7 +38,7 @@ const DateReporting = () => {
 
     return (
         <React.Fragment>
-            <Grid container>
+            <Grid container justifyContent='center' alignContent="center">
                 <Stack spacing={4} direction="row">
                     <LocalizationProvider
                         dateAdapter={AdapterDateFns}

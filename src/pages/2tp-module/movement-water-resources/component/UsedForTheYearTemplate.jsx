@@ -3,7 +3,6 @@
 // *********************************************************************************************************************
 
 
-
 import React, {useRef, useState} from "react";
 
 // MUI
@@ -44,26 +43,24 @@ export default function UsedForTheYearTemplate() {
         setArrayAddUsedYearCodes(prevState => prevState.filter(el => +el.key !== +key))
     };
 
-    return(
+    return (
         <React.Fragment>
             <Paper elevation={3}>
                 <HeadBox>Использовано за год по кодам видов использования</HeadBox>
                 <Box p={4}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
-                            <Fab
-                                sx={{marginTop: 2}}
-                                disabled={arrayAddUsedYearCodes.length >= 10}
-                                variant="extended"
-                                size="small"
-                                color="primary"
-                                aria-label="add"
-                                onClick={onAddUsedYearCodes}
-                            >
-                                <AddIcon/>
-                                Добавить
-                            </Fab>
-                        </Grid>
+                    <Grid container spacing={2} justifyContent='center' alignContent='center'>
+                        <Fab
+                            sx={{marginTop: 2}}
+                            disabled={arrayAddUsedYearCodes.length >= 10}
+                            variant="extended"
+                            size="small"
+                            color="primary"
+                            aria-label="add"
+                            onClick={onAddUsedYearCodes}
+                        >
+                            <AddIcon/>
+                            Добавить
+                        </Fab>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             {arrayAddUsedYearCodes}
                         </Grid>
