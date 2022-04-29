@@ -21,6 +21,50 @@ import GeneralDataTemplate from "./general-data/GeneralDataTemplate";
 import MovementWaterResourcesTemplate
     from "./movement-water-resources/MovementWaterResourcesTemplate";
 
+const testInit = {
+    authorizationDocumentField: {
+        typeDocument: 'null',
+        numberDocument: '',
+        dateDocument: new Date(),
+        codeGuivProvider: ''
+    },
+    waterSupplySource: {
+        nameWaterObjectName: 'Наименование водного объекта',
+        nameWaterObjectCode: 'Код водного объекта',
+        typeSource: '',
+        distanceMouth: '',
+        waterQualityCategories: ''
+    },
+    fencePeriodsField: {
+        january: '',
+        february: '',
+        march: '',
+        april: '',
+        may: '',
+        june: '',
+        july: '',
+        august: '',
+        september: '',
+        october: '',
+        november: '',
+        december: '',
+        justYear: ''
+    },
+    availableAccountedField: {
+        permissibleVolumeWaterIntake: '',
+        measured: '',
+        transportationLosses: ''
+    },
+    usedWaterField: {
+        processed: '',
+        repeat: '',
+        usedForYear: ''
+    },
+    usedForTheYearField: {},
+    transmittedWithoutUseField: {},
+    transmittedAfterUseField: {}
+};
+
 
 
 export default function Home2TpModule() {
@@ -29,7 +73,7 @@ export default function Home2TpModule() {
     const [numberPage, setNumberPage] = useState(0);
     const [page, setPage] = useState();
 
-    // Стейты для хранения данных дочерних компонентов
+    // Стейты для хранения данных компонента "Общие данные"
     const organizationField = useRef({
         nameReportingOrganization: '',
         postalAddress: '',
@@ -51,14 +95,13 @@ export default function Home2TpModule() {
         datePreparationDocument: new Date()
     });
 
-
-    const authorizationDocumentField = useRef({
+    // Стейты для хранения данных сомпонента "Раздел 1"
+        const authorizationDocumentField = useRef({
         typeDocument: 'null',
         numberDocument: '',
         dateDocument: new Date(),
         codeGuivProvider: ''
     });
-
     const waterSupplySourceField = useRef({
         nameWaterObjectName: 'Наименование водного объекта',
         nameWaterObjectCode: 'Код водного объекта',
@@ -95,6 +138,8 @@ export default function Home2TpModule() {
     const transmittedWithoutUseField = useRef({});
     const transmittedAfterUseField = useRef({});
 
+    const arrayPageForm = useRef([testInit]);
+
     // Смена компонентов
     useEffect(() => {
         switch (numberPage) {
@@ -119,7 +164,8 @@ export default function Home2TpModule() {
                         usedWaterField,
                         usedForTheYearField,
                         transmittedWithoutUseField,
-                        transmittedAfterUseField
+                        transmittedAfterUseField,
+                        arrayPageForm
                     }}>
                         <MovementWaterResourcesTemplate/>
                     </MovementWaterResourcesContext.Provider>
@@ -164,7 +210,7 @@ export default function Home2TpModule() {
                                             </Button>
                                             <Button
                                                 onClick={() => {
-                                                    setNumberPage(2);
+                                                    console.log(<testRef className="current"></testRef>)
                                                 }}
                                             >
                                                 Раздел 2

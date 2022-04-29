@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 
 // MUI
 import {Box, Grid, TextField} from "@mui/material";
@@ -15,27 +15,30 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 // Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
 
-// Контекст
-import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
-export default function AvailableAccounted() {
+export default function AvailableAccounted(props) {
 
-    // Получаем данные из родительского компонента с помощью контекста
-    const {authorizationDocumentField, availableAccountedField} = useContext(MovementWaterResourcesContext);
     // Стейты для сохранения данных из формы
-    const permissibleVolumeWaterIntake = useInput(availableAccountedField.current.permissibleVolumeWaterIntake);
-    const measured = useInput(availableAccountedField.current.measured);
-    const transportationLosses = useInput(availableAccountedField.current.transportationLosses);
+    const permissibleVolumeWaterIntake = useInput(props.availableAccountedField.current.permissibleVolumeWaterIntake);
+    const measured = useInput(props.availableAccountedField.current.measured);
+    const transportationLosses = useInput(props.availableAccountedField.current.transportationLosses);
+
+    // При создании новой формы обновляем данные стейтов
+    useEffect(() => {
+        permissibleVolumeWaterIntake.setValue(props.availableAccountedField.current.permissibleVolumeWaterIntake);
+        measured.setValue(props.availableAccountedField.current.measured);
+        transportationLosses.setValue(props.availableAccountedField.current.transportationLosses);
+        props.availableAccountedFlag.current = false;
+    }, [props.availableAccountedFlag.current]);
 
     // Сохраняем введенные данные в родительский компонент
     useEffect(() => {
-        availableAccountedField.current = {
+        props.availableAccountedField.current = {
             permissibleVolumeWaterIntake: permissibleVolumeWaterIntake.value,
             measured: measured.value,
             transportationLosses: transportationLosses.value
         };
-    }, [availableAccountedField, measured.value, permissibleVolumeWaterIntake.value, transportationLosses.value])
-
+    }, [measured.value, permissibleVolumeWaterIntake.value, transportationLosses.value])
 
     return (
         <React.Fragment>
@@ -45,7 +48,7 @@ export default function AvailableAccounted() {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             <TextField
-                                disabled={authorizationDocumentField.current.codeGuivProvider !== ''}
+                                disabled={props.authorizationDocumentField.current.codeGuivProvider !== ''}
                                 type='number'
                                 fullWidth
                                 name='permissibleVolumeWaterIntake'
@@ -54,7 +57,7 @@ export default function AvailableAccounted() {
                                 variant="standard"
                                 value={permissibleVolumeWaterIntake.value}
                                 onChange={(e) => {
-                                    if (authorizationDocumentField.current.codeGuivProvider !== '') {
+                                    if (props.authorizationDocumentField.current.codeGuivProvider !== '') {
                                         permissibleVolumeWaterIntake.setValue(0);
                                         measured.setValue(0);
                                     } else {
@@ -65,7 +68,7 @@ export default function AvailableAccounted() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             <TextField
-                                disabled={authorizationDocumentField.current.codeGuivProvider !== ''}
+                                disabled={props.authorizationDocumentField.current.codeGuivProvider !== ''}
                                 type='number'
                                 fullWidth
                                 name='measured'
@@ -74,7 +77,7 @@ export default function AvailableAccounted() {
                                 variant="standard"
                                 value={measured.value}
                                 onChange={(e) => {
-                                    if (authorizationDocumentField.current.codeGuivProvider !== '') {
+                                    if (props.authorizationDocumentField.current.codeGuivProvider !== '') {
                                         permissibleVolumeWaterIntake.setValue(0);
                                         measured.setValue(0);
                                     } else {

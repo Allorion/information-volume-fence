@@ -3,34 +3,42 @@
 // *********************************************************************************************************************
 
 
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 // MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, IconButton, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-// Пользовательские хуки
-import useInput from "../../../../global-components/hooks/useInput";
-
 // Контекст
-import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
+import TransmittedWithoutUseContext from "../context/TransmittedWithoutUseContext";
 
 export default function TransmittedWithoutUseForm(props) {
 
-    // Получаем стейт из родительского компонента
-    const {transmittedWithoutUseField} = useContext(MovementWaterResourcesContext);
+    // Получаем данные из родительского компонента
+    const [transmittedWithoutUseField,
+        transmittedWithoutUseFlag,
+        transmittedWithoutUseComponents] = useContext(TransmittedWithoutUseContext);
 
     // Стейт для записи данных из формы
-    const volume = useInput('');
+    const [code, setCode] = useState(props.obj.code);
+    const [value, setValue] = useState(props.obj.value);
+
+    // Получаем данные полей при переходе на другую страницу
+    useEffect(() => {
+        try {
+            setCode(transmittedWithoutUseField.current[props.index-1].code);
+            setValue(transmittedWithoutUseField.current[props.index-1].value);
+        } catch {
+
+        }
+    }, [transmittedWithoutUseFlag.current]);
 
     // Сохранение данных в стейт в родительском компоненте
     useEffect(() => {
-        transmittedWithoutUseField.current[props.keyCount] = {
-            code: Object.keys(transmittedWithoutUseField.current).length,
-            volume: volume.value
-        };
-    }, [volume])
+        props.obj.code = code;
+        props.obj.value = value;
+    }, [code, value]);
 
     return (
         <React.Fragment>
@@ -54,14 +62,13 @@ export default function TransmittedWithoutUseForm(props) {
                                 id="volume"
                                 label="Объем"
                                 variant="standard"
-                                value={volume.value}
-                                onChange={volume.onChange}
+                                value={value}
+                                onChange={e => setValue(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={2} lg={2} xl={2} mt={2}>
                             <IconButton aria-label="delete" color='error' onClick={() => {
-                                props.delete(props.keyCount)
-                                delete transmittedWithoutUseField.current[props.keyCount]
+                                props.delete(props.obj, props.index);
                             }}>
                                 <DeleteIcon/>
                             </IconButton>

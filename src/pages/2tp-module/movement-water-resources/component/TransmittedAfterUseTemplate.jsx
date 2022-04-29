@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 
 // MUI
 import Paper from "@mui/material/Paper";
@@ -16,31 +16,63 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 // Компоненты
 import TransmittedAfterUseForm from "./TransmittedAfterUseForm";
 
+// Контекст
+import TransmittedAfterUseContext from "../context/TransmittedAfterUseContext";
+
+
 
 export default function TransmittedAfterUseTemplate() {
 
-    // Стейт со списками форм
-    const [arrayTransmittedAfterUse, setArrayTransmittedAfterUse] = useState([]);
+    // Получаем данные из родительского компонента
+    const [transmittedAfterUseField,
+        transmittedAfterUseFlag,
+        transmittedAfterUseComponents] = useContext(TransmittedAfterUseContext);
 
-    // Счетчик для отслеживания формы
-    const count = useRef(0);
+    // Стейт со списками форм
+    const [arrayTransmittedAfterUse,
+        setArrayTransmittedAfterUse] = useState(transmittedAfterUseComponents.current);
+
+    // Для уникальности строки при ее создании
+    const formCount = useRef(0);
 
     // Добавляем форму в массив
     const onAddUsedYearCodes = () => {
-        if (arrayTransmittedAfterUse.length < 2) {
+        if (arrayTransmittedAfterUse.length < 10) {
+            const obj = transmittedAfterUseField.current[transmittedAfterUseField.current.length] = {
+                code: '',
+                value: ''
+            }
             setArrayTransmittedAfterUse(arrayTransmittedAfterUse.concat(
                 <TransmittedAfterUseForm
+                    index={transmittedAfterUseField.current.length}
+                    obj={obj}
                     delete={dell}
-                    key={count.current++}
-                    keyCount={count.current}
+                    key={Math.random()}
                 />
             ));
         }
     };
 
+    // Сохраняем в глобальный объект данные из списка форм
+    useEffect(() => {
+        transmittedAfterUseComponents.current = arrayTransmittedAfterUse
+    }, [arrayTransmittedAfterUse]);
+
+    // При создании или перехода на новую страницу сохраняем данные
+    useEffect(() => {
+        setArrayTransmittedAfterUse(transmittedAfterUseComponents.current);
+        formCount.current = 0;
+        transmittedAfterUseFlag.current = false;
+    }, [transmittedAfterUseFlag.current]);
+
     // Функция удаления формы из массива
-    const dell = key => {
-        setArrayTransmittedAfterUse(prevState => prevState.filter(el => +el.key !== +key))
+    const dell = (obj, index) => {
+        setArrayTransmittedAfterUse(prevState => prevState.filter((n) => {
+            return n.props.obj !== obj
+        }))
+        transmittedAfterUseField.current = transmittedAfterUseField.current.filter((n) => {
+            return n !== obj
+        });
     };
 
     return (

@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 
 // Стили
 import HeadBox from "../../../../global-components/style/HeadBox";
@@ -20,30 +20,34 @@ import useInputDate from "../../../../global-components/hooks/useInputDate";
 
 // Доп. модули
 import {ru} from "date-fns/locale";
-import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
-
 
 const AuthorizationDocument = (props) => {
 
-    const {authorizationDocumentField} = useContext(MovementWaterResourcesContext);
+    // Используя пользовательский хук создаем стейты для записи данных из полей ввода
+    const typeDocument = useInput(props.authorizationDocumentField.current.typeDocument);
+    const numberDocument = useInput(props.authorizationDocumentField.current.numberDocument);
+    const dateDocument = useInputDate(props.authorizationDocumentField.current.dateDocument);
+    const codeGuivProvider = useInput(props.authorizationDocumentField.current.codeGuivProvider, {isSymbolGuiv: true});
 
-    // Стейты для сохранения данных из полей формы
-    const typeDocument = useInput(authorizationDocumentField.current.typeDocument);
-    const numberDocument = useInput(authorizationDocumentField.current.numberDocument);
-    const dateDocument = useInputDate(authorizationDocumentField.current.dateDocument);
-    const codeGuivProvider = useInput(authorizationDocumentField.current.codeGuivProvider, {isSymbolGuiv: true});
+    // При создании новой формы обновляем данные стейтов
+    useEffect(() => {
+        typeDocument.setValue(props.authorizationDocumentField.current.typeDocument);
+        numberDocument.setValue(props.authorizationDocumentField.current.numberDocument);
+        dateDocument.onChange(props.authorizationDocumentField.current.dateDocument);
+        codeGuivProvider.setValue(props.authorizationDocumentField.current.codeGuivProvider);
+        props.authorizationDocumentFlag.current = false;
+    }, [props.authorizationDocumentFlag.current]);
 
     // Записываем данные в родительский компонент
     useEffect(() =>{
-        authorizationDocumentField.current = {
+        props.authorizationDocumentField.current = {
             typeDocument: typeDocument.value,
             numberDocument: numberDocument.value,
             dateDocument: dateDocument.value,
             codeGuivProvider: codeGuivProvider.value
         };
-    }, [authorizationDocumentField, codeGuivProvider, dateDocument, numberDocument, typeDocument]);
+    }, [codeGuivProvider.value, dateDocument.value, numberDocument.value, typeDocument.value]);
 
-    
     return (
         <React.Fragment>
             <Grid container spacing={2}>

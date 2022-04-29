@@ -4,7 +4,7 @@
 
 
 
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 
 // Стили
 import HeadBox from "../../../../global-components/style/HeadBox";
@@ -15,28 +15,42 @@ import {Box, Grid, InputAdornment, TextField} from "@mui/material";
 
 // Пользовательские хуки
 import useInput from "../../../../global-components/hooks/useInput";
-import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
 
-export default function FencePeriods() {
-
-    // Получаем данные из родительского компонента с помощью контекста
-    const {fencePeriodsField} = useContext(MovementWaterResourcesContext);
+export default function FencePeriods(props) {
 
     // Стейты для сохранения данных из полей формы
-    const january = useInput(fencePeriodsField.current.january);
-    const february = useInput(fencePeriodsField.current.february);
-    const march = useInput(fencePeriodsField.current.march);
-    const april = useInput(fencePeriodsField.current.april);
-    const may = useInput(fencePeriodsField.current.may);
-    const june = useInput(fencePeriodsField.current.june);
-    const july = useInput(fencePeriodsField.current.july);
-    const august = useInput(fencePeriodsField.current.august);
-    const september = useInput(fencePeriodsField.current.september);
-    const october = useInput(fencePeriodsField.current.october);
-    const november = useInput(fencePeriodsField.current.november);
-    const december = useInput(fencePeriodsField.current.december);
-    const justYear = useInput(fencePeriodsField.current.justYear)
+    const january = useInput(props.fencePeriodsField.current.january);
+    const february = useInput(props.fencePeriodsField.current.february);
+    const march = useInput(props.fencePeriodsField.current.march);
+    const april = useInput(props.fencePeriodsField.current.april);
+    const may = useInput(props.fencePeriodsField.current.may);
+    const june = useInput(props.fencePeriodsField.current.june);
+    const july = useInput(props.fencePeriodsField.current.july);
+    const august = useInput(props.fencePeriodsField.current.august);
+    const september = useInput(props.fencePeriodsField.current.september);
+    const october = useInput(props.fencePeriodsField.current.october);
+    const november = useInput(props.fencePeriodsField.current.november);
+    const december = useInput(props.fencePeriodsField.current.december);
+    const justYear = useInput(props.fencePeriodsField.current.justYear);
+
+    // При создании новой формы обновляем данные стейтов
+    useEffect(() => {
+        january.setValue(props.fencePeriodsField.current.january);
+        february.setValue(props.fencePeriodsField.current.february);
+        march.setValue(props.fencePeriodsField.current.march);
+        april.setValue(props.fencePeriodsField.current.april);
+        may.setValue(props.fencePeriodsField.current.may);
+        june.setValue(props.fencePeriodsField.current.june);
+        july.setValue(props.fencePeriodsField.current.july);
+        august.setValue(props.fencePeriodsField.current.august);
+        september.setValue(props.fencePeriodsField.current.september);
+        october.setValue(props.fencePeriodsField.current.october);
+        november.setValue(props.fencePeriodsField.current.november);
+        december.setValue(props.fencePeriodsField.current.december);
+        justYear.setValue(props.fencePeriodsField.current.justYear);
+        props.fencePeriodsFlag.current = false;
+    }, [props.fencePeriodsFlag.current]);
 
     // Функция для подсчета суммы за год
     useEffect(() => {
@@ -60,22 +74,22 @@ export default function FencePeriods() {
 
     // Сохраняем данные в родительский компонент
     useEffect(() => {
-        fencePeriodsField.current = {
+        props.fencePeriodsField.current = {
             january: january.value,
             february: february.value,
             march: march.value,
-            april: january.value,
-            may: january.value,
+            april: april.value,
+            may: may.value,
             june: june.value,
             july: july.value,
             august: august.value,
             september: september.value,
-            october: january.value,
+            october: october.value,
             november: november.value,
             december: december.value,
             justYear: justYear.value
         };
-    }, [august.value, december.value, february.value, fencePeriodsField, january.value, july.value, june.value,
+    }, [august.value, december.value, february.value, january.value, july.value, june.value,
         justYear.value, march.value, november.value, september.value]);
 
     return(

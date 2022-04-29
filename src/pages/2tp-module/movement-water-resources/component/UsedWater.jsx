@@ -4,7 +4,7 @@
 
 
 
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 
 // MUI
 import HeadBox from "../../../../global-components/style/HeadBox";
@@ -13,24 +13,31 @@ import Paper from "@mui/material/Paper";
 
 // Пользовательский хук
 import useInput from "../../../../global-components/hooks/useInput";
-import MovementWaterResourcesContext from "../../context/MovementWaterResourcesContext";
 
-export default function UsedWater() {
 
-    // Получаем данные из родительского компонента с помощью контекста
-    const {usedWaterField} = useContext(MovementWaterResourcesContext);
+export default function UsedWater(props) {
 
-    const processed = useInput(usedWaterField.current.processed);
-    const repeat = useInput(usedWaterField.current.repeat);
-    const usedForYear = useInput(usedWaterField.current.usedForYear);
-    
+    // Используя пользовательский хук создаем стейты для записи данных из полей ввода
+    const processed = useInput(props.usedWaterField.current.processed);
+    const repeat = useInput(props.usedWaterField.current.repeat);
+    const usedForYear = useInput(props.usedWaterField.current.usedForYear);
+
+    // При создании новой формы обновляем данные стейтов
     useEffect(() => {
-        usedWaterField.current = {
+        processed.setValue(props.usedWaterField.current.processed);
+        repeat.setValue(props.usedWaterField.current.repeat);
+        usedForYear.setValue(props.usedWaterField.current.usedForYear);
+        props.usedWaterFlag.current = false;
+    }, [props.usedWaterFlag.current]);
+
+    // Записываем данные в родительский компонент
+    useEffect(() =>{
+        props.usedWaterField.current = {
             processed: processed.value,
             repeat: repeat.value,
             usedForYear: usedForYear.value
         };
-    }, [processed.value, repeat.value, usedForYear.value, usedWaterField]);
+    }, [processed.value, repeat.value, usedForYear.value]);
 
     return(
         <React.Fragment>
