@@ -5,9 +5,6 @@
 
 import React, {useContext, useEffect, useState} from "react";
 
-// Пользовательские хуки
-import useInput from "../../../../global-components/hooks/useInput";
-
 // MUI
 import Paper from "@mui/material/Paper";
 import {Box, Grid, IconButton, TextField} from "@mui/material";
@@ -33,10 +30,10 @@ export default function TransmittedAfterUseForm(props) {
         try {
             setCode(transmittedAfterUseField.current[props.index-1].code);
             setValue(transmittedAfterUseField.current[props.index-1].value);
-        } catch {
-
+        } catch (err) {
+            return;
         }
-    }, [transmittedAfterUseField.current]);
+    }, [transmittedAfterUseFlag.current]);
 
     // Сохранение данных в стейт в родительском компоненте
     useEffect(() => {

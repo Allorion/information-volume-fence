@@ -20,7 +20,7 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 import TransmittedWithoutUseContext from "../context/TransmittedWithoutUseContext";
 
 
-export default function TransmittedWithoutUseTemplate() {
+export default function TransmittedWithoutUseTemplate(props) {
 
     // Получаем данные из родительского компонента
     const [transmittedWithoutUseField,
@@ -33,6 +33,17 @@ export default function TransmittedWithoutUseTemplate() {
 
     // Для уникальности строки при ее создании
     const formCount = useRef(0);
+
+    // Сохраняем данные в родительский компонент
+    useEffect(() => {
+        for (let i=0; i<arrayTransmittedOrWithdrawnByCodes.length; i++) {
+            try {
+                props.transmittedWithoutUseComponentsGlobal[i] = arrayTransmittedOrWithdrawnByCodes[i]
+            }catch (err) {
+                return;
+            }
+        }
+    }, [arrayTransmittedOrWithdrawnByCodes]);
 
     // Добавляем форму в массив
     const onAddUsedYearCodes = () => {

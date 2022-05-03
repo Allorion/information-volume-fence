@@ -1,5 +1,5 @@
 // *********************************************************************************************************************
-// Форма "Передано для использования или отведения без использования, по кодам категории воды"
+// Компонент с формой "Передано для использования или отведения после использования"
 // *********************************************************************************************************************
 
 
@@ -11,34 +11,37 @@ import {Box, Grid, IconButton, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 // Контекст
-import TransmittedWithoutUseContext from "../context/TransmittedWithoutUseContext";
+import ContentPollutantsContext from "../context/ContentPollutantsContext";
 
-export default function TransmittedWithoutUseForm(props) {
+
+export default function ContentPollutantsForm(props) {
 
     // Получаем данные из родительского компонента
-    const [transmittedWithoutUseField,
-        transmittedWithoutUseFlag,
-        transmittedWithoutUseComponents] = useContext(TransmittedWithoutUseContext);
+    const [
+        contentPollutantsField,
+        contentPollutantsFlag,
+        contentPollutantsComponents
+    ] = useContext(ContentPollutantsContext);
 
     // Стейт для записи данных из формы
     const [code, setCode] = useState(props.obj.code);
-    const [value, setValue] = useState(props.obj.value);
+    const [mass, setMass] = useState(props.obj.mass);
 
     // Получаем данные полей при переходе на другую страницу
     useEffect(() => {
         try {
-            setCode(transmittedWithoutUseField.current[props.index-1].code);
-            setValue(transmittedWithoutUseField.current[props.index-1].value);
+            setCode(contentPollutantsField.current[props.index - 1].code);
+            setMass(contentPollutantsField.current[props.index - 1].mass);
         } catch (err) {
             return;
         }
-    }, [transmittedWithoutUseFlag.current]);
+    }, [contentPollutantsFlag.current]);
 
     // Сохранение данных в стейт в родительском компоненте
     useEffect(() => {
         props.obj.code = code;
-        props.obj.value = value;
-    }, [code, value]);
+        props.obj.mass = mass;
+    }, [code, mass]);
 
     return (
         <React.Fragment>
@@ -62,8 +65,8 @@ export default function TransmittedWithoutUseForm(props) {
                                 id="volume"
                                 label="Объем"
                                 variant="standard"
-                                value={value}
-                                onChange={e => setValue(e.target.value)}
+                                value={mass}
+                                onChange={e => setMass(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={2} lg={2} xl={2} mt={2}>

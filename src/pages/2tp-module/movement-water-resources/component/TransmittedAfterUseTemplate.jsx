@@ -21,7 +21,7 @@ import TransmittedAfterUseContext from "../context/TransmittedAfterUseContext";
 
 
 
-export default function TransmittedAfterUseTemplate() {
+export default function TransmittedAfterUseTemplate(props) {
 
     // Получаем данные из родительского компонента
     const [transmittedAfterUseField,
@@ -34,6 +34,17 @@ export default function TransmittedAfterUseTemplate() {
 
     // Для уникальности строки при ее создании
     const formCount = useRef(0);
+
+    // Сохраняем данные в родительский компонент
+    useEffect(() => {
+        for (let i=0; i<arrayTransmittedAfterUse.length; i++) {
+            try {
+                props.transmittedAfterUseComponentsGlobal[i] = arrayTransmittedAfterUse[i]
+            }catch (err) {
+                return;
+            }
+        }
+    }, [arrayTransmittedAfterUse]);
 
     // Добавляем форму в массив
     const onAddUsedYearCodes = () => {

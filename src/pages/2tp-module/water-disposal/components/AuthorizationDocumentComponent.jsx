@@ -1,5 +1,5 @@
 // *********************************************************************************************************************
-// Компонент с выбором разрешающего документа или поставщика
+// Компонент с выбором разрешающего документа или поставщика для "Раздел 2"
 // *********************************************************************************************************************
 
 
@@ -10,7 +10,7 @@ import HeadBox from "../../../../global-components/style/HeadBox";
 
 // MUI
 import Paper from "@mui/material/Paper";
-import {Box, Grid, MenuItem, TextField, Typography} from "@mui/material";
+import {Box, Grid, MenuItem, TextField} from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import {LocalizationProvider, MobileDatePicker} from "@mui/lab";
 
@@ -21,30 +21,27 @@ import useInputDate from "../../../../global-components/hooks/useInputDate";
 // Доп. модули
 import {ru} from "date-fns/locale";
 
-const AuthorizationDocument = (props) => {
+const AuthorizationDocumentComponent = (props) => {
 
     // Используя пользовательский хук создаем стейты для записи данных из полей ввода
     const typeDocument = useInput(props.authorizationDocumentField.current.typeDocument);
     const numberDocument = useInput(props.authorizationDocumentField.current.numberDocument);
     const dateDocument = useInputDate(props.authorizationDocumentField.current.dateDocument);
-    const codeGuivProvider = useInput(props.authorizationDocumentField.current.codeGuivProvider, {isSymbolGuiv: true});
 
     // При создании новой формы обновляем данные стейтов
     useEffect(() => {
         typeDocument.setValue(props.authorizationDocumentField.current.typeDocument);
         numberDocument.setValue(props.authorizationDocumentField.current.numberDocument);
         dateDocument.onChange(props.authorizationDocumentField.current.dateDocument);
-        codeGuivProvider.setValue(props.authorizationDocumentField.current.codeGuivProvider);
         props.authorizationDocumentFlag.current = false;
     }, [props.authorizationDocumentFlag.current]);
 
     // Записываем данные в родительский компонент
-    useEffect(() =>{
+    useEffect(() => {
         props.authorizationDocumentFieldGlobal.typeDocument = typeDocument.value
         props.authorizationDocumentFieldGlobal.numberDocument = numberDocument.value
         props.authorizationDocumentFieldGlobal.dateDocument = dateDocument.value
-        props.authorizationDocumentFieldGlobal.codeGuivProvider = codeGuivProvider.value
-    }, [codeGuivProvider.value, dateDocument.value, numberDocument.value, typeDocument.value]);
+    }, [dateDocument.value, numberDocument.value, typeDocument.value]);
 
     return (
         <React.Fragment>
@@ -57,7 +54,6 @@ const AuthorizationDocument = (props) => {
                                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                                     <TextField
                                         fullWidth
-                                        disabled={codeGuivProvider.value !== ''}
                                         id="select-document-type"
                                         select
                                         label="Тип документа"
@@ -117,40 +113,9 @@ const AuthorizationDocument = (props) => {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
-                    <Paper elevation={3}>
-                        <HeadBox>Поставщик</HeadBox>
-                        <Box p={4}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <TextField
-                                        sx={{paddingBottom: '15px'}}
-                                        disabled={typeDocument.value !== 'null'}
-                                        error={(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv)}
-                                        onInput={(e) => {
-                                            e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 6)
-                                        }}
-                                        type='number'
-                                        fullWidth
-                                        name='codeGuivProvider'
-                                        id="code-guiv-provider"
-                                        label="Код поставщика по ГУИВ"
-                                        variant="standard"
-                                        value={codeGuivProvider.value}
-                                        onChange={codeGuivProvider.onChange}
-                                        onBlur={e => codeGuivProvider.onBlur(e)}
-                                    />
-                                    {(codeGuivProvider.isDirty && codeGuivProvider.checkNumberSymbolGuiv) &&
-                                        <Typography variant="span" style={{color: 'red'}}>Код ГУИВ должен быть 6
-                                            цифр</Typography>}
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Paper>
-                </Grid>
             </Grid>
         </React.Fragment>
     );
 };
 
-export default AuthorizationDocument;
+export default AuthorizationDocumentComponent;

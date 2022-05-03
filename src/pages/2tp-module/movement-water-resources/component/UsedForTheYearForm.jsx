@@ -28,8 +28,8 @@ const UsedForTheYearForm = props => {
         try {
             setCode(usedForTheYearField.current[props.index-1].code);
             setValue(usedForTheYearField.current[props.index-1].value);
-        } catch {
-
+        } catch (err) {
+            return;
         }
     }, [usedForTheYearFlag.current]);
 

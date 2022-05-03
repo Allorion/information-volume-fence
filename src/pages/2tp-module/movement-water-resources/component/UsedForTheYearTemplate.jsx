@@ -20,7 +20,7 @@ import UsedForTheYearForm from "./UsedForTheYearForm";
 import UsedForTheYearContext from "../context/UsedForTheYearContext";
 
 
-export default function UsedForTheYearTemplate() {
+export default function UsedForTheYearTemplate(props) {
 
     // Получаем данные из родительского компонента
     const [usedForTheYearField, usedForTheYearFlag, usedForTheYearComponents] = useContext(UsedForTheYearContext);
@@ -30,6 +30,17 @@ export default function UsedForTheYearTemplate() {
 
     // Для уникальности строки при ее создании
     const formCount = useRef(0);
+
+    // Сохраняем данные в родительский компонент
+    useEffect(() => {
+         for (let i=0; i<arrayAddUsedYearCodes.length; i++) {
+             try {
+                 props.usedForTheYearComponentsGlobal[i] = arrayAddUsedYearCodes[i]
+             }catch (err) {
+                 return;
+             }
+         }
+    }, [arrayAddUsedYearCodes]);
 
     // Добавляем форму в массив
     const onAddUsedYearCodes = () => {

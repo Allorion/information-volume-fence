@@ -70,41 +70,44 @@ export default function MovementWaterResourcesTemplate() {
         },
         usedForTheYearField: [],
         transmittedWithoutUseField: [],
-        transmittedAfterUseField: []
+        transmittedAfterUseField: [],
+        usedForTheYearComponents: [],
+        transmittedWithoutUseComponents: [],
+        transmittedAfterUseComponents: [],
     };
 
-    const {arrayPageForm} = useContext(MovementWaterResourcesContext);
+    const {arrayPageFormChapter1} = useContext(MovementWaterResourcesContext);
 
     const [page, setPage] = useState(1);
 
-    const authorizationDocumentField = useRef(initialValues.authorizationDocumentField);
+    const authorizationDocumentField = useRef(arrayPageFormChapter1.current[0].authorizationDocumentField);
     const authorizationDocumentFlag = useRef(false);
 
-    const waterSupplySourceField = useRef(initialValues.waterSupplySource);
+    const waterSupplySourceField = useRef(arrayPageFormChapter1.current[0].waterSupplySource);
     const waterSupplySourceFlag = useRef(false);
 
-    const fencePeriodsField = useRef(initialValues.fencePeriodsField);
+    const fencePeriodsField = useRef(arrayPageFormChapter1.current[0].fencePeriodsField);
     const fencePeriodsFlag = useRef(false);
 
-    const availableAccountedField = useRef(initialValues.availableAccountedField);
+    const availableAccountedField = useRef(arrayPageFormChapter1.current[0].availableAccountedField);
     const availableAccountedFlag = useRef(false);
 
-    const usedWaterField = useRef(initialValues.usedWaterField);
+    const usedWaterField = useRef(arrayPageFormChapter1.current[0].usedWaterField);
     const usedWaterFlag = useRef(false);
 
 
-    const usedForTheYearField = useRef([]);
+    const usedForTheYearField = useRef(arrayPageFormChapter1.current[0].usedForTheYearField);
     const usedForTheYearFlag = useRef(false);
-    const usedForTheYearComponents = useRef([]);
+    const usedForTheYearComponents = useRef(arrayPageFormChapter1.current[0].usedForTheYearComponents);
 
-    const transmittedWithoutUseField = useRef([]);
+    const transmittedWithoutUseField = useRef(arrayPageFormChapter1.current[0].transmittedWithoutUseField);
     const transmittedWithoutUseFlag = useRef(false);
-    const transmittedWithoutUseComponents = useRef([]);
+    const transmittedWithoutUseComponents = useRef(arrayPageFormChapter1.current[0].transmittedWithoutUseComponents);
 
 
-    const transmittedAfterUseField = useRef([]);
+    const transmittedAfterUseField = useRef(arrayPageFormChapter1.current[0].transmittedAfterUseField);
     const transmittedAfterUseFlag = useRef(false);
-    const transmittedAfterUseComponents = useRef([]);
+    const transmittedAfterUseComponents = useRef(arrayPageFormChapter1.current[0].transmittedAfterUseComponents);
 
     const handlerNewPage = () => {
 
@@ -117,19 +120,6 @@ export default function MovementWaterResourcesTemplate() {
         usedForTheYearFlag.current = true;
         transmittedWithoutUseFlag.current = true;
         transmittedAfterUseFlag.current = true;
-
-        // Сохраняем данные в глобальный массив
-        arrayPageForm.current[page - 1].authorizationDocumentField = authorizationDocumentField.current;
-        arrayPageForm.current[page - 1].waterSupplySource = waterSupplySourceField.current;
-        arrayPageForm.current[page - 1].fencePeriodsField = fencePeriodsField.current;
-        arrayPageForm.current[page - 1].availableAccountedField = availableAccountedField.current;
-        arrayPageForm.current[page - 1].usedWaterField = usedWaterField.current;
-        arrayPageForm.current[page - 1].usedForTheYearField = usedForTheYearField.current;
-        arrayPageForm.current[page - 1].usedForTheYearComponents = usedForTheYearComponents.current;
-        arrayPageForm.current[page - 1].transmittedWithoutUseField = transmittedWithoutUseField.current;
-        arrayPageForm.current[page - 1].transmittedWithoutUseComponents = transmittedWithoutUseComponents.current;
-        arrayPageForm.current[page - 1].transmittedAfterUseField = transmittedAfterUseField.current;
-        arrayPageForm.current[page - 1].transmittedAfterUseComponents = transmittedAfterUseComponents.current;
 
         // Передаем в дочерний компонент начальные данные
         authorizationDocumentField.current = initialValues.authorizationDocumentField;
@@ -145,10 +135,10 @@ export default function MovementWaterResourcesTemplate() {
         transmittedAfterUseComponents.current = [];
 
         // Добавляем пустую форму в общий массив форм
-        arrayPageForm.current = [...arrayPageForm.current, initialValues]
+        arrayPageFormChapter1.current = [...arrayPageFormChapter1.current, initialValues]
 
         // Указываем номер новой формы
-        setPage(arrayPageForm.current.length);
+        setPage(arrayPageFormChapter1.current.length);
     };
 
     const handlerPage = (event, flag) => {
@@ -171,31 +161,18 @@ export default function MovementWaterResourcesTemplate() {
         transmittedWithoutUseFlag.current = true;
         transmittedAfterUseFlag.current = true;
 
-        // Сохраняем данные в глобальный массив
-        arrayPageForm.current[page - 1].authorizationDocumentField = authorizationDocumentField.current;
-        arrayPageForm.current[page - 1].waterSupplySource = waterSupplySourceField.current;
-        arrayPageForm.current[page - 1].fencePeriodsField = fencePeriodsField.current;
-        arrayPageForm.current[page - 1].availableAccountedField = availableAccountedField.current;
-        arrayPageForm.current[page - 1].usedWaterField = usedWaterField.current;
-        arrayPageForm.current[page - 1].usedForTheYearField = usedForTheYearField.current;
-        arrayPageForm.current[page - 1].usedForTheYearComponents = usedForTheYearComponents.current;
-        arrayPageForm.current[page - 1].transmittedWithoutUseField = transmittedWithoutUseField.current;
-        arrayPageForm.current[page - 1].transmittedWithoutUseComponents = transmittedWithoutUseComponents.current;
-        arrayPageForm.current[page - 1].transmittedAfterUseField = transmittedAfterUseField.current;
-        arrayPageForm.current[page - 1].transmittedAfterUseComponents = transmittedAfterUseField.current;
-
         // Передаем в дочерний компонент начальные данные
-        authorizationDocumentField.current = arrayPageForm.current[numberPage].authorizationDocumentField;
-        waterSupplySourceField.current = arrayPageForm.current[numberPage].waterSupplySource;
-        fencePeriodsField.current = arrayPageForm.current[numberPage].fencePeriodsField;
-        availableAccountedField.current = arrayPageForm.current[numberPage].availableAccountedField;
-        usedWaterField.current = arrayPageForm.current[numberPage].usedWaterField;
-        usedForTheYearField.current = arrayPageForm.current[numberPage].usedForTheYearField;
-        usedForTheYearComponents.current = arrayPageForm.current[numberPage].usedForTheYearComponents;
-        transmittedWithoutUseField.current = arrayPageForm.current[numberPage].transmittedWithoutUseField;
-        transmittedWithoutUseComponents.current = arrayPageForm.current[numberPage].transmittedWithoutUseComponents;
-        transmittedAfterUseField.current = arrayPageForm.current[numberPage].transmittedAfterUseField;
-        transmittedAfterUseComponents.current = arrayPageForm.current[numberPage].transmittedAfterUseComponents;
+        authorizationDocumentField.current = arrayPageFormChapter1.current[numberPage].authorizationDocumentField;
+        waterSupplySourceField.current = arrayPageFormChapter1.current[numberPage].waterSupplySource;
+        fencePeriodsField.current = arrayPageFormChapter1.current[numberPage].fencePeriodsField;
+        availableAccountedField.current = arrayPageFormChapter1.current[numberPage].availableAccountedField;
+        usedWaterField.current = arrayPageFormChapter1.current[numberPage].usedWaterField;
+        usedForTheYearField.current = arrayPageFormChapter1.current[numberPage].usedForTheYearField;
+        usedForTheYearComponents.current = arrayPageFormChapter1.current[numberPage].usedForTheYearComponents;
+        transmittedWithoutUseField.current = arrayPageFormChapter1.current[numberPage].transmittedWithoutUseField;
+        transmittedWithoutUseComponents.current = arrayPageFormChapter1.current[numberPage].transmittedWithoutUseComponents;
+        transmittedAfterUseField.current = arrayPageFormChapter1.current[numberPage].transmittedAfterUseField;
+        transmittedAfterUseComponents.current = arrayPageFormChapter1.current[numberPage].transmittedAfterUseComponents;
 
         // Указываем номер новой формы
         setPage(numberPage + 1);
@@ -210,7 +187,7 @@ export default function MovementWaterResourcesTemplate() {
                         <Grid container>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                    {arrayPageForm.current.map((obj, index) =>(
+                                    {arrayPageFormChapter1.current.map((obj, index) =>(
                                         <Button value={index} key={index} onClick={e => handlerPage(e, false)}>{index + 1}</Button>
                                     ))}
                                     <Button size='small' onClick={handlerNewPage}>
@@ -222,8 +199,8 @@ export default function MovementWaterResourcesTemplate() {
                                 <IconButton disabled={page-2 < 0} aria-label="delete" color='error' onClick={() => {
                                     if (+page - 2 >= 0) {
                                         handlerPage(+page - 2, true);
-                                        arrayPageForm.current = arrayPageForm.current.filter((n) => {
-                                            return n !== arrayPageForm.current[page - 1]
+                                        arrayPageFormChapter1.current = arrayPageFormChapter1.current.filter((n) => {
+                                            return n !== arrayPageFormChapter1.current[page - 1]
                                         })
                                     }
                                 }}>
@@ -233,24 +210,34 @@ export default function MovementWaterResourcesTemplate() {
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <AuthorizationDocument
                                     authorizationDocumentField={authorizationDocumentField}
+                                    authorizationDocumentFieldGlobal={
+                                    arrayPageFormChapter1.current[page - 1].authorizationDocumentField
+                                }
                                     authorizationDocumentFlag={authorizationDocumentFlag}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <WaterSupplySource
                                     waterSupplySourceField={waterSupplySourceField}
+                                    waterSupplySourceFieldGlobal={
+                                        arrayPageFormChapter1.current[page - 1].waterSupplySource
+                                }
                                     waterSupplySourceFlag={waterSupplySourceFlag}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <FencePeriods
                                     fencePeriodsField={fencePeriodsField}
+                                    fencePeriodsFieldGlobal={arrayPageFormChapter1.current[page - 1].fencePeriodsField}
                                     fencePeriodsFlag={fencePeriodsFlag}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
                                 <AvailableAccounted
                                     availableAccountedField={availableAccountedField}
+                                    availableAccountedFieldGlobal={
+                                    arrayPageFormChapter1.current[page - 1].availableAccountedField
+                                }
                                     availableAccountedFlag={availableAccountedFlag}
                                     authorizationDocumentField={authorizationDocumentField}
                                 />
@@ -258,6 +245,7 @@ export default function MovementWaterResourcesTemplate() {
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
                                 <UsedWater
                                     usedWaterField={usedWaterField}
+                                    usedWaterFieldGlobal={arrayPageFormChapter1.current[page - 1].usedWaterField}
                                     usedWaterFlag={usedWaterFlag}
                                 />
                             </Grid>
@@ -267,7 +255,8 @@ export default function MovementWaterResourcesTemplate() {
                                     usedForTheYearFlag,
                                     usedForTheYearComponents
                                 ]}>
-                                    <UsedForTheYearTemplate/>
+                                    <UsedForTheYearTemplate
+                                        usedForTheYearComponentsGlobal={arrayPageFormChapter1.current[page - 1].usedForTheYearComponents}/>
                                 </UsedForTheYearContext.Provider>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
@@ -276,7 +265,8 @@ export default function MovementWaterResourcesTemplate() {
                                     transmittedWithoutUseFlag,
                                     transmittedWithoutUseComponents
                                 ]}>
-                                    <TransmittedWithoutUseTemplate/>
+                                    <TransmittedWithoutUseTemplate
+                                        transmittedWithoutUseComponentsGlobal={arrayPageFormChapter1.current[page - 1].transmittedWithoutUseComponents}/>
                                 </TransmittedWithoutUseContext.Provider>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
@@ -285,7 +275,8 @@ export default function MovementWaterResourcesTemplate() {
                                     transmittedAfterUseFlag,
                                     transmittedAfterUseComponents
                                 ]}>
-                                    <TransmittedAfterUseTemplate/>
+                                    <TransmittedAfterUseTemplate
+                                        transmittedAfterUseComponentsGlobal={arrayPageFormChapter1.current[page - 1].transmittedAfterUseComponents}/>
                                 </TransmittedAfterUseContext.Provider>
                             </Grid>
                         </Grid>

@@ -33,11 +33,9 @@ export default function AvailableAccounted(props) {
 
     // Сохраняем введенные данные в родительский компонент
     useEffect(() => {
-        props.availableAccountedField.current = {
-            permissibleVolumeWaterIntake: permissibleVolumeWaterIntake.value,
-            measured: measured.value,
-            transportationLosses: transportationLosses.value
-        };
+        props.availableAccountedFieldGlobal.permissibleVolumeWaterIntake = permissibleVolumeWaterIntake.value;
+        props.availableAccountedFieldGlobal.measured = measured.value;
+        props.availableAccountedFieldGlobal.transportationLosses = transportationLosses.value;
     }, [measured.value, permissibleVolumeWaterIntake.value, transportationLosses.value])
 
     return (

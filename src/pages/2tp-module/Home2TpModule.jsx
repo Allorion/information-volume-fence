@@ -20,6 +20,8 @@ import MovementWaterResourcesContext from "./context/MovementWaterResourcesConte
 import GeneralDataTemplate from "./general-data/GeneralDataTemplate";
 import MovementWaterResourcesTemplate
     from "./movement-water-resources/MovementWaterResourcesTemplate";
+import WaterDisposalContext from "./water-disposal/context/WaterDisposalContext";
+import WaterDisposalTemplate from "./water-disposal/WaterDisposalTemplate";
 
 const testInit = {
     authorizationDocumentField: {
@@ -60,11 +62,58 @@ const testInit = {
         repeat: '',
         usedForYear: ''
     },
-    usedForTheYearField: {},
-    transmittedWithoutUseField: {},
-    transmittedAfterUseField: {}
+    usedForTheYearField: [],
+    transmittedWithoutUseField: [],
+    transmittedAfterUseField: [],
+    usedForTheYearComponents: [],
+    transmittedWithoutUseComponents: [],
+    transmittedAfterUseComponents: [],
 };
 
+const initialValues = {
+    authorizationDocumentField: {
+        typeDocument: 'null',
+        numberDocument: '',
+        dateDocument: new Date(),
+    },
+    receiverDivertedWatersField: {
+        receiverTypeCode: '',
+        nameWaterObjectName: 'Наименование водного объекта',
+        nameWaterObjectCode: 'Код водного объекта',
+        distanceMouth: '',
+        waterQualityCategories: '',
+    },
+    availableAccountedField: {
+        permissibleVolumeDrainage: '',
+        waterWithdrawnPerYear: '',
+        takenAccountMeasuringInstruments: '',
+    },
+    allocatedWaterBodiesField: {
+        withoutCleaning: '',
+        insufficientlyCleaned: '',
+        normativelyClean: '',
+        treatmentFacilityCode: '',
+        volume: '',
+        capacityTreatmentFacilities: '',
+    },
+    fencePeriodsField: {
+        january: '',
+        february: '',
+        march: '',
+        april: '',
+        may: '',
+        june: '',
+        july: '',
+        august: '',
+        september: '',
+        october: '',
+        november: '',
+        december: '',
+        justYear: ''
+    },
+    contentPollutantsField: [],
+    contentPollutantsComponents: [],
+};
 
 
 export default function Home2TpModule() {
@@ -95,50 +144,11 @@ export default function Home2TpModule() {
         datePreparationDocument: new Date()
     });
 
-    // Стейты для хранения данных сомпонента "Раздел 1"
-        const authorizationDocumentField = useRef({
-        typeDocument: 'null',
-        numberDocument: '',
-        dateDocument: new Date(),
-        codeGuivProvider: ''
-    });
-    const waterSupplySourceField = useRef({
-        nameWaterObjectName: 'Наименование водного объекта',
-        nameWaterObjectCode: 'Код водного объекта',
-        typeSource: '',
-        distanceMouth: '',
-        waterQualityCategories: ''
-    });
-    const fencePeriodsField = useRef({
-        january: '',
-        february: '',
-        march: '',
-        april: '',
-        may: '',
-        june: '',
-        july: '',
-        august: '',
-        september: '',
-        october: '',
-        november: '',
-        december: '',
-        justYear: ''
-    });
-    const availableAccountedField = useRef({
-        permissibleVolumeWaterIntake: '',
-        measured: '',
-        transportationLosses: ''
-    });
-    const usedWaterField = useRef({
-        processed: '',
-        repeat: '',
-        usedForYear: ''
-    });
-    const usedForTheYearField = useRef({});
-    const transmittedWithoutUseField = useRef({});
-    const transmittedAfterUseField = useRef({});
+    // Стейт для хранения данных формы "Раздел 1"
+    const arrayPageFormChapter1 = useRef([testInit]);
 
-    const arrayPageForm = useRef([testInit]);
+    // Стейт для хранения данных формы "Раздел 2"
+    const arrayPageFormChapter2 = useRef([initialValues]);
 
     // Смена компонентов
     useEffect(() => {
@@ -157,18 +167,19 @@ export default function Home2TpModule() {
             case 1:
                 setPage(
                     <MovementWaterResourcesContext.Provider value={{
-                        authorizationDocumentField,
-                        waterSupplySourceField,
-                        fencePeriodsField,
-                        availableAccountedField,
-                        usedWaterField,
-                        usedForTheYearField,
-                        transmittedWithoutUseField,
-                        transmittedAfterUseField,
-                        arrayPageForm
+                        arrayPageFormChapter1,
                     }}>
                         <MovementWaterResourcesTemplate/>
                     </MovementWaterResourcesContext.Provider>
+                );
+                break;
+            case 2:
+                setPage(
+                    <WaterDisposalContext.Provider value={{
+                        arrayPageFormChapter2
+                    }}>
+                        <WaterDisposalTemplate/>
+                    </WaterDisposalContext.Provider>
                 );
                 break;
             default:
@@ -210,7 +221,7 @@ export default function Home2TpModule() {
                                             </Button>
                                             <Button
                                                 onClick={() => {
-                                                    console.log(<testRef className="current"></testRef>)
+                                                    setNumberPage(2);
                                                 }}
                                             >
                                                 Раздел 2

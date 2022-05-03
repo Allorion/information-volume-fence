@@ -32,11 +32,9 @@ export default function UsedWater(props) {
 
     // Записываем данные в родительский компонент
     useEffect(() =>{
-        props.usedWaterField.current = {
-            processed: processed.value,
-            repeat: repeat.value,
-            usedForYear: usedForYear.value
-        };
+        props.usedWaterFieldGlobal.processed = processed.value;
+        props.usedWaterFieldGlobal.repeat = repeat.value;
+        props.usedWaterFieldGlobal.usedForYear = usedForYear.value;
     }, [processed.value, repeat.value, usedForYear.value]);
 
     return(

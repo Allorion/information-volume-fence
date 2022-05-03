@@ -3,7 +3,7 @@
 // *********************************************************************************************************************
 
 
-import React, {useContext, useEffect, useMemo} from "react";
+import React, {useEffect, useMemo} from "react";
 
 // MUI
 import {Box, Grid, MenuItem, Stack, TextField} from "@mui/material";
@@ -24,38 +24,39 @@ import ListWaterBodies from "../../../../global-components/components/selects/Li
 import ListWaterQualityCategories from "../../../../global-components/components/selects/ListWaterQualityCategories";
 
 
-export default function WaterSupplySource(props) {
+export default function ReceiverDivertedWatersComponent(props) {
 
     // Стейты для сохранения полей формы
-    const typeSource = useInput(props.waterSupplySourceField.current.typeSource);
-    const waterQualityCategories = useInput(props.waterSupplySourceField.current.waterQualityCategories);
+    const receiverTypeCode = useInput(props.receiverDivertedWatersField.current.receiverTypeCode);
+    const waterQualityCategories = useInput(props.receiverDivertedWatersField.current.waterQualityCategories);
     const nameWaterObjectCodeName = useInput({
-        nameWaterObjectName: props.waterSupplySourceField.current.nameWaterObjectName,
-        nameWaterObjectCode: props.waterSupplySourceField.current.nameWaterObjectCode
+        nameWaterObjectName: props.receiverDivertedWatersField.current.nameWaterObjectName,
+        nameWaterObjectCode: props.receiverDivertedWatersField.current.nameWaterObjectCode
     });
-    const distanceMouth = useInput(props.waterSupplySourceField.current.distanceMouth);
+    const distanceMouth = useInput(props.receiverDivertedWatersField.current.distanceMouth);
 
     // При создании новой формы обновляем данные стейтов
     useEffect(() => {
-        typeSource.setValue(props.waterSupplySourceField.current.typeSource);
-        waterQualityCategories.setValue(props.waterSupplySourceField.current.waterQualityCategories);
+        receiverTypeCode.setValue(props.receiverDivertedWatersField.current.receiverTypeCode);
+        waterQualityCategories.setValue(props.receiverDivertedWatersField.current.waterQualityCategories);
         nameWaterObjectCodeName.setValue({
-            nameWaterObjectName: props.waterSupplySourceField.current.nameWaterObjectName,
-            nameWaterObjectCode: props.waterSupplySourceField.current.nameWaterObjectCode
+            nameWaterObjectName: props.receiverDivertedWatersField.current.nameWaterObjectName,
+            nameWaterObjectCode: props.receiverDivertedWatersField.current.nameWaterObjectCode
         });
-        distanceMouth.setValue(props.waterSupplySourceField.current.distanceMouth);
-        props.waterSupplySourceFlag.current = false;
-    }, [props.waterSupplySourceFlag.current]);
+        distanceMouth.setValue(props.receiverDivertedWatersField.current.distanceMouth);
+        props.receiverDivertedWatersFlag.current = false;
+    }, [props.receiverDivertedWatersFlag.current]);
+
 
     // Сохранение данных в родительский компонент
     useEffect(() => {
-        props.waterSupplySourceFieldGlobal.nameWaterObjectName = nameWaterObjectCodeName.value.nameWaterObjectName;
-        props.waterSupplySourceFieldGlobal.nameWaterObjectCode = nameWaterObjectCodeName.value.nameWaterObjectCode;
-        props.waterSupplySourceFieldGlobal.typeSource = typeSource.value;
-        props.waterSupplySourceFieldGlobal.distanceMouth = distanceMouth.value;
-        props.waterSupplySourceFieldGlobal.waterQualityCategories = waterQualityCategories.value;
+        props.receiverDivertedWatersFieldGlobal.nameWaterObjectName = nameWaterObjectCodeName.value.nameWaterObjectName;
+        props.receiverDivertedWatersFieldGlobal.nameWaterObjectCode = nameWaterObjectCodeName.value.nameWaterObjectCode;
+        props.receiverDivertedWatersFieldGlobal.receiverTypeCode = receiverTypeCode.value;
+        props.receiverDivertedWatersFieldGlobal.distanceMouth = distanceMouth.value;
+        props.receiverDivertedWatersFieldGlobal.waterQualityCategories = waterQualityCategories.value;
     }, [distanceMouth.value, nameWaterObjectCodeName.value.nameWaterObjectCode,
-        nameWaterObjectCodeName.value.nameWaterObjectName, typeSource.value, waterQualityCategories.value]);
+        nameWaterObjectCodeName.value.nameWaterObjectName, receiverTypeCode.value, waterQualityCategories.value]);
 
     // Получаем селект
     const {arrayObj, loadingListWaterBodies} = ListWaterBodies();
@@ -78,10 +79,10 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 id="select-type-source"
                                 select
-                                label="Тип источника"
-                                name='typeSource'
-                                value={typeSource.value}
-                                onChange={typeSource.onChange}
+                                label="Тип приемника"
+                                name='receiverTypeCode'
+                                value={receiverTypeCode.value}
+                                onChange={receiverTypeCode.onChange}
                                 variant="standard"
                             >
                                 {loadingListWaterBodies ? (

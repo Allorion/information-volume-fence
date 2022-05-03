@@ -3,7 +3,6 @@
 // *********************************************************************************************************************
 
 
-
 import React, {useEffect} from "react";
 
 // Стили
@@ -17,7 +16,7 @@ import {Box, Grid, InputAdornment, TextField} from "@mui/material";
 import useInput from "../../../../global-components/hooks/useInput";
 
 
-export default function FencePeriods(props) {
+export default function FencePeriodsComponent(props) {
 
     // Стейты для сохранения данных из полей формы
     const january = useInput(props.fencePeriodsField.current.january);
@@ -90,7 +89,7 @@ export default function FencePeriods(props) {
     }, [august.value, december.value, february.value, january.value, july.value, june.value,
         justYear.value, march.value, november.value, september.value]);
 
-    return(
+    return (
         <React.Fragment>
             <Paper elevation={3}>
                 <HeadBox>Забрано или получено по периодам (тыс.м<sup>3</sup>)</HeadBox>
