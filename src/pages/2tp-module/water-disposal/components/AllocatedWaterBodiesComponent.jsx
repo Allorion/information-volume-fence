@@ -53,18 +53,18 @@ export default function AllocatedWaterBodiesComponent(props) {
                 <HeadBox>Отведено в водные объекты</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
                             <Paper>
                                 <HeadBox>Загрязненных</HeadBox>
                                 <Box p={2}>
-                                    <Grid container spacing={2}>
+                                    <Grid container spacing={2} direction='column'>
                                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                                             <TextField
                                                 type='number'
                                                 fullWidth
                                                 name='without-cleaning'
                                                 id="without-cleaning"
-                                                label="без очистки"
+                                                label="[13] без очистки"
                                                 variant="standard"
                                                 value={withoutCleaning.value}
                                                 onChange={withoutCleaning.onChange}
@@ -76,7 +76,7 @@ export default function AllocatedWaterBodiesComponent(props) {
                                                 fullWidth
                                                 name='insufficiently-cleaned'
                                                 id="insufficiently-cleaned"
-                                                label="недостаточно очищенных"
+                                                label="[14] недостаточно очищенных"
                                                 variant="standard"
                                                 value={insufficientlyCleaned.value}
                                                 onChange={insufficientlyCleaned.onChange}
@@ -86,30 +86,18 @@ export default function AllocatedWaterBodiesComponent(props) {
                                 </Box>
                             </Paper>
                         </Grid>
-                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} pt={2}>
-                            <TextField
-                                type='number'
-                                fullWidth
-                                name='normatively-clean'
-                                id="normatively-clean"
-                                label="нормативно чистых (без очистки)"
-                                variant="standard"
-                                value={normativelyClean.value}
-                                onChange={normativelyClean.onChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} pt={2}>
                             <Paper>
                                 <HeadBox>Нормативно-очищенных</HeadBox>
                                 <Box p={2}>
-                                    <Grid container spacing={2}>
+                                    <Grid container spacing={2} direction='column'>
                                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                                             <TextField
                                                 type='number'
                                                 fullWidth
                                                 name='treatment-facility-code'
                                                 id="treatment-facility-code"
-                                                label="код очистного сооружения"
+                                                label="[16] код очистного сооружения"
                                                 variant="standard"
                                                 value={treatmentFacilityCode.value}
                                                 onChange={treatmentFacilityCode.onChange}
@@ -121,7 +109,7 @@ export default function AllocatedWaterBodiesComponent(props) {
                                                 fullWidth
                                                 name='volume'
                                                 id="volume"
-                                                label="объем"
+                                                label="[17] объем"
                                                 variant="standard"
                                                 value={volume.value}
                                                 onChange={volume.onChange}
@@ -131,17 +119,29 @@ export default function AllocatedWaterBodiesComponent(props) {
                                 </Box>
                             </Paper>
                         </Grid>
-                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} pt={2}>
+                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} pt={2} direction='column'>
                             <TextField
                                 type='number'
                                 fullWidth
-                                name='capacity-treatment-facilities'
-                                id="capacity-treatment-facilities"
-                                label="мощность очистных сооружений"
+                                name='normatively-clean'
+                                id="normatively-clean"
+                                label="[15] нормативно чистых (без очистки)"
                                 variant="standard"
-                                value={capacityTreatmentFacilities.value}
-                                onChange={capacityTreatmentFacilities.onChange}
+                                value={normativelyClean.value}
+                                onChange={normativelyClean.onChange}
                             />
+                            <Grid item pt={2}>
+                                <TextField
+                                    type='number'
+                                    fullWidth
+                                    name='capacity-treatment-facilities'
+                                    id="capacity-treatment-facilities"
+                                    label="[18] мощность очистных сооружений"
+                                    variant="standard"
+                                    value={capacityTreatmentFacilities.value}
+                                    onChange={capacityTreatmentFacilities.onChange}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Box>

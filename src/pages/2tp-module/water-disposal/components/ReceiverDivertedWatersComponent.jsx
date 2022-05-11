@@ -71,7 +71,7 @@ export default function ReceiverDivertedWatersComponent(props) {
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Данные о источнике</HeadBox>
+                <HeadBox>Данные о приемнике отведенных вод</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
@@ -79,7 +79,7 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 fullWidth
                                 id="select-type-source"
                                 select
-                                label="Тип приемника"
+                                label="[4] Тип приемника"
                                 name='receiverTypeCode'
                                 value={receiverTypeCode.value}
                                 onChange={receiverTypeCode.onChange}
@@ -101,7 +101,7 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 fullWidth
                                 id="select-water-quality-category"
                                 select
-                                label="Категория качества воды"
+                                label="[7] Категория качества воды"
                                 name='waterQualityCategory'
                                 value={waterQualityCategories.value}
                                 onChange={waterQualityCategories.onChange}
@@ -118,14 +118,14 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 )}
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
+                        <Grid item xs={12} sm={12} md={9} lg={9} xl={9} pt={2}>
                             <Stack spacing={2} direction="row">
                                 <TextField
                                     fullWidth
                                     disabled
                                     id="input-name-water-object"
                                     value={nameWaterObjectCodeName.value.nameWaterObjectName + ' / ' + nameWaterObjectCodeName.value.nameWaterObjectCode}
-                                    label="Наименование водного объекта - водоприемника / код водного объекта"
+                                    label="[5] Наименование водного объекта - водоприемника / код водного объекта"
                                     variant="standard" helperText='Выберите водный источник'/>
                                 <ChoosingWaterFeatureContext.Provider value={
                                     formWaterFeatureSelectionMemo
@@ -134,13 +134,25 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 </ChoosingWaterFeatureContext.Provider>
                             </Stack>
                         </Grid>
+                        <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
+                            <TextField
+                                type='number'
+                                fullWidth
+                                name='distanceMouth'
+                                id="distance-mouth"
+                                label="[6] Расстояние от устья, км"
+                                variant="standard"
+                                value={distanceMouth.value}
+                                onChange={distanceMouth.onChange}
+                            />
+                        </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
                             <TextField
                                 disabled={true}
                                 fullWidth
                                 name='code-okato'
                                 id="code-okato"
-                                label="Код по ОКАТО"
+                                label="[8] Код по ОКАТО"
                                 variant="standard"
                             />
                         </Grid>
@@ -150,20 +162,8 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 fullWidth
                                 name='distanceMouth'
                                 id="VHU"
-                                label="ВХУ"
+                                label="[9] ВХУ"
                                 variant="standard"
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
-                            <TextField
-                                type='number'
-                                fullWidth
-                                name='distanceMouth'
-                                id="distance-mouth"
-                                label="Расстояние от устья, км"
-                                variant="standard"
-                                value={distanceMouth.value}
-                                onChange={distanceMouth.onChange}
                             />
                         </Grid>
                     </Grid>

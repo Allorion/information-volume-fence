@@ -58,7 +58,6 @@ export default function WaterDisposalTemplate() {
             october: '',
             november: '',
             december: '',
-            justYear: ''
         },
         contentPollutantsField: [],
         contentPollutantsComponents: [],
@@ -150,7 +149,7 @@ export default function WaterDisposalTemplate() {
             <Grid container sx={{textOverflow: 'ellipsis'}}>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Box p={2}>
-                        <Typography variant="h5" align='center' mb={2}>Раздел 1</Typography>
+                        <Typography variant="h5" align='center' mb={2}>Раздел 2</Typography>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <ButtonGroup variant="outlined" aria-label="outlined button group">
@@ -175,22 +174,13 @@ export default function WaterDisposalTemplate() {
                                     <DeleteIcon/>
                                 </IconButton>
                             </Grid>
-                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
+                            <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
                                 <AuthorizationDocumentComponent
                                     authorizationDocumentField={authorizationDocumentField}
                                     authorizationDocumentFieldGlobal={
                                         arrayPageFormChapter2.current[page - 1].authorizationDocumentField
                                     }
                                     authorizationDocumentFlag={authorizationDocumentFlag}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
-                                <ReceiverDivertedWatersComponent
-                                    receiverDivertedWatersField={receiverDivertedWatersField}
-                                    receiverDivertedWatersFieldGlobal={
-                                        arrayPageFormChapter2.current[page - 1].receiverDivertedWatersField
-                                    }
-                                    receiverDivertedWatersFlag={receiverDivertedWatersFlag}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
@@ -200,6 +190,15 @@ export default function WaterDisposalTemplate() {
                                         arrayPageFormChapter2.current[page - 1].availableAccountedField
                                     }
                                     availableAccountedFlag={availableAccountedFlag}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
+                                <ReceiverDivertedWatersComponent
+                                    receiverDivertedWatersField={receiverDivertedWatersField}
+                                    receiverDivertedWatersFieldGlobal={
+                                        arrayPageFormChapter2.current[page - 1].receiverDivertedWatersField
+                                    }
+                                    receiverDivertedWatersFlag={receiverDivertedWatersFlag}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>

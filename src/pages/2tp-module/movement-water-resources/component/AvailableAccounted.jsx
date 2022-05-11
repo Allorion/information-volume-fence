@@ -51,7 +51,7 @@ export default function AvailableAccounted(props) {
                                 fullWidth
                                 name='permissibleVolumeWaterIntake'
                                 id="permissible-volume-water-intake"
-                                label="Допустимый объем забора воды"
+                                label="[11] Допустимый объем забора воды"
                                 variant="standard"
                                 value={permissibleVolumeWaterIntake.value}
                                 onChange={(e) => {
@@ -71,7 +71,7 @@ export default function AvailableAccounted(props) {
                                 fullWidth
                                 name='measured'
                                 id="measured"
-                                label="Учтено средствами измерений"
+                                label="[25] Учтено средствами измерений"
                                 variant="standard"
                                 value={measured.value}
                                 onChange={(e) => {
@@ -90,7 +90,7 @@ export default function AvailableAccounted(props) {
                                 fullWidth
                                 name='transportationLosses'
                                 id="transportation-losses"
-                                label="Потери при транспортировке"
+                                label="[26] Потери при транспортировке"
                                 variant="standard"
                                 value={transportationLosses.value}
                                 onChange={transportationLosses.onChange}

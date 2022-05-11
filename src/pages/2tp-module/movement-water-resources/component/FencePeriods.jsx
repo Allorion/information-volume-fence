@@ -102,7 +102,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='january'
                                 id="january"
-                                label="Январь"
+                                label="[12] Январь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -117,7 +117,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='february'
                                 id="february"
-                                label="Февраль"
+                                label="[13] Февраль"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -132,7 +132,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='march'
                                 id="march"
-                                label="Март"
+                                label="[14] Март"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -147,7 +147,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='april'
                                 id="april"
-                                label="Апрель"
+                                label="[15] Апрель"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -162,7 +162,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='may'
                                 id="may"
-                                label="Май"
+                                label="[16] Май"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -177,7 +177,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='june'
                                 id="june"
-                                label="Июнь"
+                                label="[17] Июнь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -192,7 +192,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='july'
                                 id="july"
-                                label="Июль"
+                                label="[18] Июль"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -207,7 +207,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='august'
                                 id="august"
-                                label="Август"
+                                label="[19] Август"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -222,7 +222,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='september'
                                 id="september"
-                                label="Сентябрь"
+                                label="[20] Сентябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -237,7 +237,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='october'
                                 id="october"
-                                label="Октябрь"
+                                label="[21] Октябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -252,7 +252,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='november'
                                 id="november"
-                                label="Ноябрь"
+                                label="[22] Ноябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -267,7 +267,7 @@ export default function FencePeriods(props) {
                                 fullWidth
                                 name='december'
                                 id="december"
-                                label="Декабрь"
+                                label="[23] Декабрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -282,7 +282,7 @@ export default function FencePeriods(props) {
                                 type='number'
                                 name='justYear'
                                 id="just-year"
-                                label="Всего за год"
+                                label="[12] Всего за год"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,

@@ -78,7 +78,7 @@ export default function UsedForTheYearTemplate(props) {
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Использовано за год по кодам видов использования</HeadBox>
+                <HeadBox>[32 - 41] Использовано за год по кодам видов использования</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2} justifyContent='center' alignContent='center'>
                         <Fab

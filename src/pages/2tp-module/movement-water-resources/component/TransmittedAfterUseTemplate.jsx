@@ -89,7 +89,7 @@ export default function TransmittedAfterUseTemplate(props) {
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Передано для использования или отведения после использования</HeadBox>
+                <HeadBox>[48 - 49] Передано для использования или отведения после использования</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2} justifyContent='center' alignContent='center'>
                         <Fab

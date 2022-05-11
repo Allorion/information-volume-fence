@@ -46,7 +46,7 @@ const AuthorizationDocumentComponent = (props) => {
     return (
         <React.Fragment>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                     <Paper elevation={3}>
                         <HeadBox>Разрешающий документ</HeadBox>
                         <Box p={4}>
@@ -56,9 +56,9 @@ const AuthorizationDocumentComponent = (props) => {
                                         fullWidth
                                         id="select-document-type"
                                         select
-                                        label="Тип документа"
+                                        label="[1] Тип документа"
                                         name='documentType'
-                                        helperText="Выберите цель водопользования"
+                                        helperText="Выберите вид документа"
                                         variant="standard"
                                         value={typeDocument.value}
                                         onChange={e => typeDocument.onChange(e)}
@@ -85,7 +85,7 @@ const AuthorizationDocumentComponent = (props) => {
                                         maxRows={4}
                                         name='numberDocument'
                                         id="number-document"
-                                        label="Номер документа"
+                                        label="[2] Номер документа"
                                         variant="standard"
                                         value={numberDocument.value}
                                         onChange={numberDocument.onChange}
@@ -98,7 +98,7 @@ const AuthorizationDocumentComponent = (props) => {
                                     >
                                         <MobileDatePicker
                                             disabled={typeDocument.value === 'null'}
-                                            label="Дата"
+                                            label="[3] Дата"
                                             value={typeDocument.value === 'null' ? null : dateDocument.value}
                                             onChange={(newValue) => {
                                                 dateDocument.onChange(newValue);

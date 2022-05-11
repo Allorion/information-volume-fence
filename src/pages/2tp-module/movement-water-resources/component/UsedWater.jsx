@@ -49,7 +49,7 @@ export default function UsedWater(props) {
                                 fullWidth
                                 name='code-okato'
                                 id="code-okato"
-                                label="Код территории по ОКАТО"
+                                label="[27] Код территории по ОКАТО"
                                 variant="standard"
                             />
                         </Grid>
@@ -59,7 +59,7 @@ export default function UsedWater(props) {
                                 fullWidth
                                 name='code-vhu'
                                 id="code-vhu"
-                                label="Код территории ВХУ"
+                                label="[28] Код территории ВХУ"
                                 variant="standard"
                             />
                         </Grid>
@@ -69,7 +69,7 @@ export default function UsedWater(props) {
                                 fullWidth
                                 name='processed'
                                 id="processed"
-                                label="Обработанного"
+                                label="[29] Обработанного"
                                 variant="standard"
                                 value={processed.value}
                                 onChange={processed.onChange}
@@ -81,7 +81,7 @@ export default function UsedWater(props) {
                                 fullWidth
                                 name='repeat'
                                 id="repeat"
-                                label="Повторного"
+                                label="[30] Повторного"
                                 variant="standard"
                                 value={repeat.value}
                                 onChange={repeat.onChange}
@@ -93,7 +93,7 @@ export default function UsedWater(props) {
                                 fullWidth
                                 name='usedForYear'
                                 id="usedForYear"
-                                label="Использовано за год"
+                                label="[31] Использовано за год"
                                 variant="standard"
                                 value={usedForYear.value}
                                 onChange={usedForYear.onChange}

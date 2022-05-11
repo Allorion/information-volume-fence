@@ -50,7 +50,7 @@ export default function AvailableAccountedComponents(props) {
                                 fullWidth
                                 name='permissibleVolumeDrainage'
                                 id="permissible-volume-drainage"
-                                label="Допустимый объем водоотведения"
+                                label="[10] Допустимый объем водоотведения"
                                 variant="standard"
                                 value={permissibleVolumeDrainage.value}
                                 onChange={(e) => {
@@ -64,7 +64,7 @@ export default function AvailableAccountedComponents(props) {
                                 fullWidth
                                 name='waterWithdrawnPerYear'
                                 id="water-withdrawn-per-year"
-                                label="Отведено воды, всего за год"
+                                label="[11] Отведено воды, всего за год"
                                 variant="standard"
                                 value={waterWithdrawnPerYear.value}
                                 onChange={(e) => {
@@ -78,7 +78,7 @@ export default function AvailableAccountedComponents(props) {
                                 fullWidth
                                 name='takenAccountMeasuringInstruments'
                                 id="taken-account-measuring-instruments"
-                                label="Учтено средствами измерений"
+                                label="[12] Учтено средствами измерений"
                                 variant="standard"
                                 value={takenAccountMeasuringInstruments.value}
                                 onChange={takenAccountMeasuringInstruments.onChange}

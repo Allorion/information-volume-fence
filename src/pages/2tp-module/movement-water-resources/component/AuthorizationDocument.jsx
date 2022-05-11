@@ -60,9 +60,9 @@ const AuthorizationDocument = (props) => {
                                         disabled={codeGuivProvider.value !== ''}
                                         id="select-document-type"
                                         select
-                                        label="Тип документа"
+                                        label="[1] Тип документа"
                                         name='documentType'
-                                        helperText="Выберите цель водопользования"
+                                        helperText="Выберите вид документа"
                                         variant="standard"
                                         value={typeDocument.value}
                                         onChange={e => typeDocument.onChange(e)}
@@ -89,7 +89,7 @@ const AuthorizationDocument = (props) => {
                                         maxRows={4}
                                         name='numberDocument'
                                         id="number-document"
-                                        label="Номер документа"
+                                        label="[2] Номер документа"
                                         variant="standard"
                                         value={numberDocument.value}
                                         onChange={numberDocument.onChange}
@@ -102,7 +102,7 @@ const AuthorizationDocument = (props) => {
                                     >
                                         <MobileDatePicker
                                             disabled={typeDocument.value === 'null'}
-                                            label="Дата"
+                                            label="[3] Дата"
                                             value={typeDocument.value === 'null' ? null : dateDocument.value}
                                             onChange={(newValue) => {
                                                 dateDocument.onChange(newValue);
@@ -134,7 +134,7 @@ const AuthorizationDocument = (props) => {
                                         fullWidth
                                         name='codeGuivProvider'
                                         id="code-guiv-provider"
-                                        label="Код поставщика по ГУИВ"
+                                        label="[7] Код поставщика по ГУИВ"
                                         variant="standard"
                                         value={codeGuivProvider.value}
                                         onChange={codeGuivProvider.onChange}

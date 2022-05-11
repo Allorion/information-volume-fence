@@ -88,7 +88,7 @@ export default function TransmittedWithoutUseTemplate(props) {
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Передано для использования или отведения без использования, по кодам категории воды</HeadBox>
+                <HeadBox>[42 - 47] Передано для использования или отведения без использования, по кодам категории воды</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2} justifyContent='center' alignContent='center'>
                         <Fab

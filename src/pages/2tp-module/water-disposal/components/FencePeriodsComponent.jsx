@@ -31,7 +31,6 @@ export default function FencePeriodsComponent(props) {
     const october = useInput(props.fencePeriodsField.current.october);
     const november = useInput(props.fencePeriodsField.current.november);
     const december = useInput(props.fencePeriodsField.current.december);
-    const justYear = useInput(props.fencePeriodsField.current.justYear);
 
     // При создании новой формы обновляем данные стейтов
     useEffect(() => {
@@ -47,29 +46,8 @@ export default function FencePeriodsComponent(props) {
         october.setValue(props.fencePeriodsField.current.october);
         november.setValue(props.fencePeriodsField.current.november);
         december.setValue(props.fencePeriodsField.current.december);
-        justYear.setValue(props.fencePeriodsField.current.justYear);
         props.fencePeriodsFlag.current = false;
     }, [props.fencePeriodsFlag.current]);
-
-    // Функция для подсчета суммы за год
-    useEffect(() => {
-        const summa = (
-            +january.value +
-            +february.value +
-            +march.value +
-            +april.value +
-            +may.value +
-            +june.value +
-            +july.value +
-            +august.value +
-            +september.value +
-            +october.value +
-            +november.value +
-            +december.value
-        );
-        justYear.setValue(summa)
-    }, [april.value, august.value, december.value, february.value, january.value, july.value, june.value,
-        justYear, march.value, may.value, november.value, october.value, september.value]);
 
     // Сохраняем данные в родительский компонент
     useEffect(() => {
@@ -85,14 +63,13 @@ export default function FencePeriodsComponent(props) {
         props.fencePeriodsFieldGlobal.october = october.value;
         props.fencePeriodsFieldGlobal.november = november.value;
         props.fencePeriodsFieldGlobal.december = december.value;
-        props.fencePeriodsFieldGlobal.justYear = justYear.value;
     }, [august.value, december.value, february.value, january.value, july.value, june.value,
-        justYear.value, march.value, november.value, september.value]);
+        march.value, november.value, september.value]);
 
     return (
         <React.Fragment>
             <Paper elevation={3}>
-                <HeadBox>Забрано или получено по периодам (тыс.м<sup>3</sup>)</HeadBox>
+                <HeadBox>Отведено по периодам (тыс.м<sup>3</sup>)</HeadBox>
                 <Box p={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
@@ -101,7 +78,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='january'
                                 id="january"
-                                label="Январь"
+                                label="[19] Январь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -116,7 +93,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='february'
                                 id="february"
-                                label="Февраль"
+                                label="[20] Февраль"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -131,7 +108,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='march'
                                 id="march"
-                                label="Март"
+                                label="[21] Март"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -146,7 +123,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='april'
                                 id="april"
-                                label="Апрель"
+                                label="[22] Апрель"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -161,7 +138,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='may'
                                 id="may"
-                                label="Май"
+                                label="[23] Май"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -176,7 +153,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='june'
                                 id="june"
-                                label="Июнь"
+                                label="[24] Июнь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -191,7 +168,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='july'
                                 id="july"
-                                label="Июль"
+                                label="[25] Июль"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -206,7 +183,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='august'
                                 id="august"
-                                label="Август"
+                                label="[26] Август"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -221,7 +198,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='september'
                                 id="september"
-                                label="Сентябрь"
+                                label="[27] Сентябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -236,7 +213,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='october'
                                 id="october"
-                                label="Октябрь"
+                                label="[28] Октябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -251,7 +228,7 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='november'
                                 id="november"
-                                label="Ноябрь"
+                                label="[29] Ноябрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
@@ -266,27 +243,13 @@ export default function FencePeriodsComponent(props) {
                                 fullWidth
                                 name='december'
                                 id="december"
-                                label="Декабрь"
+                                label="[30] Декабрь"
                                 variant="standard"
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
                                 }}
                                 value={december.value}
                                 onChange={december.onChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={4}>
-                            <TextField
-                                disabled={true}
-                                type='number'
-                                name='justYear'
-                                id="just-year"
-                                label="Всего за год"
-                                variant="standard"
-                                InputProps={{
-                                    endAdornment: <InputAdornment position="end">тыс.м<sup>3</sup></InputAdornment>,
-                                }}
-                                value={justYear.value}
                             />
                         </Grid>
                     </Grid>

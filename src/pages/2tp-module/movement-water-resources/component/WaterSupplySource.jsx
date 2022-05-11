@@ -78,7 +78,7 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 id="select-type-source"
                                 select
-                                label="Тип источника"
+                                label="[4] Тип источника"
                                 name='typeSource'
                                 value={typeSource.value}
                                 onChange={typeSource.onChange}
@@ -100,7 +100,7 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 id="select-water-quality-category"
                                 select
-                                label="Категория качества воды"
+                                label="[8] Категория качества воды"
                                 name='waterQualityCategory'
                                 value={waterQualityCategories.value}
                                 onChange={waterQualityCategories.onChange}
@@ -124,7 +124,7 @@ export default function WaterSupplySource(props) {
                                     disabled
                                     id="input-name-water-object"
                                     value={nameWaterObjectCodeName.value.nameWaterObjectName + ' / ' + nameWaterObjectCodeName.value.nameWaterObjectCode}
-                                    label="Наименование водного объекта - водоприемника / код водного объекта"
+                                    label="[5] Наименование водного объекта - водоприемника / код водного объекта"
                                     variant="standard" helperText='Выберите водный источник'/>
                                 <ChoosingWaterFeatureContext.Provider value={
                                     formWaterFeatureSelectionMemo
@@ -139,7 +139,7 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 name='code-okato'
                                 id="code-okato"
-                                label="Код по ОКАТО"
+                                label="[9] Код по ОКАТО"
                                 variant="standard"
                             />
                         </Grid>
@@ -149,7 +149,7 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 name='distanceMouth'
                                 id="VHU"
-                                label="ВХУ"
+                                label="[10] ВХУ"
                                 variant="standard"
                             />
                         </Grid>
@@ -159,7 +159,7 @@ export default function WaterSupplySource(props) {
                                 fullWidth
                                 name='distanceMouth'
                                 id="distance-mouth"
-                                label="Расстояние от устья, км"
+                                label="[6] Расстояние от устья, км"
                                 variant="standard"
                                 value={distanceMouth.value}
                                 onChange={distanceMouth.onChange}
