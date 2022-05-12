@@ -3,12 +3,13 @@
 // *********************************************************************************************************************
 
 
-
 import React, {useContext, useRef, useState} from "react";
 
 // MUI
-import {Box, Button, ButtonGroup, Grid, IconButton, Typography} from "@mui/material";
+import {AppBar, Box, Button, Fab, Grid, Stack, Toolbar, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from "@mui/icons-material/Delete";
+import Pagination from '@mui/material/Pagination';
 
 // Компоненты
 import AuthorizationDocument from "./component/AuthorizationDocument";
@@ -25,7 +26,7 @@ import MovementWaterResourcesContext from "../context/MovementWaterResourcesCont
 import UsedForTheYearContext from "./context/UsedForTheYearContext";
 import TransmittedWithoutUseContext from "./context/TransmittedWithoutUseContext";
 import TransmittedAfterUseContext from "./context/TransmittedAfterUseContext";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 
 export default function MovementWaterResourcesTemplate() {
 
@@ -147,8 +148,8 @@ export default function MovementWaterResourcesTemplate() {
 
         if (flag === true) {
             numberPage = +event
-        }else {
-            numberPage = +event.target.value;
+        } else {
+            numberPage = +event.target.outerText - 1;
         }
 
         // Собираем данные из компонентов
@@ -186,33 +187,52 @@ export default function MovementWaterResourcesTemplate() {
                         <Typography variant="h5" align='center' mb={2}>Раздел 1</Typography>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
-                                <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                    {arrayPageFormChapter1.current.map((obj, index) =>(
-                                        <Button value={index} key={index} onClick={e => handlerPage(e, false)}>{index + 1}</Button>
-                                    ))}
-                                    <Button size='small' onClick={handlerNewPage}>
+                                <Stack sx={{flexGrow: 1}} direction={'row'}>
+                                    <Pagination
+                                        size="large"
+                                        count={arrayPageFormChapter1.current.length}
+                                        variant="outlined"
+                                        color="primary"
+                                        page={page}
+                                        onClick={(e) => handlerPage(e, false)}
+                                        hidePrevButton
+                                        hideNextButton
+                                    />
+                                    <Fab
+                                        sx={{width: 40, minHeight: 40, height: 40}}
+                                        color="primary"
+                                        aria-label="add"
+                                        onClick={handlerNewPage}
+                                    >
                                         <AddIcon/>
-                                    </Button>
-                                </ButtonGroup>
+                                    </Fab>
+                                </Stack>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
-                                <IconButton disabled={page-2 < 0} aria-label="delete" color='error' onClick={() => {
-                                    if (+page - 2 >= 0) {
-                                        handlerPage(+page - 2, true);
-                                        arrayPageFormChapter1.current = arrayPageFormChapter1.current.filter((n) => {
-                                            return n !== arrayPageFormChapter1.current[page - 1]
-                                        })
-                                    }
-                                }}>
-                                    <DeleteIcon/>
-                                </IconButton>
+                                <Button
+                                    variant="text"
+                                    color={'error'}
+                                    disabled={page - 2 < 0}
+                                    aria-label="delete"
+                                    onClick={() => {
+                                        if (+page - 2 >= 0) {
+                                            handlerPage(+page - 2, true);
+                                            arrayPageFormChapter1.current = arrayPageFormChapter1.current.filter((n) => {
+                                                return n !== arrayPageFormChapter1.current[page - 1]
+                                            })
+                                        }
+                                    }}
+                                    endIcon={<DeleteIcon/>}
+                                >
+                                    Удалить страницу
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
                                 <AuthorizationDocument
                                     authorizationDocumentField={authorizationDocumentField}
                                     authorizationDocumentFieldGlobal={
-                                    arrayPageFormChapter1.current[page - 1].authorizationDocumentField
-                                }
+                                        arrayPageFormChapter1.current[page - 1].authorizationDocumentField
+                                    }
                                     authorizationDocumentFlag={authorizationDocumentFlag}
                                 />
                             </Grid>
@@ -221,7 +241,7 @@ export default function MovementWaterResourcesTemplate() {
                                     waterSupplySourceField={waterSupplySourceField}
                                     waterSupplySourceFieldGlobal={
                                         arrayPageFormChapter1.current[page - 1].waterSupplySource
-                                }
+                                    }
                                     waterSupplySourceFlag={waterSupplySourceFlag}
                                 />
                             </Grid>
@@ -236,8 +256,8 @@ export default function MovementWaterResourcesTemplate() {
                                 <AvailableAccounted
                                     availableAccountedField={availableAccountedField}
                                     availableAccountedFieldGlobal={
-                                    arrayPageFormChapter1.current[page - 1].availableAccountedField
-                                }
+                                        arrayPageFormChapter1.current[page - 1].availableAccountedField
+                                    }
                                     availableAccountedFlag={availableAccountedFlag}
                                     authorizationDocumentField={authorizationDocumentField}
                                 />

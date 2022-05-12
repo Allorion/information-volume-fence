@@ -5,7 +5,7 @@
 
 import React, {useContext, useRef, useState} from "react";
 import WaterDisposalContext from "./context/WaterDisposalContext";
-import {Box, Button, ButtonGroup, Grid, IconButton, Typography} from "@mui/material";
+import {Box, Button, ButtonGroup, Fab, Grid, IconButton, Stack, Typography} from "@mui/material";
 import AuthorizationDocumentComponent from "./components/AuthorizationDocumentComponent";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,6 +15,7 @@ import FencePeriodsComponent from "./components/FencePeriodsComponent";
 import AllocatedWaterBodiesComponent from "./components/AllocatedWaterBodiesComponent";
 import ContentPollutantsContext from "./context/ContentPollutantsContext";
 import ContentPollutantsTemplate from "./components/ContentPollutantsTemplate";
+import Pagination from "@mui/material/Pagination";
 
 
 export default function WaterDisposalTemplate() {
@@ -120,7 +121,7 @@ export default function WaterDisposalTemplate() {
         if (flag === true) {
             numberPage = +event
         } else {
-            numberPage = +event.target.value;
+            numberPage = +event.target.outerText - 1;
         }
 
         // Собираем данные из компонентов
@@ -152,27 +153,45 @@ export default function WaterDisposalTemplate() {
                         <Typography variant="h5" align='center' mb={2}>Раздел 2</Typography>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
-                                <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                    {arrayPageFormChapter2.current.map((obj, index) => (
-                                        <Button value={index} key={index}
-                                                onClick={e => handlerPage(e, false)}>{index + 1}</Button>
-                                    ))}
-                                    <Button size='small' onClick={handlerNewPage}>
+                                <Stack sx={{flexGrow: 1}} direction={'row'}>
+                                    <Pagination
+                                        size="large"
+                                        count={arrayPageFormChapter2.current.length}
+                                        variant="outlined"
+                                        color="primary"
+                                        page={page}
+                                        onClick={(e) => handlerPage(e, false)}
+                                        hidePrevButton
+                                        hideNextButton
+                                    />
+                                    <Fab
+                                        sx={{width: 40, minHeight: 40, height: 40}}
+                                        color="primary"
+                                        aria-label="add"
+                                        onClick={handlerNewPage}
+                                    >
                                         <AddIcon/>
-                                    </Button>
-                                </ButtonGroup>
+                                    </Fab>
+                                </Stack>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} p={1}>
-                                <IconButton disabled={page - 2 < 0} aria-label="delete" color='error' onClick={() => {
-                                    if (+page - 2 >= 0) {
-                                        handlerPage(+page - 2, true);
-                                        arrayPageFormChapter2.current = arrayPageFormChapter2.current.filter((n) => {
-                                            return n !== arrayPageFormChapter2.current[page - 1]
-                                        })
-                                    }
-                                }}>
-                                    <DeleteIcon/>
-                                </IconButton>
+                                <Button
+                                    variant="text"
+                                    color={'error'}
+                                    disabled={page - 2 < 0}
+                                    aria-label="delete"
+                                    onClick={() => {
+                                        if (+page - 2 >= 0) {
+                                            handlerPage(+page - 2, true);
+                                            arrayPageFormChapter2.current = arrayPageFormChapter2.current.filter((n) => {
+                                                return n !== arrayPageFormChapter2.current[page - 1]
+                                            })
+                                        }
+                                    }}
+                                    endIcon={<DeleteIcon/>}
+                                >
+                                    Удалить страницу
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6} p={1}>
                                 <AuthorizationDocumentComponent
