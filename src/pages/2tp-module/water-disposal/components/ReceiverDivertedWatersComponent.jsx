@@ -118,7 +118,7 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 )}
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={9} lg={9} xl={9} pt={2}>
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} pt={2}>
                             <Stack spacing={2} direction="row">
                                 <TextField
                                     fullWidth
@@ -133,18 +133,6 @@ export default function ReceiverDivertedWatersComponent(props) {
                                     <ChoosingWaterFeature/>
                                 </ChoosingWaterFeatureContext.Provider>
                             </Stack>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={3} lg={3} xl={3} pt={2}>
-                            <TextField
-                                type='number'
-                                fullWidth
-                                name='distanceMouth'
-                                id="distance-mouth"
-                                label="[6] Расстояние от устья, км"
-                                variant="standard"
-                                value={distanceMouth.value}
-                                onChange={distanceMouth.onChange}
-                            />
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
                             <TextField
@@ -164,6 +152,18 @@ export default function ReceiverDivertedWatersComponent(props) {
                                 id="VHU"
                                 label="[9] ВХУ"
                                 variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} pt={2}>
+                            <TextField
+                                type='number'
+                                fullWidth
+                                name='distanceMouth'
+                                id="distance-mouth"
+                                label="[6] Расстояние от устья, км"
+                                variant="standard"
+                                value={distanceMouth.value}
+                                onChange={distanceMouth.onChange}
                             />
                         </Grid>
                     </Grid>

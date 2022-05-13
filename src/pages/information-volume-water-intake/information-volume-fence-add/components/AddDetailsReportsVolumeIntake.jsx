@@ -40,8 +40,13 @@ const AddDetailsReportsVolumeIntake = () => {
 
     // Получаем данные из компонента с глобальными select
     const {arrayObj, loadingListWaterBodies} = ListWaterBodies();
+    const copyArrayObj = arrayObj.filter((n) => {
+        return n.inCode !== null
+    });
     const {listWaterQualityCategories, loadingListWaterQualityCategories} = ListWaterQualityCategories();
-
+    const copyListWaterQualityCategories = listWaterQualityCategories.filter((n) => {
+        return n.withdrawal !== null
+    });
     // Блок открытия и закрытия модального окна
     const [open, setOpen] = useState(false);
     const [handleOpen, handleClose] = useModal(setOpen);
@@ -149,7 +154,7 @@ const AddDetailsReportsVolumeIntake = () => {
                                         {loadingListWaterBodies ? (
                                             <MenuItem>Загрузка...</MenuItem>
                                         ) : (
-                                            arrayObj.map((option) => (
+                                            copyArrayObj.map((option) => (
                                                 <MenuItem key={option.id} value={option.id}>
                                                     {option.name}
                                                 </MenuItem>
@@ -172,7 +177,7 @@ const AddDetailsReportsVolumeIntake = () => {
                                         {loadingListWaterQualityCategories ? (
                                             <MenuItem>Загрузка...</MenuItem>
                                         ) : (
-                                            listWaterQualityCategories.map((option) => (
+                                            copyListWaterQualityCategories.map((option) => (
                                                 <MenuItem key={option.id} value={option.id}>
                                                     {option.getCode} - {option.name}
                                                 </MenuItem>
